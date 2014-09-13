@@ -312,6 +312,7 @@
 		83AA8FA319C4F265007278D5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		83AA8FA519C4F26A007278D5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83AA8FA719C4F273007278D5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		83AA8FA919C4F4CB007278D5 /* AppConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +397,7 @@
 		83AA8E5A19C4F1A3007278D5 /* DukeStudy */ = {
 			isa = PBXGroup;
 			children = (
+				83AA8FA919C4F4CB007278D5 /* AppConstant.h */,
 				83AA8E6319C4F1A3007278D5 /* AppDelegate.h */,
 				83AA8E6419C4F1A3007278D5 /* AppDelegate.m */,
 				83AA8E6619C4F1A3007278D5 /* Main.storyboard */,
