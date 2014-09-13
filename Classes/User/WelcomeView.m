@@ -108,7 +108,7 @@
 	{
 		UIImage *image = (UIImage *)responseObject;
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		if (image.size.width > 140) image = ResizeImage(image, 140, 140);
+		if (image.size.width > 140) image = ResizeImage(image, 140, image.size.height / image.size.width * 140);
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		PFFile *filePicture = [PFFile fileWithName:@"picture.jpg" data:UIImageJPEGRepresentation(image, 0.6)];
 		[filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
@@ -116,7 +116,7 @@
 			if (error != nil) [ProgressHUD showError:@"Network error."];
 		}];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		if (image.size.width > 34) image = ResizeImage(image, 34, 34);
+		if (image.size.width > 34) image = ResizeImage(image, 34, image.size.height / image.size.width * 34);
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		PFFile *fileThumbnail = [PFFile fileWithName:@"thumbnail.jpg" data:UIImageJPEGRepresentation(image, 0.6)];
 		[fileThumbnail saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)

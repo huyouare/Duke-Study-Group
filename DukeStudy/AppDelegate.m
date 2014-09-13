@@ -31,11 +31,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     NavigationController *nc1 = [[NavigationController alloc] initWithRootViewController:[[GroupView alloc] init]];
-	NavigationController *nc2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
+//	NavigationController *nc2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
 	NavigationController *nc3 = [[NavigationController alloc] initWithRootViewController:[[ProfileView alloc] init]];
     
 	self.tabBarController = [[UITabBarController alloc] init];
-	self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc2, nc3, nil];
+	self.tabBarController.viewControllers = [NSArray arrayWithObjects:nc1, nc3, nil];
 	self.tabBarController.tabBar.barTintColor = COLOR_TABBAR_BACKGROUND;
 	self.tabBarController.tabBar.tintColor = COLOR_TABBAR_LABEL;
 	self.tabBarController.tabBar.translucent = NO;

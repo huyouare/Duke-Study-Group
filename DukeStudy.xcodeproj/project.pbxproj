@@ -122,6 +122,10 @@
 		83AA8FA419C4F265007278D5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AA8FA319C4F265007278D5 /* CFNetwork.framework */; };
 		83AA8FA619C4F26A007278D5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AA8FA519C4F26A007278D5 /* AudioToolbox.framework */; };
 		83AA8FA819C4F273007278D5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AA8FA719C4F273007278D5 /* libz.dylib */; };
+		83AA8FAD19C5051F007278D5 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AA8FAB19C5051F007278D5 /* GroupViewController.m */; };
+		83AA8FAE19C50520007278D5 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AA8FAB19C5051F007278D5 /* GroupViewController.m */; };
+		83AA8FAF19C50520007278D5 /* GroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AA8FAC19C5051F007278D5 /* GroupViewController.xib */; };
+		83AA8FB019C50520007278D5 /* GroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AA8FAC19C5051F007278D5 /* GroupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +317,9 @@
 		83AA8FA519C4F26A007278D5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83AA8FA719C4F273007278D5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		83AA8FA919C4F4CB007278D5 /* AppConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
+		83AA8FAA19C5051F007278D5 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupViewController.h; path = Classes/Tabs/GroupViewController.h; sourceTree = SOURCE_ROOT; };
+		83AA8FAB19C5051F007278D5 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupViewController.m; path = Classes/Tabs/GroupViewController.m; sourceTree = SOURCE_ROOT; };
+		83AA8FAC19C5051F007278D5 /* GroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GroupViewController.xib; path = Classes/Tabs/GroupViewController.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +478,9 @@
 		83AA8E9019C4F1C6007278D5 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				83AA8FAA19C5051F007278D5 /* GroupViewController.h */,
+				83AA8FAB19C5051F007278D5 /* GroupViewController.m */,
+				83AA8FAC19C5051F007278D5 /* GroupViewController.xib */,
 				83AA8E9119C4F1C6007278D5 /* 01 */,
 				83AA8E9419C4F1C6007278D5 /* 02 */,
 				83AA8E9819C4F1C6007278D5 /* 03 */,
@@ -895,6 +905,7 @@
 				83AA8F4F19C4F1C6007278D5 /* tab_group@2x.png in Resources */,
 				83AA8F7319C4F1C6007278D5 /* message_received.aiff in Resources */,
 				83AA8E6D19C4F1A4007278D5 /* Images.xcassets in Resources */,
+				83AA8FAF19C50520007278D5 /* GroupViewController.xib in Resources */,
 				83AA8F6D19C4F1C6007278D5 /* bubble_tailless.png in Resources */,
 				83AA8F6319C4F1C6007278D5 /* bubble.png in Resources */,
 				83AA8F5019C4F1C6007278D5 /* tab_private@2x.png in Resources */,
@@ -937,6 +948,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83AA8FB019C50520007278D5 /* GroupViewController.xib in Resources */,
 				83AA8E7E19C4F1A4007278D5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -951,6 +963,7 @@
 				83AA8F5D19C4F1C6007278D5 /* UIAlertView+AFNetworking.m in Sources */,
 				83AA8F8719C4F1C6007278D5 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				83AA8F5F19C4F1C6007278D5 /* UIImageView+AFNetworking.m in Sources */,
+				83AA8FAD19C5051F007278D5 /* GroupViewController.m in Sources */,
 				83AA8F5E19C4F1C6007278D5 /* UIButton+AFNetworking.m in Sources */,
 				83AA8F8019C4F1C6007278D5 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				83AA8F7619C4F1C6007278D5 /* NSString+JSQMessages.m in Sources */,
@@ -1011,6 +1024,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83AA8FAE19C50520007278D5 /* GroupViewController.m in Sources */,
 				83AA8E8019C4F1A4007278D5 /* DukeStudyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
