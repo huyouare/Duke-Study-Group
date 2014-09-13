@@ -119,8 +119,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	if (indexPath.row == 0) return cellName;
-	if (indexPath.row == 1) return cellPassword;
-	if (indexPath.row == 2) return cellEmail;
+	if (indexPath.row == 1) return cellEmail;
+	if (indexPath.row == 2) return cellPassword;
 	if (indexPath.row == 3) return cellButton;
 	return nil;
 }
