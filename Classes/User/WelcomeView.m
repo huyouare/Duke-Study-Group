@@ -98,7 +98,7 @@
 - (void)processFacebook:(PFUser *)user UserData:(NSDictionary *)userData
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	NSString *link = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
+	NSString *link = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?redirect=1&height=140&type=normal&width=140", userData[@"id"]];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link]];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
