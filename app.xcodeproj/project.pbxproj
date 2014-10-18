@@ -121,6 +121,7 @@
 		83F76BEB19F2D8C9007354D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F76BEA19F2D8C8007354D5 /* Main.storyboard */; };
 		83F76BEE19F2E30A007354D5 /* SubjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */; };
 		83F76BF019F2E551007354D5 /* courses_final.json in Resources */ = {isa = PBXBuildFile; fileRef = 83F76BEF19F2E551007354D5 /* courses_final.json */; };
+		83F76BF319F2EE6C007354D5 /* CourseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F76BF219F2EE6C007354D5 /* CourseTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -315,6 +316,8 @@
 		83F76BEC19F2E30A007354D5 /* SubjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubjectTableViewController.h; path = ../../../app/SubjectTableViewController.h; sourceTree = "<group>"; };
 		83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubjectTableViewController.m; path = ../../../app/SubjectTableViewController.m; sourceTree = "<group>"; };
 		83F76BEF19F2E551007354D5 /* courses_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = courses_final.json; path = ../../../app/courses_final.json; sourceTree = "<group>"; };
+		83F76BF119F2EE6C007354D5 /* CourseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTableViewController.h; sourceTree = "<group>"; };
+		83F76BF219F2EE6C007354D5 /* CourseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -650,6 +653,8 @@
 			children = (
 				83F76BEC19F2E30A007354D5 /* SubjectTableViewController.h */,
 				83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */,
+				83F76BF119F2EE6C007354D5 /* CourseTableViewController.h */,
+				83F76BF219F2EE6C007354D5 /* CourseTableViewController.m */,
 				83F76BEF19F2E551007354D5 /* courses_final.json */,
 				2930F90119E96C5C000F7799 /* GroupView.h */,
 				2930F90219E96C5C000F7799 /* GroupView.m */,
@@ -935,6 +940,7 @@
 				2930F8DB19E94E01000F7799 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				2930F8EB19E94E01000F7799 /* ProgressHUD.m in Sources */,
 				2930F92E19E96C5C000F7799 /* RegisterView.m in Sources */,
+				83F76BF319F2EE6C007354D5 /* CourseTableViewController.m in Sources */,
 				2930F93219E96C5C000F7799 /* messages.m in Sources */,
 				2930F8A719E94E01000F7799 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2930F92619E96C5C000F7799 /* MessagesCell.m in Sources */,

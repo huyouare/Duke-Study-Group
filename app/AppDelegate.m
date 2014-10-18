@@ -34,20 +34,20 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[PFImageView class];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
-	NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:[[GroupView alloc] init]];
-//	NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
-	NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:[[MessagesView alloc] init]];
-	NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:[[ProfileView alloc] init]];
-
-	self.tabBarController = [[UITabBarController alloc] init];
-	self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController3, navController4, nil];
-	self.tabBarController.tabBar.translucent = NO;
-	self.tabBarController.selectedIndex = 0;
-
-	self.window.rootViewController = self.tabBarController;
-	[self.window makeKeyAndVisible];
+//	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//	
+//	NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:[[GroupView alloc] init]];
+////	NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
+//	NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:[[MessagesView alloc] init]];
+//	NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:[[ProfileView alloc] init]];
+//
+//	self.tabBarController = [[UITabBarController alloc] init];
+//	self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController3, navController4, nil];
+//	self.tabBarController.tabBar.translucent = NO;
+//	self.tabBarController.selectedIndex = 0;
+//
+//	self.window.rootViewController = self.tabBarController;
+//	[self.window makeKeyAndVisible];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	return YES;
 }

@@ -1,29 +1,20 @@
 //
-//  SubjectTableViewController.m
+//  CourseTableViewController.m
 //  app
 //
 //  Created by Jesse Hu on 10/18/14.
 //  Copyright (c) 2014 KZ. All rights reserved.
 //
 
-#import "SubjectTableViewController.h"
 #import "CourseTableViewController.h"
 
-@interface SubjectTableViewController () <UITableViewDelegate, UITableViewDataSource>
-
-@property (strong, nonatomic) NSArray *subjects;
-@property (strong, nonatomic) NSArray *courses;
+@interface CourseTableViewController ()
 
 @end
 
-@implementation SubjectTableViewController
+@implementation CourseTableViewController
 
 - (void)viewDidLoad {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"courses_final" ofType:@"json"];
-    NSData *content = [[NSData alloc] initWithContentsOfFile:filePath];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:content options:kNilOptions error:nil];
-    self.subjects = [json valueForKey:@"subjects"];
-    
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -38,15 +29,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"subjectsToCoursesSegue"]) {
-        CourseTableViewController *courseVC = segue.destinationViewController;
-        courseVC.courses = self.courses;
-        // courseVC.delegate = self;
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -56,28 +38,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.subjects count];
+    return [self.courses count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    // Configure the cell...
     
-    NSDictionary *subjectDictionary = [self.subjects objectAtIndex:[indexPath row]];
-    NSString *subjectCode = [subjectDictionary objectForKey:@"code"];
-    NSString *subjectDesc = [subjectDictionary objectForKey:@"desc"];
-    
-    cell.textLabel.text = subjectCode;
-    cell.detailTextLabel.text = subjectDesc;
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    self.courses = [self.subjects objectAtIndex:[indexPath row]];
-    
-    [self performSegueWithIdentifier:@"subjectsToCoursesSegue" sender:nil];
 }
 
 /*

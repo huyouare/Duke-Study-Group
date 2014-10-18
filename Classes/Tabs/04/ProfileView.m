@@ -226,6 +226,7 @@
 {
 	if (indexPath.section == 0) return cellName;
 	if (indexPath.section == 1) return cellButton;
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
 	return nil;
 }
 
