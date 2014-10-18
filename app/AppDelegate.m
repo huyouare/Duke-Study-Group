@@ -27,8 +27,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	[Parse setApplicationId:@"sRtJbiHUImOPq2KPHPda0QXqSXsAWokDNBYN4GfL" clientKey:@"iGS37ZA4FzOmeizqRVjMvZXj6RYdBKlm6aODZMNM"];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
+    [Parse setApplicationId:@"SgbZOZ1OPs3pSiC3H9vDZ9ZqF1NFYDQ75jgWAkWK"
+                  clientKey:@"jg9PNPhgqaMNpb1x683mGCERM4lJ1QX5SAIKk2Zs"];
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 	[PFFacebookUtils initializeFacebook];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[PFImageView class];
@@ -36,12 +37,12 @@
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:[[GroupView alloc] init]];
-	NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
+//	NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:[[PrivateView alloc] init]];
 	NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:[[MessagesView alloc] init]];
 	NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:[[ProfileView alloc] init]];
 
 	self.tabBarController = [[UITabBarController alloc] init];
-	self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController2, navController3, navController4, nil];
+	self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController3, navController4, nil];
 	self.tabBarController.tabBar.translucent = NO;
 	self.tabBarController.selectedIndex = 0;
 

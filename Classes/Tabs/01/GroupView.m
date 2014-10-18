@@ -19,6 +19,8 @@
 #import "GroupView.h"
 #import "ChatView.h"
 
+#import "SubjectTableViewController.h"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupView()
 {
@@ -76,10 +78,12 @@
 - (void)actionNew
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a name for your group" message:nil delegate:self
-										  cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-	[alert show];
+//	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a name for your group" message:nil delegate:self
+//										  cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+//	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//	[alert show];
+    UIViewController *subjectVC = [[SubjectTableViewController alloc] init];
+    [self.navigationController pushViewController:subjectVC animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate

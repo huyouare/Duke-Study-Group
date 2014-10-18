@@ -118,6 +118,9 @@
 		29EB243619E9297900D7AA97 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EB243419E9297900D7AA97 /* Parse.framework */; };
 		29EB243719E9297900D7AA97 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EB243519E9297900D7AA97 /* ParseFacebookUtils.framework */; };
 		29EB255119E92B3600D7AA97 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EB255019E92B3600D7AA97 /* FacebookSDK.framework */; };
+		83F76BEB19F2D8C9007354D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F76BEA19F2D8C8007354D5 /* Main.storyboard */; };
+		83F76BEE19F2E30A007354D5 /* SubjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */; };
+		83F76BF019F2E551007354D5 /* courses_final.json in Resources */ = {isa = PBXBuildFile; fileRef = 83F76BEF19F2E551007354D5 /* courses_final.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -308,6 +311,10 @@
 		29EB243519E9297900D7AA97 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		29EB254F19E92ACD00D7AA97 /* AppConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
 		29EB255019E92B3600D7AA97 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		83F76BEA19F2D8C8007354D5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		83F76BEC19F2E30A007354D5 /* SubjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubjectTableViewController.h; path = ../../../app/SubjectTableViewController.h; sourceTree = "<group>"; };
+		83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubjectTableViewController.m; path = ../../../app/SubjectTableViewController.m; sourceTree = "<group>"; };
+		83F76BEF19F2E551007354D5 /* courses_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = courses_final.json; path = ../../../app/courses_final.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,6 +648,9 @@
 		2930F90019E96C5C000F7799 /* 01 */ = {
 			isa = PBXGroup;
 			children = (
+				83F76BEC19F2E30A007354D5 /* SubjectTableViewController.h */,
+				83F76BED19F2E30A007354D5 /* SubjectTableViewController.m */,
+				83F76BEF19F2E551007354D5 /* courses_final.json */,
 				2930F90119E96C5C000F7799 /* GroupView.h */,
 				2930F90219E96C5C000F7799 /* GroupView.m */,
 			);
@@ -752,6 +762,7 @@
 		29EB240719E9292500D7AA97 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				83F76BEA19F2D8C8007354D5 /* Main.storyboard */,
 				29EB254F19E92ACD00D7AA97 /* AppConstant.h */,
 				29EB240C19E9292500D7AA97 /* AppDelegate.h */,
 				29EB240D19E9292500D7AA97 /* AppDelegate.m */,
@@ -839,6 +850,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2930F93F19E96C73000F7799 /* tab_group@2x.png in Resources */,
+				83F76BEB19F2D8C9007354D5 /* Main.storyboard in Resources */,
 				2930F93E19E96C73000F7799 /* blank_profile@2x.png in Resources */,
 				2930F8C019E94E01000F7799 /* typing@3x.png in Resources */,
 				2930F8B019E94E01000F7799 /* bubble@2x.png in Resources */,
@@ -879,6 +891,7 @@
 				2930F8C219E94E01000F7799 /* message_sent.aiff in Resources */,
 				2930F92B19E96C5C000F7799 /* ProfileView.xib in Resources */,
 				2930F8BE19E94E01000F7799 /* typing.png in Resources */,
+				83F76BF019F2E551007354D5 /* courses_final.json in Resources */,
 				2930F8AF19E94E01000F7799 /* bubble.png in Resources */,
 				29EB241619E9292500D7AA97 /* Images.xcassets in Resources */,
 			);
@@ -949,6 +962,7 @@
 				2930F92319E96C5C000F7799 /* GroupView.m in Sources */,
 				2930F8D719E94E01000F7799 /* JSQPhotoMediaItem.m in Sources */,
 				2930F92419E96C5C000F7799 /* PrivateView.m in Sources */,
+				83F76BEE19F2E30A007354D5 /* SubjectTableViewController.m in Sources */,
 				2930F8A519E94E01000F7799 /* AFURLResponseSerialization.m in Sources */,
 				2930F8CF19E94E01000F7799 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				2930F8E219E94E01000F7799 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
