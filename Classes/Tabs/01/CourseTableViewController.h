@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CourseTableViewControllerDelegate <NSObject>
+
+- (void)courseSelected:(NSDictionary *)course;
+
+@end
+
 @interface CourseTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray *courses;
+@property (strong, nonatomic) NSDictionary *subjectDictionary;
+@property (strong, nonatomic) id <CourseTableViewControllerDelegate> delegate;
 
 @end

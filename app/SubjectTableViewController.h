@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseTableViewController.h"
 
 @interface SubjectTableViewController : UITableViewController
+
+@property (strong, nonatomic) id <CourseTableViewControllerDelegate> delegate;
 
 @end

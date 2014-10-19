@@ -23,7 +23,7 @@
 #import "CourseTableViewController.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface GroupView()
+@interface GroupView() <CourseTableViewControllerDelegate>
 {
 	NSMutableArray *chatrooms;
 }
@@ -83,8 +83,11 @@
 //										  cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
 //	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 //	[alert show];
+    
     UIStoryboard *myStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *subjectVC = [myStoryboard instantiateViewControllerWithIdentifier:@"SubjectTableViewController"];
+    SubjectTableViewController *subjectVC = [myStoryboard instantiateViewControllerWithIdentifier:@"SubjectTableViewController"];
+    subjectVC.delegate = self;
+    
     [self.navigationController pushViewController:subjectVC animated:YES];
 }
 
@@ -180,6 +183,29 @@
 	ChatView *chatView = [[ChatView alloc] initWith:roomId];
 	chatView.hidesBottomBarWhenPushed = YES;
 	[self.navigationController pushViewController:chatView animated:YES];
+}
+
+#pragma mark - CourseTableViewControllerDelegate methods
+
+- (void)courseSelected:(NSDictionary *)course
+{
+    NSLog(@"Course selected.");
+    NSLog(@"%@", course);
+    if (course != nil) {
+        PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
+        
+        NSString *chatName = [NSString stringWithFormat:@"%@ %@", [course objectForKey:@"subject_code"], [course objectForKey:@"course_number"]];
+        
+        object[PF_CHATROOMS_NAME] = chatName;
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             if (error == nil)
+             {
+                 [self refreshTable];
+             }
+             else [ProgressHUD showError:@"Network error."];
+         }];
+    }
 }
 
 @end

@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSArray *subjects;
 @property (strong, nonatomic) NSArray *courses;
+@property (strong, nonatomic) NSDictionary *subjectDictionary;
 
 @end
 
@@ -43,7 +44,8 @@
     if ([segue.identifier isEqualToString:@"subjectToCourseSegue"]) {
         CourseTableViewController *courseVC = segue.destinationViewController;
         courseVC.courses = [self.courses copy];
-        // courseVC.delegate = self;
+        courseVC.subjectDictionary = self.subjectDictionary;
+        courseVC.delegate = self.delegate;
     }
 }
 
@@ -79,6 +81,7 @@
     NSDictionary *subjectDictionary = [self.subjects objectAtIndex:[indexPath row]];
     NSArray *courses = [subjectDictionary objectForKey:@"courses"];
     self.courses = courses;
+    self.subjectDictionary = subjectDictionary;
     
     [self performSegueWithIdentifier:@"subjectToCourseSegue" sender:nil];
 }

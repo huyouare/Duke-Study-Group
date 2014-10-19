@@ -54,6 +54,25 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+/*
+    course = {
+        "course_number": "89S",
+        "course_title": "First-Year Seminar",
+        "crse_id": "000064",
+        "subject_code": "AAAS",
+        "subject_desc": "African and African American S"
+    }
+ */
+    
+    NSMutableDictionary *course = [[NSMutableDictionary alloc] initWithDictionary:[self.courses objectAtIndex:[indexPath row]] copyItems:YES];
+    [course setValue:[self.subjectDictionary objectForKey:@"code"] forKey:@"subject_code"];
+    [course setValue:[self.subjectDictionary objectForKey:@"desc"] forKey:@"subject_desc"];
+    [self.delegate courseSelected:course];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
