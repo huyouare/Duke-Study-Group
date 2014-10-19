@@ -43,8 +43,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
     
-    // Configure the cell...
+    NSDictionary *courseDictionary = [self.courses objectAtIndex:[indexPath row]];
+    cell.textLabel.text = [courseDictionary objectForKey:@"course_number"];
+    cell.detailTextLabel.text = [courseDictionary objectForKey:@"course_title"];
     
     return cell;
 }

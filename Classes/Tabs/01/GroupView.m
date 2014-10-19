@@ -20,6 +20,7 @@
 #import "ChatView.h"
 
 #import "SubjectTableViewController.h"
+#import "CourseTableViewController.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupView()
@@ -82,7 +83,8 @@
 //										  cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
 //	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 //	[alert show];
-    UIViewController *subjectVC = [[SubjectTableViewController alloc] init];
+    UIStoryboard *myStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *subjectVC = [myStoryboard instantiateViewControllerWithIdentifier:@"SubjectTableViewController"];
     [self.navigationController pushViewController:subjectVC animated:YES];
 }
 

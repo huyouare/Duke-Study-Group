@@ -40,9 +40,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"subjectsToCoursesSegue"]) {
+    if ([segue.identifier isEqualToString:@"subjectToCourseSegue"]) {
         CourseTableViewController *courseVC = segue.destinationViewController;
-        courseVC.courses = self.courses;
+        courseVC.courses = [self.courses copy];
         // courseVC.delegate = self;
     }
 }
@@ -60,9 +60,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
     
     NSDictionary *subjectDictionary = [self.subjects objectAtIndex:[indexPath row]];
     NSString *subjectCode = [subjectDictionary objectForKey:@"code"];
@@ -75,9 +76,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.courses = [self.subjects objectAtIndex:[indexPath row]];
+    NSDictionary *subjectDictionary = [self.subjects objectAtIndex:[indexPath row]];
+    NSArray *courses = [subjectDictionary objectForKey:@"courses"];
+    self.courses = courses;
     
-    [self performSegueWithIdentifier:@"subjectsToCoursesSegue" sender:nil];
+    [self performSegueWithIdentifier:@"subjectToCourseSegue" sender:nil];
 }
 
 /*
