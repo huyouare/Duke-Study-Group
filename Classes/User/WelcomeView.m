@@ -130,6 +130,11 @@
 		user[PF_USER_FACEBOOKID] = userData[@"id"];
 		user[PF_USER_PICTURE] = filePicture;
 		user[PF_USER_THUMBNAIL] = fileThumbnail;
+        
+        user[PF_USER_COURSES] = [[NSArray alloc] init];
+        user[PF_USER_CHATROOMS] = [[NSArray alloc] init];
+
+        
 		[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
 			if (error == nil)

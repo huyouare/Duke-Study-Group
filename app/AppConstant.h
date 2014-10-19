@@ -25,6 +25,9 @@
 #define		PF_USER_PICTURE						@"picture"
 #define		PF_USER_THUMBNAIL					@"thumbnail"
 
+#define     PF_USER_COURSES                     @"courses"
+#define     PF_USER_CHATROOMS                   @"chatrooms"
+
 #define		PF_CHAT_CLASS_NAME					@"Chat"
 #define		PF_CHAT_USER						@"user"
 #define		PF_CHAT_ROOMID						@"roomId"
@@ -42,6 +45,10 @@
 #define		PF_MESSAGES_LASTMESSAGE				@"lastMessage"
 #define		PF_MESSAGES_COUNTER					@"counter"
 #define		PF_MESSAGES_UPDATEDACTION			@"updatedAction"
+
+#define     PF_COURSES_CLASS_NAME               @"Courses"
+#define     PF_COURSES_USER                     @"user"
+#define     PF_COURSES_NAMES                    @"names"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		NOTIFICATION_APP_STARTED			@"NCAppStarted"

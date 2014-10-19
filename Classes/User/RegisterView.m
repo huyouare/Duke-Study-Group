@@ -84,6 +84,8 @@
 		user[PF_USER_EMAILCOPY] = email;
 		user[PF_USER_FULLNAME] = name;
 		user[PF_USER_FULLNAME_LOWER] = [name lowercaseString];
+        user[PF_USER_COURSES] = [[NSArray alloc] init];
+        user[PF_USER_CHATROOMS] = [[NSArray alloc] init];
 
 		[user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
