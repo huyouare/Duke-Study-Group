@@ -7,7 +7,6 @@
         <!--Subject-->
         <scene sceneID="2l1-v0-8Zf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QpN-rv-3o5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="SubjectTableViewController" title="Subject" id="ekg-vz-Gn2" customClass="SubjectTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gVi-Mk-bNI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -50,13 +49,13 @@
                         <segue destination="g8X-gw-dtf" kind="show" identifier="subjectToCourseSegue" id="cWN-NB-gcX"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QpN-rv-3o5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2653.5" y="-450"/>
         </scene>
         <!--Course Name-->
         <scene sceneID="neT-8y-X72">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K6K-QS-IrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="Course Name" id="g8X-gw-dtf" customClass="CourseTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="myt-la-KXn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -96,6 +95,7 @@
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K6K-QS-IrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1815" y="-450"/>
         </scene>
