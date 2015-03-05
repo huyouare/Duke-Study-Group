@@ -9,11 +9,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <UIKit/UIKit.h>
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-BOOL		ShouldStartPhotoLibrary		(id object, BOOL canEdit);
+BOOL			ShouldStartPhotoLibrary		(id object, BOOL canEdit);
 
-void		LoginUser					(id target);
+void			LoginUser					(id target);
 
-UIImage*	ResizeImage					(UIImage *image, CGFloat width, CGFloat height);
+UIImage*		ResizeImage					(UIImage *image, CGFloat width, CGFloat height);
 
-void		PostNotification			(NSString *notification);
+void			PostNotification			(NSString *notification);
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+NSString*		TimeElapsed					(NSTimeInterval seconds);

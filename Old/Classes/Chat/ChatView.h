@@ -15,6 +15,6 @@
 @interface ChatView : JSQMessagesViewController
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-- (id)initWith:(NSString *)chatroom_;
+- (id)initWith:(NSString *)roomId_;
 
 @end

@@ -13,6 +13,7 @@
 #import "ProgressHUD.h"
 
 #import "AppConstant.h"
+#import "messages.h"
 #import "utilities.h"
 
 #import "PrivateView.h"
@@ -113,7 +114,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 	if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
 
-	PFUser *user = [users objectAtIndex:indexPath.row];
+	PFUser *user = users[indexPath.row];
 	cell.textLabel.text = user[PF_USER_FULLNAME];
 
 	return cell;
@@ -126,13 +127,17 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-	PFUser *user = [users objectAtIndex:indexPath.row];
-	NSString *id1 = user.objectId;
-	NSString *id2 = [PFUser currentUser].objectId;
-	NSString *chatroom = ([id1 compare:id2] < 0) ? [NSString stringWithFormat:@"%@%@", id1, id2] : [NSString stringWithFormat:@"%@%@", id2, id1];
-
-	ChatView *chatView = [[ChatView alloc] initWith:chatroom];
+	//---------------------------------------------------------------------------------------------------------------------------------------------
+	PFUser *user1 = [PFUser currentUser];
+	PFUser *user2 = users[indexPath.row];
+	NSString *id1 = user1.objectId;
+	NSString *id2 = user2.objectId;
+	NSString *roomId = ([id1 compare:id2] < 0) ? [NSString stringWithFormat:@"%@%@", id1, id2] : [NSString stringWithFormat:@"%@%@", id2, id1];
+	//---------------------------------------------------------------------------------------------------------------------------------------------
+	CreateMessageItem(user1, roomId, user2[PF_USER_FULLNAME]);
+	CreateMessageItem(user2, roomId, user1[PF_USER_FULLNAME]);
+	//---------------------------------------------------------------------------------------------------------------------------------------------
+	ChatView *chatView = [[ChatView alloc] initWith:roomId];
 	chatView.hidesBottomBarWhenPushed = YES;
 	[self.navigationController pushViewController:chatView animated:YES];
 }

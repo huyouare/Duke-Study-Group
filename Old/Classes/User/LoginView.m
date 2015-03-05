@@ -80,7 +80,7 @@
 				[ProgressHUD showSuccess:[NSString stringWithFormat:@"Welcome back %@!", [user objectForKey:PF_USER_FULLNAME]]];
 				[self dismissViewControllerAnimated:YES completion:nil];
 			}
-			else [ProgressHUD showError:[error.userInfo valueForKey:@"error"]];
+			else [ProgressHUD showError:error.userInfo[@"error"]];
 		}];
 	}
 	else [ProgressHUD showError:@"Please enter both username and password."];

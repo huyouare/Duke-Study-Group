@@ -84,6 +84,8 @@
 		user[PF_USER_EMAILCOPY] = email;
 		user[PF_USER_FULLNAME] = name;
 		user[PF_USER_FULLNAME_LOWER] = [name lowercaseString];
+        user[PF_USER_COURSES] = [[NSArray alloc] init];
+        user[PF_USER_CHATROOMS] = [[NSArray alloc] init];
 
 		[user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
@@ -92,7 +94,7 @@
 				[ProgressHUD showSuccess:@"Succeed."];
 				[self dismissViewControllerAnimated:YES completion:nil];
 			}
-			else [ProgressHUD showError:[error.userInfo valueForKey:@"error"]];
+			else [ProgressHUD showError:error.userInfo[@"error"]];
 		}];
 	}
 	else [ProgressHUD showError:@"Please fill all values!"];
@@ -119,8 +121,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	if (indexPath.row == 0) return cellName;
-	if (indexPath.row == 1) return cellEmail;
-	if (indexPath.row == 2) return cellPassword;
+	if (indexPath.row == 1) return cellPassword;
+	if (indexPath.row == 2) return cellEmail;
 	if (indexPath.row == 3) return cellButton;
 	return nil;
 }

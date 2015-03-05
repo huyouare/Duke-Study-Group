@@ -1,1 +1,1 @@
-# Duke-Study-Group
+Duke Study Groups App

@@ -30,7 +30,7 @@
 	[super viewDidLoad];
 	self.title = @"Welcome";
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
 	[self.navigationItem setBackBarButtonItem:backButton];
 }
 
@@ -70,7 +70,7 @@
 			}
 			else [self userLoggedIn:user];
 		}
-		else [ProgressHUD showError:[error.userInfo valueForKey:@"error"]];
+		else [ProgressHUD showError:error.userInfo[@"error"]];
 	}];
 }
 
@@ -98,7 +98,7 @@
 - (void)processFacebook:(PFUser *)user UserData:(NSDictionary *)userData
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	NSString *link = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?redirect=1&height=140&type=normal&width=140", userData[@"id"]];
+	NSString *link = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link]];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -108,20 +108,20 @@
 	{
 		UIImage *image = (UIImage *)responseObject;
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		if (image.size.width > 140) image = ResizeImage(image, 140, image.size.height / image.size.width * 140);
+		if (image.size.width > 140) image = ResizeImage(image, 140, 140);
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		PFFile *filePicture = [PFFile fileWithName:@"picture.jpg" data:UIImageJPEGRepresentation(image, 0.6)];
 		[filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
-			if (error != nil) [ProgressHUD showError:@"Network error."];
+			if (error != nil) [ProgressHUD showError:error.userInfo[@"error"]];
 		}];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		if (image.size.width > 34) image = ResizeImage(image, 34, image.size.height / image.size.width * 34);
+		if (image.size.width > 34) image = ResizeImage(image, 30, 30);
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		PFFile *fileThumbnail = [PFFile fileWithName:@"thumbnail.jpg" data:UIImageJPEGRepresentation(image, 0.6)];
 		[fileThumbnail saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
-			if (error != nil) [ProgressHUD showError:@"Network error."];
+			if (error != nil) [ProgressHUD showError:error.userInfo[@"error"]];
 		}];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		user[PF_USER_EMAILCOPY] = userData[@"email"];
@@ -130,6 +130,11 @@
 		user[PF_USER_FACEBOOKID] = userData[@"id"];
 		user[PF_USER_PICTURE] = filePicture;
 		user[PF_USER_THUMBNAIL] = fileThumbnail;
+        
+        user[PF_USER_COURSES] = [[NSArray alloc] init];
+        user[PF_USER_CHATROOMS] = [[NSArray alloc] init];
+
+        
 		[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
 		{
 			if (error == nil)
@@ -149,7 +154,7 @@
 		[PFUser logOut];
 		[ProgressHUD showError:@"Failed to fetch Facebook profile picture."];
 	}];
-	//-----------------------------------------------------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[[NSOperationQueue mainQueue] addOperation:operation];
 }
 
