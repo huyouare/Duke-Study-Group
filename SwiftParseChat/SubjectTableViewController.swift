@@ -12,6 +12,8 @@ class SubjectTableViewController: UITableViewController {
 
     var subjects: NSArray!
     var courses: NSArray!
+    var delegate: CourseTableViewControllerDelegate!
+    var selectedSubject: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class SubjectTableViewController: UITableViewController {
         if let path = NSBundle.mainBundle().pathForResource("courses", ofType: "json") {
             if let jsonData = NSData.dataWithContentsOfMappedFile(path) as? NSData {
                 var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-                self.subjects = jsonResult.objectForKey("subject") as NSArray!
+                self.subjects = jsonResult.objectForKey("subjects") as NSArray!
             }
         }
     }
@@ -59,6 +61,7 @@ class SubjectTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let subject = self.subjects[indexPath.row] as? NSDictionary {
             if let courses = subject["courses"] as? NSArray {
+                self.selectedSubject = subject
                 self.courses = courses
                 self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
             }
@@ -70,6 +73,8 @@ class SubjectTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "subjectToCourseSegue" {
             let courseVC = segue.destinationViewController as CourseTableViewController
+            courseVC.delegate = self.delegate
+            courseVC.subject = self.selectedSubject
             courseVC.courses = self.courses
         }
     }

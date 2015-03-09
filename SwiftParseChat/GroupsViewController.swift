@@ -9,7 +9,7 @@
 import UIKit
 // Parse loaded from SwiftParseChat-Bridging-Header.h
 
-class GroupsViewController: UITableViewController, UIAlertViewDelegate {
+class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTableViewControllerDelegate {
     
     var groups: [PFObject]! = []
     
@@ -48,9 +48,9 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate {
         }
     }
     
-    @IBAction func newButtonPressed(sender: UIBarButtonItem) {
-        self.actionNew()
-    }
+//    @IBAction func newButtonPressed(sender: UIBarButtonItem) {
+//        self.actionNew()
+//    }
     
     func actionNew() {
         var alert = UIAlertView(title: "Please enter a name for your group", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
@@ -134,5 +134,11 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate {
             let groupId = sender as String
             chatVC.groupId = groupId
         }
+    }
+    
+    // MARK: - CourseTableViewController Delegate
+    
+    func didSelectCourse(course: [String : String]) {
+        println(course)
     }
 }
