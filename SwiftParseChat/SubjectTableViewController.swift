@@ -76,6 +76,7 @@ class SubjectTableViewController: UITableViewController {
             courseVC.delegate = self.delegate
             courseVC.subject = self.selectedSubject
             courseVC.courses = self.courses
+            courseVC.subjectVC = self
         }
     }
 

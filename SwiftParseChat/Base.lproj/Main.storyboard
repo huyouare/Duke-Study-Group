@@ -148,7 +148,7 @@
                     <navigationItem key="navigationItem" title="Group" id="md8-h9-Vca">
                         <barButtonItem key="rightBarButtonItem" title="New" id="ghV-52-H1M">
                             <connections>
-                                <segue destination="dbV-TW-M70" kind="push" id="og0-KY-NyM"/>
+                                <segue destination="dbV-TW-M70" kind="modal" id="og0-KY-NyM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

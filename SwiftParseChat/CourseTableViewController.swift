@@ -18,6 +18,7 @@ class CourseTableViewController: UITableViewController {
     var courses: NSArray!
     var delegate: CourseTableViewControllerDelegate!
     var selectedCourse: [String: String]!
+    var subjectVC: SubjectTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,7 @@ class CourseTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.subjectVC.dismissViewControllerAnimated(true, completion: { () -> Void in
             if self.delegate != nil {
                 /* Retrieve course and append subject code and name */
                 if let course = self.courses[indexPath.row] as? [String: String] {
