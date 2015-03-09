@@ -31,11 +31,13 @@ class WelcomeViewController: UIViewController {
                     self.userLoggedIn(user)
                 }
             } else {
-                println(error)
-                if let info = error.userInfo {
-                    println(info)
-                    ProgressHUD.showError(info["error"] as? String)
+                if error != nil {
+                    println(error)
+                    if let info = error.userInfo {
+                        println(info)
+                    }
                 }
+                ProgressHUD.showError("Facebook sign in error")
             }
         })
     }
@@ -105,7 +107,7 @@ class WelcomeViewController: UIViewController {
             } else {
                 PFUser.logOut()
                 if let info = error!.userInfo {
-                    ProgressHUD.showError("Login error")
+                    ProgressHUD.showError("Failed to fetch Facebook photo")
                     println(info["error"] as String)
                 }
             }
