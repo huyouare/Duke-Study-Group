@@ -67,7 +67,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LW4-SA-FTG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="-1498"/>
+            <point key="canvasLocation" x="1400" y="-1498"/>
         </scene>
         <!--Course Table View Controller-->
         <scene sceneID="fat-kr-Mql">
@@ -108,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMD-gv-DEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1394" y="-1498"/>
+            <point key="canvasLocation" x="1926" y="-1498"/>
         </scene>
         <!--Group-->
         <scene sceneID="hBU-2h-de9">
@@ -148,7 +148,7 @@
                     <navigationItem key="navigationItem" title="Group" id="md8-h9-Vca">
                         <barButtonItem key="rightBarButtonItem" title="New" id="ghV-52-H1M">
                             <connections>
-                                <segue destination="dbV-TW-M70" kind="modal" id="og0-KY-NyM"/>
+                                <segue destination="qfy-2V-ZBe" kind="modal" id="og0-KY-NyM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1095,6 +1095,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbX-EU-Evi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1406" y="1956"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gVl-ek-YqF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qfy-2V-ZBe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CVJ-wW-f0r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dbV-TW-M70" kind="relationship" relationship="rootViewController" id="tgY-iq-FsN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kJc-Fn-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="-1498"/>
         </scene>
     </scenes>
     <resources>
