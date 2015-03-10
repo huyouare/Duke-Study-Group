@@ -48,10 +48,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
         }
     }
     
-//    @IBAction func newButtonPressed(sender: UIBarButtonItem) {
-//        self.actionNew()
-//    }
-    
+    /* // Old function
     func actionNew() {
         var alert = UIAlertView(title: "Please enter a name for your group", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
         alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
@@ -77,6 +74,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
             }
         }
     }
+    */
     
     // MARK: - TableView Data Source
     
@@ -133,12 +131,32 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
             chatVC.hidesBottomBarWhenPushed = true
             let groupId = sender as String
             chatVC.groupId = groupId
+        } else if segue.identifier == "groupsToSubjectSegue" {
+            let subjectVC = segue.destinationViewController.topViewController as SubjectTableViewController
+            subjectVC.delegate = self
         }
     }
     
     // MARK: - CourseTableViewController Delegate
     
     func didSelectCourse(course: [String : String]) {
-        println(course)
+        
+        
+        
+        if let text = textField!.text {
+            if countElements(text) > 0 {
+                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
+                object[PF_GROUPS_NAME] = text
+                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                    if success {
+                        self.loadGroups()
+                    } else {
+                        ProgressHUD.showError("Network error")
+                        println(error)
+                    }
+                })
+            }
+        }
+
     }
 }
