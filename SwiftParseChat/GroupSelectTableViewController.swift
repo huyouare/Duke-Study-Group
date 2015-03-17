@@ -23,7 +23,36 @@ class GroupSelectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
+        if let code = course["subject_code"] {
+            if let number = course["course_number"] {
+                let courseId = code + number
+                var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
+                query.whereKey(PF_GROUPS_COURSEID, equalTo: courseId)
+                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        if count(objects) > 0 {
+                            for group in objects as [PFObject]! {
+                                groups.append(group)
+                            }
+                        } else {
+                            // No groups found
+                        }
+                    } else {
+                        ProgressHUD.showError("Network error")
+                    }
+                })
+//                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
+//                object[PF_GROUPS_NAME] =
+//                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+//                    if success {
+//                        self.loadGroups()
+//                    } else {
+//                        ProgressHUD.showError("Network error")
+//                        println(error)
+//                    }
+//                })
+            }
+        }
         
     }
 
@@ -52,20 +81,7 @@ class GroupSelectTableViewController: UITableViewController {
             }
         })
         
-//        if let code = course["subject_code"] {
-//            if let number = course["course_number"] {
-//                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-//                object[PF_GROUPS_NAME] = code + number
-//                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-//                    if success {
-//                        self.loadGroups()
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                        println(error)
-//                    }
-//                })
-//            }
-//        }
+
         
         return cell
     }
