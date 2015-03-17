@@ -716,12 +716,10 @@
 				83F02B7D1AA6C671008428DF /* MessagesCell.swift */,
 				83B8DB971AA98BEB00ADE3BB /* MessagesCompose */,
 				831C19491A98090E000FD6D0 /* GroupsViewController.swift */,
+				83ED6A4D1AB7F09F000DE3DB /* GroupSelect */,
 				831C194F1A9809C7000FD6D0 /* ProfileViewController.swift */,
 				831C194B1A980970000FD6D0 /* PrivateViewController.swift */,
 				83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */,
-				83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */,
-				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
-				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -771,6 +769,16 @@
 				83ED1DEF1AA413E500198FBF /* APAddressBook-Bridging.h */,
 			);
 			path = Swift;
+			sourceTree = "<group>";
+		};
+		83ED6A4D1AB7F09F000DE3DB /* GroupSelect */ = {
+			isa = PBXGroup;
+			children = (
+				83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */,
+				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
+				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
+			);
+			name = GroupSelect;
 			sourceTree = "<group>";
 		};
 		BA1D0AD88CD4A1615707E353 /* Pods */ = {

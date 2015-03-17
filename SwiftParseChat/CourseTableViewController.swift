@@ -54,22 +54,18 @@ class CourseTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-        self.subjectVC.dismissViewControllerAnimated(true, completion: { () -> Void in
-            if self.delegate != nil {
-                /* Retrieve course and append subject code and name */
-                if let course = self.courses[indexPath.row] as? [String: String] {
-                    self.selectedCourse = course
-                    if let code = self.subject["code"] as? String {
-                        self.selectedCourse["subject_code"] = code
-                    }
-                    if let desc = self.subject["desc"] as? String {
-                        self.selectedCourse["subject_desc"] = desc
-                    }
-                }
-                
-                self.delegate.didSelectCourse(self.selectedCourse)
+        /* Retrieve course and append subject code and name */
+        if let course = self.courses[indexPath.row] as? [String: String] {
+            self.selectedCourse = course
+            if let code = self.subject["code"] as? String {
+                self.selectedCourse["subject_code"] = code
             }
-        })
+            if let desc = self.subject["desc"] as? String {
+                self.selectedCourse["subject_desc"] = desc
+            }
+            
+            self.performSegueWithIdentifier("courseToGroupsSegue", sender: self)
+        }
     }
     
     // MARK: - Navigation

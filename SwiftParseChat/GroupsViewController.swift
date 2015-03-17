@@ -9,7 +9,7 @@
 import UIKit
 // Parse loaded from SwiftParseChat-Bridging-Header.h
 
-class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTableViewControllerDelegate {
+class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSelectTableViewControllerDelegate {
     
     var groups: [PFObject]! = []
     
@@ -178,22 +178,8 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
         }
     }
     
-    // MARK: - CourseTableViewController Delegate
+    // MARK: - GroupSelectTableViewController Delegate
     
-    func didSelectCourse(course: [String : String]) {
-        if let code = course["subject_code"] {
-            if let number = course["course_number"] {
-                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-                object[PF_GROUPS_NAME] = code + number
-                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-                    if success {
-                        self.loadGroups()
-                    } else {
-                        ProgressHUD.showError("Network error")
-                        println(error)
-                    }
-                })
-            }
-        }
+    func didSelectGroup(group: PFObject) {
     }
 }

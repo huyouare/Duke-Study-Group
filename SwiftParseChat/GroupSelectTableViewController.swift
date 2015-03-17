@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GroupSelectTableViewControllerDelegate {
-    func didSelectCourse(course: [String: String])
+    func didSelectGroup(group: PFObject)
 }
 
 class GroupSelectTableViewController: UITableViewController {
@@ -17,7 +17,7 @@ class GroupSelectTableViewController: UITableViewController {
     var course: [String: String]!
     var groups = [PFObject]()
     var selectedGroup: PFObject!
-    var delegate: GroupSelectTableViewControllerDelegate
+    var delegate: GroupSelectTableViewControllerDelegate!
     var subjectVC: SubjectTableViewController!
 
     override func viewDidLoad() {
@@ -41,15 +41,34 @@ class GroupSelectTableViewController: UITableViewController {
         return groups.count + 1
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as UITableViewCell
 
-        // Configure the cell...
-
+        self.subjectVC.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if self.delegate != nil {
+                /* Retrieve course and append subject code and name */
+                
+                self.delegate.didSelectGroup(self.selectedGroup)
+            }
+        })
+        
+//        if let code = course["subject_code"] {
+//            if let number = course["course_number"] {
+//                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
+//                object[PF_GROUPS_NAME] = code + number
+//                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+//                    if success {
+//                        self.loadGroups()
+//                    } else {
+//                        ProgressHUD.showError("Network error")
+//                        println(error)
+//                    }
+//                })
+//            }
+//        }
+        
         return cell
     }
-    */
 
 
 
