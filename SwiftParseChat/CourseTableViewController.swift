@@ -14,7 +14,6 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
     var courses: NSArray!
     var delegate: GroupSelectTableViewControllerDelegate!
     var selectedCourse: [String: String]!
-    var subjectVC: SubjectTableViewController!
 
     var filteredCourses: NSArray!
     var searchController: UISearchController!
@@ -115,7 +114,6 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
             let groupSelectVC = segue.destinationViewController as GroupSelectTableViewController
             groupSelectVC.delegate = self.delegate
             groupSelectVC.course = self.selectedCourse
-            groupSelectVC.subjectVC = self.subjectVC
         }
     }
 

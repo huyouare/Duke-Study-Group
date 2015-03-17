@@ -21,7 +21,6 @@ class GroupSelectTableViewController: UITableViewController {
     var groups = [PFObject]()
     var selectedGroup: PFObject!
     var delegate: GroupSelectTableViewControllerDelegate!
-    var subjectVC: SubjectTableViewController!
 
     @IBOutlet var emptyView: UIView!
     
@@ -47,6 +46,10 @@ class GroupSelectTableViewController: UITableViewController {
                         ProgressHUD.showError("Network error")
                     }
                 })
+                
+                /* use strings as attributes */
+                self.course["course_name"] = titleString
+                self.course["course_id"] = courseId
                 
                 
 //                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
@@ -76,6 +79,7 @@ class GroupSelectTableViewController: UITableViewController {
     }
 
     @IBAction func createGroupButtonPressed(sender: UIButton) {
+        self.performSegueWithIdentifier("groupSelectToCreateSegue", sender: self)
     }
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
@@ -107,19 +111,27 @@ class GroupSelectTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.subjectVC.dismissViewControllerAnimated(true, completion: { () -> Void in
-            if self.delegate != nil {
-                
-                self.delegate.didSelectGroup(self.selectedGroup)
-            }
-        })
+        if indexPath.row == self.groups.count {
+            self.performSegueWithIdentifier("groupSelectToCreateSegue", sender: self)
+        }
+        else {
+            self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+                if self.delegate != nil {
+                    self.delegate.didSelectGroup(self.selectedGroup)
+                }
+            })
+        }
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        if segue.identifier == "groupSelectToCreateSegue" {
+            let createVC = segue.destinationViewController as CreateGroupTableViewController
+            createVC.delegate = self.delegate
+            createVC.course = self.course
+        }
     }
 
 }

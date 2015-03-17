@@ -62,6 +62,7 @@
 		839A20E41A99E244003248CE /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A20E31A99E244003248CE /* libstdc++.6.dylib */; };
 		839A20E91A99E372003248CE /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 839A20E61A99E372003248CE /* ProgressHUD.bundle */; };
 		839A20ED1A99E9D7003248CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A20EC1A99E9D7003248CE /* LoginViewController.swift */; };
+		83A163261AB8BFF800DF969B /* CreateGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */; };
 		83B4F5951AA1713B00C09791 /* JSQMessagesAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83B4F52A1AA1713B00C09791 /* JSQMessagesAssets.bundle */; };
 		83B4F5961AA1713B00C09791 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83B4F52C1AA1713B00C09791 /* JSQMessages.strings */; };
 		83B4F5971AA1713B00C09791 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F53E1AA1713B00C09791 /* JSQSystemSoundPlayer+JSQMessages.m */; };
@@ -204,6 +205,7 @@
 		839A20E71A99E372003248CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		839A20E81A99E372003248CE /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		839A20EC1A99E9D7003248CE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupTableViewController.swift; sourceTree = "<group>"; };
 		83B4F52A1AA1713B00C09791 /* JSQMessagesAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JSQMessagesAssets.bundle; sourceTree = "<group>"; };
 		83B4F52D1AA1713B00C09791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/JSQMessages.strings; sourceTree = "<group>"; };
 		83B4F52E1AA1713B00C09791 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/JSQMessages.strings; sourceTree = "<group>"; };
@@ -402,11 +404,9 @@
 				831C19161A97F5CA000FD6D0 /* AppDelegate.swift */,
 				831C19791A9823A8000FD6D0 /* Constants.swift */,
 				8365C2D31A9C4B77003FB374 /* SwiftParseChat-Bridging-Header.h */,
-				832554E71A9B39A60022F867 /* ChatViewController.swift */,
-				839A20EC1A99E9D7003248CE /* LoginViewController.swift */,
-				83C839A31A9977E3007AC2AC /* RegisterViewController.swift */,
-				83C839A71A997857007AC2AC /* WelcomeViewController.swift */,
 				831C191C1A97F5CA000FD6D0 /* Main.storyboard */,
+				83A163271AB8C32E00DF969B /* Login */,
+				832554E71A9B39A60022F867 /* ChatViewController.swift */,
 				83C839AA1A9978A2007AC2AC /* Tabs */,
 				83C839AB1A9978F6007AC2AC /* Utilities */,
 				83C839A91A997885007AC2AC /* User */,
@@ -524,6 +524,16 @@
 				839A20E81A99E372003248CE /* ProgressHUD.m */,
 			);
 			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		83A163271AB8C32E00DF969B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				839A20EC1A99E9D7003248CE /* LoginViewController.swift */,
+				83C839A31A9977E3007AC2AC /* RegisterViewController.swift */,
+				83C839A71A997857007AC2AC /* WelcomeViewController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		83B4F5281AA1713B00C09791 /* JSQMessagesViewController */ = {
@@ -777,6 +787,7 @@
 				83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */,
 				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
 				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
+				83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */,
 			);
 			name = GroupSelect;
 			sourceTree = "<group>";
@@ -1028,6 +1039,7 @@
 				83B4F5BC1AA1713B00C09791 /* JSQMessagesToolbarContentView.m in Sources */,
 				83B4F5A51AA1713B00C09791 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				83B4F5A71AA1713B00C09791 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				83A163261AB8BFF800DF969B /* CreateGroupTableViewController.swift in Sources */,
 				83B4F5AC1AA1713B00C09791 /* JSQMessagesBubbleImage.m in Sources */,
 				83B4F5BE1AA1713B00C09791 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				83B4F59E1AA1713B00C09791 /* JSQMessagesViewController.m in Sources */,
