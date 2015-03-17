@@ -83,11 +83,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="U6a-Bx-mhL">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="vQR-Fm-Iij" detailTextLabel="ze2-lH-wJ2" style="IBUITableViewCellStyleSubtitle" id="0ed-3h-gVG">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -117,7 +112,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Course" id="unV-jM-YQz"/>
                     <connections>
-                        <outlet property="searchBar" destination="U6a-Bx-mhL" id="GqC-Z1-Vwm"/>
                         <segue destination="qAp-Q5-H7L" kind="push" identifier="courseToGroupsSegue" id="PIf-9n-GRs"/>
                     </connections>
                 </tableViewController>
