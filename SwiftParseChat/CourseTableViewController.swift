@@ -16,7 +16,7 @@ class CourseTableViewController: UITableViewController {
     
     var subject: NSDictionary!
     var courses: NSArray!
-    var delegate: CourseTableViewControllerDelegate!
+    var delegate: GroupSelectTableViewControllerDelegate!
     var selectedCourse: [String: String]!
     var subjectVC: SubjectTableViewController!
     
@@ -70,6 +70,17 @@ class CourseTableViewController: UITableViewController {
                 self.delegate.didSelectCourse(self.selectedCourse)
             }
         })
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "courseToGroupsSegue" {
+            let groupSelectVC = segue.destinationViewController as GroupSelectTableViewController
+            groupSelectVC.delegate = self.delegate
+            groupSelectVC.course = self.selectedCourse
+            groupSelectVC.subjectVC = self.subjectVC
+        }
     }
 
 }

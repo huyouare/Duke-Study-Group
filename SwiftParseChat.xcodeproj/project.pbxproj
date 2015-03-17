@@ -122,6 +122,7 @@
 		83ED1DF31AA413E500198FBF /* APPhoneWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ED1DEA1AA413E500198FBF /* APPhoneWithLabel.m */; };
 		83ED1DF41AA413E500198FBF /* APSocialProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ED1DEC1AA413E500198FBF /* APSocialProfile.m */; };
 		83ED1DF61AA45CAA00198FBF /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED1DF51AA45CAA00198FBF /* Images.swift */; };
+		83ED6A4C1AB7EE62000DE3DB /* GroupSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */; };
 		83F02B7C1AA6C3F1008428DF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */; };
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 /* End PBXBuildFile section */
@@ -327,6 +328,7 @@
 		83ED1DED1AA413E500198FBF /* APTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTypes.h; sourceTree = "<group>"; };
 		83ED1DEF1AA413E500198FBF /* APAddressBook-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APAddressBook-Bridging.h"; sourceTree = "<group>"; };
 		83ED1DF51AA45CAA00198FBF /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSelectTableViewController.swift; sourceTree = "<group>"; };
 		83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -719,6 +721,7 @@
 				83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */,
 				83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */,
 				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
+				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				83B4F5A11AA1713B00C09791 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */,
 				83B4F5C91AA1718300C09791 /* JSQSystemSoundPlayer.m in Sources */,
+				83ED6A4C1AB7EE62000DE3DB /* GroupSelectTableViewController.swift in Sources */,
 				831C19501A9809C7000FD6D0 /* ProfileViewController.swift in Sources */,
 				83ED1DE01AA2E46E00198FBF /* SearchViewController.swift in Sources */,
 				83B4F5B01AA1713B00C09791 /* JSQMessagesCollectionView.m in Sources */,

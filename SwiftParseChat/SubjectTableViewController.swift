@@ -12,7 +12,7 @@ class SubjectTableViewController: UITableViewController {
 
     var subjects: NSArray!
     var courses: NSArray!
-    var delegate: CourseTableViewControllerDelegate!
+    var delegate: GroupSelectTableViewControllerDelegate!
     var selectedSubject: NSDictionary!
     
     override func viewDidLoad() {
