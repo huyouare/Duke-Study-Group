@@ -140,13 +140,10 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
     // MARK: - CourseTableViewController Delegate
     
     func didSelectCourse(course: [String : String]) {
-        
-        
-        
-        if let text = textField!.text {
-            if countElements(text) > 0 {
+        if let code = course["subject_code"] {
+            if let number = course["course_number"] {
                 var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-                object[PF_GROUPS_NAME] = text
+                object[PF_GROUPS_NAME] = code + number
                 object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                     if success {
                         self.loadGroups()
@@ -157,6 +154,5 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, CourseTa
                 })
             }
         }
-
     }
 }

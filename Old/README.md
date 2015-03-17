@@ -1,1 +1,0 @@
-Duke Study Groups App
