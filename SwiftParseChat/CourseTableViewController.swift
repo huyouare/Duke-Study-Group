@@ -20,8 +20,14 @@ class CourseTableViewController: UITableViewController {
     var selectedCourse: [String: String]!
     var subjectVC: SubjectTableViewController!
     
+    @IBOutlet var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let subjectCode = subject["code"] as? String {
+            self.navigationItem.title? = subjectCode
+        }
     }
 
     override func didReceiveMemoryWarning() {

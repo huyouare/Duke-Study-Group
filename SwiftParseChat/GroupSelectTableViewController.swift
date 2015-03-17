@@ -14,6 +14,9 @@ protocol GroupSelectTableViewControllerDelegate {
 
 class GroupSelectTableViewController: UITableViewController {
     
+    // TODO: - Change this constant programmatically
+    let currentSemester = "SPRING15"
+    
     var course: [String: String]!
     var groups = [PFObject]()
     var selectedGroup: PFObject!
@@ -25,9 +28,12 @@ class GroupSelectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let code = course["subject_code"] {
-            if let number = course["course_number"] {
-//                let courseId = code + number
+        if let subjectCode = course["subject_code"] {
+            if let courseNumber = course["course_number"] {
+                let titleString = subjectCode + " " + courseNumber
+                self.navigationItem.title = titleString
+                
+//                let courseId = currentSemester + subjectCode + courseNumber
 //                var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
 //                query.whereKey(PF_GROUPS_COURSEID, equalTo: courseId)
 //                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in

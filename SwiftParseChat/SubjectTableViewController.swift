@@ -8,12 +8,17 @@
 
 import UIKit
 
-class SubjectTableViewController: UITableViewController {
+class SubjectTableViewController: UITableViewController, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     var subjects: NSArray!
     var courses: NSArray!
     var delegate: GroupSelectTableViewControllerDelegate!
     var selectedSubject: NSDictionary!
+    
+    var filteredSubjects: NSArray!
+    var searchController: UISearchController!
+    
+//    @IBOutlet var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,16 @@ class SubjectTableViewController: UITableViewController {
                 self.subjects = jsonResult.objectForKey("subjects") as NSArray!
             }
         }
+        
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.delegate = self
+        self.searchController.searchBar.sizeToFit()
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.definesPresentationContext = true;
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,18 +57,33 @@ class SubjectTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.searchController.active {
+            return self.filteredSubjects.count
+        }
         return self.subjects.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
 
-        if let subject = self.subjects[indexPath.row] as? NSDictionary {
-            if let subjectCode = subject["code"] as? String {
-                cell.textLabel?.text = subjectCode
+        if self.searchController.active {
+            if let subject = self.filteredSubjects[indexPath.row] as? NSDictionary {
+                if let subjectCode = subject["code"] as? String {
+                    cell.textLabel?.text = subjectCode
+                }
+                if let subjectDesc = subject["desc"] as? String {
+                    cell.detailTextLabel?.text = subjectDesc
+                }
             }
-            if let subjectDesc = subject["desc"] as? String {
-                cell.detailTextLabel?.text = subjectDesc
+        }
+        else {
+            if let subject = self.subjects[indexPath.row] as? NSDictionary {
+                if let subjectCode = subject["code"] as? String {
+                    cell.textLabel?.text = subjectCode
+                }
+                if let subjectDesc = subject["desc"] as? String {
+                    cell.detailTextLabel?.text = subjectDesc
+                }
             }
         }
 
@@ -63,11 +93,22 @@ class SubjectTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let subject = self.subjects[indexPath.row] as? NSDictionary {
-            if let courses = subject["courses"] as? NSArray {
-                self.selectedSubject = subject
-                self.courses = courses
-                self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
+        if self.searchController.active {
+            if let subject = self.filteredSubjects[indexPath.row] as? NSDictionary {
+                if let courses = subject["courses"] as? NSArray {
+                    self.selectedSubject = subject
+                    self.courses = courses
+                    self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
+                }
+            }
+        }
+        else {
+            if let subject = self.subjects[indexPath.row] as? NSDictionary {
+                if let courses = subject["courses"] as? NSArray {
+                    self.selectedSubject = subject
+                    self.courses = courses
+                    self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
+                }
             }
         }
     }
@@ -82,6 +123,17 @@ class SubjectTableViewController: UITableViewController {
             courseVC.courses = self.courses
             courseVC.subjectVC = self
         }
+    }
+    
+    // MARK: - UISearchControllerDelegate
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchString = searchController.searchBar.text
+        
+        let predicate = NSPredicate(format: "code contains[c] %@ OR desc contains[c] %@", argumentArray: [searchString, searchString])
+        self.filteredSubjects = self.subjects.filteredArrayUsingPredicate(predicate)
+        
+        self.tableView.reloadData()
     }
 
 }
