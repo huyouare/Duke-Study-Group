@@ -29,12 +29,12 @@
         <scene sceneID="t1b-FU-8Rt">
             <objects>
                 <tableViewController id="dbV-TW-M70" customClass="SubjectTableViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UqM-27-D3l">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="UqM-27-D3l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="FaQ-UH-GSm" detailTextLabel="lht-1D-x2Y" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="ZtJ-wT-hii">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="FaQ-UH-GSm" detailTextLabel="lht-1D-x2Y" style="IBUITableViewCellStyleSubtitle" id="ZtJ-wT-hii">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZtJ-wT-hii" id="UcU-SX-xqM">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -60,7 +60,13 @@
                             <outlet property="delegate" destination="dbV-TW-M70" id="T1H-np-Spv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Subject" id="OLV-Jq-kbA"/>
+                    <navigationItem key="navigationItem" title="Subject" id="OLV-Jq-kbA">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="eu6-1h-Kgb">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="dbV-TW-M70" id="Lbn-C3-mXu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Ez0-Sc-XEK" kind="push" identifier="subjectToCourseSegue" id="98F-lI-pMk"/>
                     </connections>
@@ -73,12 +79,12 @@
         <scene sceneID="fat-kr-Mql">
             <objects>
                 <tableViewController id="Ez0-Sc-XEK" customClass="CourseTableViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aBx-5A-WjH">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="aBx-5A-WjH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="vQR-Fm-Iij" detailTextLabel="ze2-lH-wJ2" rowHeight="50" style="IBUITableViewCellStyleSubtitle" id="0ed-3h-gVG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="vQR-Fm-Iij" detailTextLabel="ze2-lH-wJ2" style="IBUITableViewCellStyleSubtitle" id="0ed-3h-gVG">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ed-3h-gVG" id="5Bj-gK-P3x">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -117,12 +123,53 @@
         <scene sceneID="T5F-e7-3Ua">
             <objects>
                 <tableViewController id="qAp-Q5-H7L" customClass="GroupSelectTableViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bQp-bF-6zg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bQp-bF-6zg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="OWa-EQ-gHH">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No groups to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGO-ra-0yv">
+                                    <rect key="frame" x="89" y="120" width="143" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="m5b-aL-Dzp"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-6I-pIF">
+                                    <rect key="frame" x="60" y="149" width="200" height="50"/>
+                                    <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="N7R-lc-Qbi"/>
+                                        <constraint firstAttribute="height" constant="50" id="o0h-D7-Fq5"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Create Group">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="aM1-6I-pIF" firstAttribute="top" secondItem="bGO-ra-0yv" secondAttribute="bottom" constant="8" symbolic="YES" id="fIg-9i-QAS"/>
+                                <constraint firstAttribute="centerX" secondItem="aM1-6I-pIF" secondAttribute="centerX" id="fbH-dT-6WF"/>
+                                <constraint firstItem="bGO-ra-0yv" firstAttribute="top" secondItem="OWa-EQ-gHH" secondAttribute="top" constant="120" id="i6Q-C9-bDt"/>
+                                <constraint firstAttribute="centerX" secondItem="bGO-ra-0yv" secondAttribute="centerX" id="sSn-lw-O6f"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="60" id="E1h-Wp-kch">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E1h-Wp-kch" id="3ZI-pf-ZaD">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -175,6 +222,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Groups" id="rYw-B4-dxU"/>
+                    <connections>
+                        <outlet property="emptyView" destination="OWa-EQ-gHH" id="ob4-Me-kyd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRB-uS-fAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1198,6 +1248,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="y1X-T3-N16"/>
+        <segue reference="Rx5-ve-5Y3"/>
     </inferredMetricsTieBreakers>
 </document>
