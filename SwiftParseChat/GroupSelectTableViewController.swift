@@ -30,21 +30,25 @@ class GroupSelectTableViewController: UITableViewController {
         
         if let subjectCode = course["subject_code"] {
             if let courseNumber = course["course_number"] {
+                /* update navigation bar title */
                 let titleString = subjectCode + " " + courseNumber
                 self.navigationItem.title = titleString
                 
-//                let courseId = currentSemester + subjectCode + courseNumber
-//                var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
-//                query.whereKey(PF_GROUPS_COURSEID, equalTo: courseId)
-//                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-//                    if error == nil {
-//                        for group in objects as [PFObject]! {
-//                            self.groups.append(group)
-//                        }
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                    }
-//                })
+                /* find groups for that course in Parse */
+                let courseId = currentSemester + subjectCode + courseNumber
+                var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
+                query.whereKey(PF_GROUPS_COURSEID, equalTo: courseId)
+                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        for group in objects as [PFObject]! {
+                            self.groups.append(group)
+                        }
+                    } else {
+                        ProgressHUD.showError("Network error")
+                    }
+                })
+                
+                
 //                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
 //                object[PF_GROUPS_NAME] =
 //                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
@@ -58,6 +62,7 @@ class GroupSelectTableViewController: UITableViewController {
             }
         }
         
+        /* show alternate view when no groups found */
         if self.groups.count > 0 {
             self.emptyView.hidden = true
         } else {
@@ -71,6 +76,10 @@ class GroupSelectTableViewController: UITableViewController {
     }
 
     @IBAction func createGroupButtonPressed(sender: UIButton) {
+    }
+    
+    @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -106,14 +115,11 @@ class GroupSelectTableViewController: UITableViewController {
         })
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        
     }
-    */
 
 }
