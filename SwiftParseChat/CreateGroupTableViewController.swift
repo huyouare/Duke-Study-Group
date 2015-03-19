@@ -76,6 +76,11 @@ class CreateGroupTableViewController: UITableViewController {
     }
     
     @IBAction func createGroupPressed(sender: AnyObject) {
+        var course = self.course["course_name"]
+        var groupName = groupNameField.description
+        var description = descriptionField.description
+        var date = self.dateButton.titleLabel?.description
+        //TODO: network request
         
     }
 
