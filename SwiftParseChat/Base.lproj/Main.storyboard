@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -248,16 +248,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CKS-Re-GjT">
-                            <rect key="frame" x="0.0" y="244" width="320" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" title="Create Group">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <sections>
                             <tableViewSection id="D40-I9-bdv">
                                 <cells>
@@ -356,8 +346,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Group" id="Hmm-Xq-t4k">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="LEr-9R-o9U"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="XPM-w6-Noa"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="LEr-9R-o9U">
+                            <connections>
+                                <action selector="cancelPressed:" destination="7Cj-u3-Ym5" id="2U5-kR-ICo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="XPM-w6-Noa">
+                            <connections>
+                                <action selector="createGroupPressed:" destination="7Cj-u3-Ym5" id="7M9-uz-Oh2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="courseLabel" destination="kML-tN-JGM" id="q6C-iw-Nga"/>

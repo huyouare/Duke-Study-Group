@@ -70,7 +70,12 @@ class CreateGroupTableViewController: UITableViewController {
         self.datePicker.alpha = 0.25
     }
     
-    func createGroup() {
+    
+    @IBAction func cancelPressed(sender: AnyObject) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func createGroupPressed(sender: AnyObject) {
         
     }
 
