@@ -83,8 +83,13 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func logout() {
-        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Log out")
-        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+//        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Log out")
+//        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+        PFUser.logOut()
+        PushNotication.parsePushUserResign()
+        Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
+        self.cleanup()
+        Utilities.loginUser(self)
     }
     
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
@@ -93,18 +98,32 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     
     // MARK: - UIActionSheetDelegate
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex != actionSheet.cancelButtonIndex {
-            PFUser.logOut()
-            PushNotication.parsePushUserResign()
-            Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
-            self.cleanup()
-            Utilities.loginUser(self)
-        }
-    }
+//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+//        if buttonIndex != actionSheet.cancelButtonIndex {
+//            PFUser.logOut()
+//            PushNotication.parsePushUserResign()
+//            Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
+//            self.cleanup()
+//            Utilities.loginUser(self)
+//        }
+//    }
     
     @IBAction func photoButtonPressed(sender: UIButton) {
-        Camera.shouldStartPhotoLibrary(self, canEdit: true)
+        var actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery")
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            switch buttonIndex {
+            case 1:
+                Camera.shouldStartCamera(self, canEdit: true)
+            case 2:
+                Camera.shouldStartPhotoLibrary(self, canEdit: false)
+            default:
+                break
+            }
+        }
     }
     
     @IBAction func saveButtonPressed(sender: UIButton) {
