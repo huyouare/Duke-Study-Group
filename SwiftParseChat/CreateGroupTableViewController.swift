@@ -28,7 +28,6 @@ class CreateGroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.courseLabel.text = self.course["course_name"]
         self.noneButton.highlighted = true
         self.datePicker.addTarget(self, action: "datePickerChanged:", forControlEvents: UIControlEvents.ValueChanged)
@@ -70,31 +69,39 @@ class CreateGroupTableViewController: UITableViewController {
         self.datePicker.alpha = 0.25
     }
     
-    
     @IBAction func cancelPressed(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
-        //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func createGroupPressed(sender: AnyObject) {
-        var course = self.course["course_name"]
-        var groupName = groupNameField.description
-        var description = descriptionField.description
-        var date = self.dateButton.titleLabel?.description
-        //TODO: network request
-//        var group = PFObject(className: "Group")??
-//        
-//        var gameScore = PFObject(className: "GameScore")
-//        gameScore.setObject(1337, forKey: "score")
-//        gameScore.setObject("Sean Plott", forKey: "playerName")
-//        gameScore.saveInBackgroundWithBlock {
-//            (success: Bool!, error: NSError!) -> Void in
-//            if success {
-//                NSLog("Object created with id: \(gameScore.objectId)")
-//            } else {
-//                NSLog("%@", error)
-//            }
-//        }
+        let course = self.course["course_name"]
+        let groupName = groupNameField.text
+        if countElements(groupName) > 0 {
+            let description = descriptionField.text //TODO: add column to relation and constants
+            var date = "" //TODO: add column to relation and constants
+            if noneSelected {
+                date = "none"
+            } else {
+                date = self.dateButton.titleLabel?.text ?? ""
+            }
+            
+            var group = PFObject(className: PF_GROUPS_CLASS_NAME)
+            group[PF_GROUPS_NAME] = groupName
+            //group[PF_GROUPS_COURSEID] = self.course["course_id"] //TODO: this should be a String in Parse database
+            group[PF_GROUPS_COURSEID] = 1 //TODO: delete
+            group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
+                if success {
+                    ProgressHUD.showSuccess("Saved")
+                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUPS_CLASS_NAME])")
+                } else {
+                    ProgressHUD.showError("Network Error")
+                    NSLog("%@", error)
+                }
+            })
+        } else {
+            ProgressHUD.showError("Group name field must not be empty")
+        }
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
