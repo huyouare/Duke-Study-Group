@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -104,7 +105,13 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     @IBAction func photoButtonPressed(sender: UIButton) {
-        var actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery")
+        let user = PFUser.currentUser()
+        var actionSheet: UIActionSheet!
+        if user[PF_USER_FACEBOOKID] == nil {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery")
+        } else {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Facebook Profile Picture", "Camera",  "Photo Gallery")
+        }
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
     
@@ -114,8 +121,10 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         if buttonIndex != actionSheet.cancelButtonIndex {
             switch buttonIndex {
             case 1:
-                Camera.shouldStartFrontCamera(self, canEdit: true)
+                self.requestFacebook(PFUser.currentUser());
             case 2:
+                Camera.shouldStartFrontCamera(self, canEdit: true)
+            case 3:
                 Camera.shouldStartPhotoLibrary(self, canEdit: false)
             default:
                 break
@@ -143,7 +152,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             }
         }
         
-        userImageView.image = image
+        self.userImageView.image = image
         
         if image.size.width > 60 {
             image = Images.resizeImage(image, width: 60, height: 60)!
@@ -166,6 +175,80 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         }
         
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Facebook Profile Photo fetch methods
+    
+    func requestFacebook(user: PFUser) {
+        var request = FBRequest.requestForMe()
+        request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+            if error == nil {
+                var userData = result as [String: AnyObject]!
+                self.processFacebook(user, userData: userData)
+            } else {
+                PFUser.logOut()
+                ProgressHUD.showError("Failed to fetch Facebook user data")
+            }
+        }
+    }
+    
+    func processFacebook(user: PFUser, userData: [String: AnyObject]) {
+        let facebookUserId = userData["id"] as String
+        var link = "http://graph.facebook.com/\(facebookUserId)/picture"
+        let url = NSURL(string: link)
+        var request = NSURLRequest(URL: url!)
+        let params = ["height": "200", "width": "200", "type": "square"]
+        Alamofire.request(.GET, link, parameters: params).response() {
+            (request, response, data, error) in
+            
+            if error == nil {
+                var image = UIImage(data: data! as NSData)!
+                
+                if image.size.width > 280 {
+                    image = Images.resizeImage(image, width: 280, height: 280)!
+                }
+                var filePicture = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
+                filePicture.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                    if error != nil {
+                        ProgressHUD.showError("Error saving photo")
+                    }
+                })
+                
+                self.userImageView.image = image
+                
+                if image.size.width > 60 {
+                    image = Images.resizeImage(image, width: 60, height: 60)!
+                }
+                var fileThumbnail = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
+                fileThumbnail.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                    if error != nil {
+                        ProgressHUD.showError("Error saving thumbnail")
+                    }
+                })
+                
+                user[PF_USER_EMAILCOPY] = userData["email"]
+                user[PF_USER_FULLNAME] = userData["name"]
+                user[PF_USER_FULLNAME_LOWER] = (userData["name"] as String).lowercaseString
+                user[PF_USER_FACEBOOKID] = userData["id"]
+                user[PF_USER_PICTURE] = filePicture
+                user[PF_USER_THUMBNAIL] = fileThumbnail
+                user.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
+                    if error == nil {
+                        return
+                    } else {
+                        if let info = error!.userInfo {
+                            ProgressHUD.showError("Login error")
+                            println(info["error"] as String)
+                        }
+                    }
+                })
+            } else {
+                if let info = error!.userInfo {
+                    ProgressHUD.showError("Failed to fetch Facebook photo")
+                    println(info["error"] as String)
+                }
+            }
+        }
     }
 
 }

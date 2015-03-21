@@ -12,11 +12,11 @@ import MobileCoreServices
 class Camera {
     
     class func shouldStartCamera(target: AnyObject, canEdit: Bool) -> Bool {
-        self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: false)
+        return self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: false)
     }
     
     class func shouldStartFrontCamera(target: AnyObject, canEdit: Bool) -> Bool {
-        self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: true)
+        return self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: true)
     }
     
     class func shouldStartCameraHelper(target: AnyObject, canEdit: Bool, frontFacing: Bool) -> Bool {
