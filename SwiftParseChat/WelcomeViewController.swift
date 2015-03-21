@@ -76,13 +76,14 @@ class WelcomeViewController: UIViewController {
         request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 var userData = result as [String: AnyObject]!
-                if (self.hasDukeEducation(userData)) {
-                    self.processFacebook(user, userData: userData)
-                }
-                else {
-                    PFUser.logOut()
-                    ProgressHUD.showError("Please authenticate with Duke NetID")
-                }
+                self.processFacebook(user, userData: userData)
+//                if (self.hasDukeEducation(userData)) {
+//                    self.processFacebook(user, userData: userData)
+//                }
+//                else {
+//                    PFUser.logOut()
+//                    ProgressHUD.showError("Please authenticate with Duke NetID")
+//                }
             } else {
                 PFUser.logOut()
                 ProgressHUD.showError("Failed to fetch Facebook user data")
