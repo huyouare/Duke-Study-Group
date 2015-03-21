@@ -12,35 +12,53 @@ import MobileCoreServices
 class Camera {
     
     class func shouldStartCamera(target: AnyObject, canEdit: Bool) -> Bool {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+        self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: false)
+    }
+    
+    class func shouldStartFrontCamera(target: AnyObject, canEdit: Bool) -> Bool {
+        self.shouldStartCameraHelper(target, canEdit: canEdit, frontFacing: true)
+    }
+    
+    class func shouldStartCameraHelper(target: AnyObject, canEdit: Bool, frontFacing: Bool) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == false {
             return false
         }
         
         let type = kUTTypeImage as String
-        let imagePicker = UIImagePickerController()
-        let available = contains(UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) as [String]!, type)
+        let cameraUI = UIImagePickerController()
+        
+        let available = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) && contains(UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) as [String]!, type)
         
         if available {
-            imagePicker.mediaTypes = [type]
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-            
-            if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) {
-                imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.Rear
-            } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front) {
-                imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.Front
+            cameraUI.mediaTypes = [type]
+            cameraUI.sourceType = UIImagePickerControllerSourceType.Camera
+
+            /* Prioritize front or rear camera */
+            if (frontFacing == true) {
+                if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front) {
+                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Front
+                } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) {
+                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Rear
+                }
+            } else {
+                if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) {
+                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Rear
+                } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front) {
+                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Front
+                }
             }
         } else {
             return false
         }
         
-        imagePicker.allowsEditing = canEdit
-        imagePicker.showsCameraControls = true
+        cameraUI.allowsEditing = canEdit
+        cameraUI.showsCameraControls = true
         if target is ChatViewController {
-            imagePicker.delegate = target as ChatViewController
+            cameraUI.delegate = target as ChatViewController
         } else if target is ProfileViewController {
-            imagePicker.delegate = target as ProfileViewController
+            cameraUI.delegate = target as ProfileViewController
         }
-        target.presentViewController(imagePicker, animated: true, completion: nil)
+        target.presentViewController(cameraUI, animated: true, completion: nil)
         
         return true
     }
