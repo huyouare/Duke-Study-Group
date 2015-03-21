@@ -72,7 +72,8 @@ class CreateGroupTableViewController: UITableViewController {
     
     
     @IBAction func cancelPressed(sender: AnyObject) {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+        //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func createGroupPressed(sender: AnyObject) {
@@ -81,7 +82,19 @@ class CreateGroupTableViewController: UITableViewController {
         var description = descriptionField.description
         var date = self.dateButton.titleLabel?.description
         //TODO: network request
-        
+//        var group = PFObject(className: "Group")??
+//        
+//        var gameScore = PFObject(className: "GameScore")
+//        gameScore.setObject(1337, forKey: "score")
+//        gameScore.setObject("Sean Plott", forKey: "playerName")
+//        gameScore.saveInBackgroundWithBlock {
+//            (success: Bool!, error: NSError!) -> Void in
+//            if success {
+//                NSLog("Object created with id: \(gameScore.objectId)")
+//            } else {
+//                NSLog("%@", error)
+//            }
+//        }
     }
 
     /*
