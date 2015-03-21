@@ -61,12 +61,12 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-//        if PFUser.currentUser() != nil {
-//            self.loadGroups()
-//        }
-//        else {
+        if PFUser.currentUser() != nil {
+            self.loadGroups()
+        }
+        else {
             Utilities.loginUser(self)
-//        }
+        }
     }
     
     override func didReceiveMemoryWarning() {
