@@ -83,35 +83,32 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func logout() {
-//        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Log out")
-//        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
-        PFUser.logOut()
-        PushNotication.parsePushUserResign()
-        Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
-        self.cleanup()
-        Utilities.loginUser(self)
+        var logOutAlert = UIAlertController(title: "Log Out", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+            NSLog("Cancelled log out")
+        }))
+        
+        logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction!) in
+            PFUser.logOut()
+            PushNotication.parsePushUserResign()
+            Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
+            self.cleanup()
+            Utilities.loginUser(self)
+        }))
+        
+        presentViewController(logOutAlert, animated: true, completion: nil)
     }
     
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
         self.logout()
     }
     
-    // MARK: - UIActionSheetDelegate
-    
-//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-//        if buttonIndex != actionSheet.cancelButtonIndex {
-//            PFUser.logOut()
-//            PushNotication.parsePushUserResign()
-//            Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
-//            self.cleanup()
-//            Utilities.loginUser(self)
-//        }
-//    }
-    
     @IBAction func photoButtonPressed(sender: UIButton) {
         var actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery")
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
+    
+    // MARK: - UIActionSheetDelegate
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
