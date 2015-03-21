@@ -114,7 +114,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         if buttonIndex != actionSheet.cancelButtonIndex {
             switch buttonIndex {
             case 1:
-                Camera.shouldStartCamera(self, canEdit: true)
+                Camera.shouldStartFrontCamera(self, canEdit: true)
             case 2:
                 Camera.shouldStartPhotoLibrary(self, canEdit: false)
             default:
