@@ -16,6 +16,7 @@ class RegisterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
     }
     
