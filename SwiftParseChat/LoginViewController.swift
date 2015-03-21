@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UITableViewController {
+class LoginViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet var emailField: UITextField!
     @IBOutlet var passwordField: UITextField!
@@ -17,6 +17,8 @@ class LoginViewController: UITableViewController {
         super.viewDidLoad()
 
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -33,7 +35,20 @@ class LoginViewController: UITableViewController {
         self.view.endEditing(true)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == self.emailField {
+            self.passwordField.becomeFirstResponder()
+        } else if textField == self.passwordField {
+            self.login()
+        }
+        return true
+    }
+    
     @IBAction func loginButtonPressed(sender: UIButton) {
+        self.login()
+    }
+    
+    func login() {
         let email = emailField.text.lowercaseString
         let password = passwordField.text
         
@@ -56,6 +71,5 @@ class LoginViewController: UITableViewController {
                 }
             }
         }
-        
     }
 }
