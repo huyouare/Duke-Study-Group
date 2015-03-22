@@ -26,7 +26,16 @@ class GroupSelectTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadGroupData()
+        refreshGroupTable()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        loadGroupData()
+    }
+    
+    func loadGroupData() {
         if let subjectCode = course["subject_code"] {
             if let courseNumber = course["course_number"] {
                 /* update navigation bar title */
@@ -43,7 +52,7 @@ class GroupSelectTableViewController: UITableViewController {
                             self.groups.append(group)
                             //NSLog("GroupSelectTableViewController: add group")
                         }
-                        self.reloadGroups()
+                        self.refreshGroupTable()
                     } else {
                         ProgressHUD.showError("Network error")
                     }
@@ -54,10 +63,9 @@ class GroupSelectTableViewController: UITableViewController {
                 self.course["course_id"] = courseId
             }
         }
-        reloadGroups()
     }
     
-    func reloadGroups() {
+    func refreshGroupTable() {
         self.tableView.reloadData()
         /* show alternate view when no groups found */
         if self.groups.count > 0 {

@@ -100,7 +100,7 @@ class CreateGroupTableViewController: UITableViewController {
         } else {
             ProgressHUD.showError("Group name field must not be empty")
         }
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     /*
