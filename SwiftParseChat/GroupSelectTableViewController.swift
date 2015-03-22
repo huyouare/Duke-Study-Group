@@ -49,8 +49,10 @@ class GroupSelectTableViewController: UITableViewController {
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         for group in objects as [PFObject]! {
-                            self.groups.append(group)
-                            //NSLog("GroupSelectTableViewController: add group")
+                            if !self.hasGroup(group) {
+                                self.groups.append(group)
+                                //NSLog("GroupSelectTableViewController: add group")
+                            }
                         }
                         self.refreshGroupTable()
                     } else {
@@ -73,6 +75,15 @@ class GroupSelectTableViewController: UITableViewController {
         } else {
             self.emptyView.hidden = false
         }
+    }
+    
+    func hasGroup(group:PFObject) -> Bool {
+        for obj in self.groups {
+            if Utilities.isIdenticalPFObject(obj, obj2: group) {
+                return true
+            }
+        }
+        return false
     }
 
     override func didReceiveMemoryWarning() {
