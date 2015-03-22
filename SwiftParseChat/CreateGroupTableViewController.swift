@@ -87,12 +87,11 @@ class CreateGroupTableViewController: UITableViewController {
             
             var group = PFObject(className: PF_GROUPS_CLASS_NAME)
             group[PF_GROUPS_NAME] = groupName
-            //group[PF_GROUPS_COURSEID] = self.course["course_id"] //TODO: this should be a String in Parse database
-            group[PF_GROUPS_COURSEID] = 1 //TODO: delete
+            group[PF_GROUPS_COURSEID] = self.course["course_id"]
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if success {
                     ProgressHUD.showSuccess("Saved")
-                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUPS_CLASS_NAME])")
+                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUPS_COURSEID])")
                 } else {
                     ProgressHUD.showError("Network Error")
                     NSLog("%@", error)

@@ -41,7 +41,9 @@ class GroupSelectTableViewController: UITableViewController {
                     if error == nil {
                         for group in objects as [PFObject]! {
                             self.groups.append(group)
+                            //NSLog("GroupSelectTableViewController: add group")
                         }
+                        self.reloadGroups()
                     } else {
                         ProgressHUD.showError("Network error")
                     }
@@ -50,28 +52,19 @@ class GroupSelectTableViewController: UITableViewController {
                 /* use strings as attributes */
                 self.course["course_name"] = titleString
                 self.course["course_id"] = courseId
-                
-                
-//                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-//                object[PF_GROUPS_NAME] =
-//                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-//                    if success {
-//                        self.loadGroups()
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                        println(error)
-//                    }
-//                })
             }
         }
-        
+        reloadGroups()
+    }
+    
+    func reloadGroups() {
+        self.tableView.reloadData()
         /* show alternate view when no groups found */
         if self.groups.count > 0 {
             self.emptyView.hidden = true
         } else {
             self.emptyView.hidden = false
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

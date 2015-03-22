@@ -125,7 +125,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             case 2:
                 Camera.shouldStartFrontCamera(self, canEdit: true)
             case 3:
-                Camera.shouldStartPhotoLibrary(self, canEdit: false)
+                Camera.shouldStartPhotoLibrary(self, canEdit: true)
             default:
                 break
             }
