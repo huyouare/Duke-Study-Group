@@ -23,6 +23,9 @@ let DEFAULT_TAB							= 0
 
 let MESSAGE_INVITE						= "Check out SwiftParseChat on GitHub: https://github.com/huyouare/SwiftParseChat"
 
+let PF_CLASS_NAME                       = "parseClassName"
+let PF_OBJECT_ID                        = "objectId"
+
 /* Installation */
 let PF_INSTALLATION_CLASS_NAME			= "_Installation"           //	Class name
 let PF_INSTALLATION_OBJECTID			= "objectId"				//	String

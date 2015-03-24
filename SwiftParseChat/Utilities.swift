@@ -43,5 +43,12 @@ class Utilities {
         }
         return elapsed
     }
+    
+    class func isIdenticalPFObject(obj1:PFObject, obj2:PFObject) -> Bool {
+        if  obj1.parseClassName == obj2.parseClassName && obj1.objectId == obj2.objectId {
+            return true
+        }
+        return false
+    }
 }
 

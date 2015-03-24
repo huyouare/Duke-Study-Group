@@ -26,7 +26,16 @@ class GroupSelectTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadGroupData()
+        refreshGroupTable()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        loadGroupData()
+    }
+    
+    func loadGroupData() {
         if let subjectCode = course["subject_code"] {
             if let courseNumber = course["course_number"] {
                 /* update navigation bar title */
@@ -40,8 +49,12 @@ class GroupSelectTableViewController: UITableViewController {
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         for group in objects as [PFObject]! {
-                            self.groups.append(group)
+                            if !self.hasGroup(group) {
+                                self.groups.append(group)
+                                //NSLog("GroupSelectTableViewController: add group")
+                            }
                         }
+                        self.refreshGroupTable()
                     } else {
                         ProgressHUD.showError("Network error")
                     }
@@ -50,28 +63,27 @@ class GroupSelectTableViewController: UITableViewController {
                 /* use strings as attributes */
                 self.course["course_name"] = titleString
                 self.course["course_id"] = courseId
-                
-                
-//                var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-//                object[PF_GROUPS_NAME] =
-//                object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-//                    if success {
-//                        self.loadGroups()
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                        println(error)
-//                    }
-//                })
             }
         }
-        
+    }
+    
+    func refreshGroupTable() {
+        self.tableView.reloadData()
         /* show alternate view when no groups found */
         if self.groups.count > 0 {
             self.emptyView.hidden = true
         } else {
             self.emptyView.hidden = false
         }
-        
+    }
+    
+    func hasGroup(group:PFObject) -> Bool {
+        for obj in self.groups {
+            if Utilities.isIdenticalPFObject(obj, obj2: group) {
+                return true
+            }
+        }
+        return false
     }
 
     override func didReceiveMemoryWarning() {
