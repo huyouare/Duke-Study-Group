@@ -21,6 +21,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         self.nameField.delegate = self
         self.emailField.delegate = self
         self.passwordField.delegate = self
+        self.tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func viewDidAppear(animated: Bool) {

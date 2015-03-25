@@ -23,9 +23,6 @@ let DEFAULT_TAB							= 0
 
 let MESSAGE_INVITE						= "Check out SwiftParseChat on GitHub: https://github.com/huyouare/SwiftParseChat"
 
-let PF_CLASS_NAME                       = "parseClassName"
-let PF_OBJECT_ID                        = "objectId"
-
 /* Installation */
 let PF_INSTALLATION_CLASS_NAME			= "_Installation"           //	Class name
 let PF_INSTALLATION_OBJECTID			= "objectId"				//	String
@@ -53,10 +50,13 @@ let PF_CHAT_PICTURE						= "picture"                 //	File
 let PF_CHAT_VIDEO						= "video"                   //	File
 let PF_CHAT_CREATEDAT					= "createdAt"               //	Date
 
-/* Groups */
-let PF_GROUPS_CLASS_NAME				= "Groups"                  //	Class name
-let PF_GROUPS_NAME                      = "name"					//	String
-let PF_GROUPS_COURSEID                 = "courseId"                //  String
+/* Group */
+let PF_GROUP_CLASS_NAME                 = "Group"                   //	Class name
+let PF_GROUP_NAME                       = "name"                     //	String
+let PF_GROUP_COURSEID                   = "courseId"                 //  String
+let PF_GROUP_DESCRIPTION                = "description"              //  String
+let PF_GROUP_LOCATION                   = "location"                 //  String
+let PF_GROUP_DATETIME                   = "dateTime"                 //  Date
 
 /* Messages*/
 let PF_MESSAGES_CLASS_NAME				= "Messages"				//	Class name

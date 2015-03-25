@@ -10,15 +10,18 @@ import UIKit
 
 class LoginViewController: UITableViewController, UITextFieldDelegate {
 
-    @IBOutlet var emailField: UITextField!
-    @IBOutlet var passwordField: UITextField!
+    @IBOutlet var emailField: UITextField! {
+        didSet { self.emailField.delegate = self }
+    }
+    @IBOutlet var passwordField: UITextField! {
+        didSet { self.passwordField.delegate = self }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
-        self.emailField.delegate = self
-        self.passwordField.delegate = self
+        self.tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func viewDidAppear(animated: Bool) {

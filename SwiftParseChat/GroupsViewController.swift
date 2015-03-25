@@ -75,7 +75,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     }
     
     func loadGroups() {
-        var query = PFQuery(className: PF_GROUPS_CLASS_NAME)
+        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
@@ -101,8 +101,8 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
             var textField = alertView.textFieldAtIndex(0);
             if let text = textField!.text {
                 if countElements(text) > 0 {
-                    var object = PFObject(className: PF_GROUPS_CLASS_NAME)
-                    object[PF_GROUPS_NAME] = text
+                    var object = PFObject(className: PF_GROUP_CLASS_NAME)
+                    object[PF_GROUP_NAME] = text
                     object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                         if success {
                             self.loadGroups()
@@ -131,7 +131,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
         
         var group = self.groups[indexPath.row]
-        cell.textLabel?.text = group[PF_GROUPS_NAME] as? String
+        cell.textLabel?.text = group[PF_GROUP_NAME] as? String
         
         var query = PFQuery(className: PF_CHAT_CLASS_NAME)
         query.whereKey(PF_CHAT_GROUPID, equalTo: group.objectId)
@@ -161,7 +161,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         var group = self.groups[indexPath.row]
         let groupId = group.objectId as String
         
-        Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUPS_NAME] as String)
+        Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as String)
         
         self.performSegueWithIdentifier("groupChatSegue", sender: groupId)
     }

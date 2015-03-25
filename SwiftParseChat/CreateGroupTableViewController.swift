@@ -16,6 +16,7 @@ class CreateGroupTableViewController: UITableViewController {
     @IBOutlet var courseLabel: UILabel!
     @IBOutlet var groupNameField: UITextField!
     @IBOutlet var descriptionField: UITextField!
+    @IBOutlet var locationField: UITextField!
     
     @IBOutlet var dateTimeCell: UITableViewCell!
     @IBOutlet var datePicker: UIDatePicker!
@@ -75,23 +76,18 @@ class CreateGroupTableViewController: UITableViewController {
     
     @IBAction func createGroupPressed(sender: AnyObject) {
         let course = self.course["course_name"]
-        let groupName = groupNameField.text
+
         if countElements(groupName) > 0 {
-            let description = descriptionField.text //TODO: add column to relation and constants
-            var date = "" //TODO: add column to relation and constants
-            if noneSelected {
-                date = "none"
-            } else {
-                date = self.dateButton.titleLabel?.text ?? ""
-            }
-            
-            var group = PFObject(className: PF_GROUPS_CLASS_NAME)
-            group[PF_GROUPS_NAME] = groupName
-            group[PF_GROUPS_COURSEID] = self.course["course_id"]
+            var group = PFObject(className: PF_GROUP_CLASS_NAME)
+            group[PF_GROUP_NAME] = groupNameField.text
+            group[PF_GROUP_COURSEID] = self.course["course_id"]
+            group[PF_GROUP_DESCRIPTION] = descriptionField.text
+            group[PF_GROUP_LOCATION] = locationField.text
+            group[PF_GROUP_USERS] = [PFUser.currentUser()]
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if success {
                     ProgressHUD.showSuccess("Saved")
-                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUPS_COURSEID])")
+                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {
                     ProgressHUD.showError("Network Error")
                     NSLog("%@", error)
