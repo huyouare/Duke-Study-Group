@@ -76,10 +76,11 @@ class CreateGroupTableViewController: UITableViewController {
     
     @IBAction func createGroupPressed(sender: AnyObject) {
         let course = self.course["course_name"]
+        let groupName = groupNameField.text
 
         if countElements(groupName) > 0 {
             var group = PFObject(className: PF_GROUP_CLASS_NAME)
-            group[PF_GROUP_NAME] = groupNameField.text
+            group[PF_GROUP_NAME] = groupName
             group[PF_GROUP_COURSEID] = self.course["course_id"]
             group[PF_GROUP_DESCRIPTION] = descriptionField.text
             group[PF_GROUP_LOCATION] = locationField.text
@@ -87,7 +88,7 @@ class CreateGroupTableViewController: UITableViewController {
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if success {
                     ProgressHUD.showSuccess("Saved")
-                    NSLog("Group \(group[PF_GROUPS_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
+                    NSLog("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {
                     ProgressHUD.showError("Network Error")
                     NSLog("%@", error)
@@ -95,6 +96,7 @@ class CreateGroupTableViewController: UITableViewController {
             })
         } else {
             ProgressHUD.showError("Group name field must not be empty")
+            return
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
