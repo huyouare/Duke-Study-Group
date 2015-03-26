@@ -14,9 +14,6 @@ protocol GroupSelectTableViewControllerDelegate {
 
 class GroupSelectTableViewController: UITableViewController {
     
-    // TODO: - Change this constant programmatically
-    let currentSemester = "SPRING15"
-    
     var course: [String: String]!
     var groups = [PFObject]()
     var selectedGroup: PFObject!
@@ -43,7 +40,7 @@ class GroupSelectTableViewController: UITableViewController {
                 self.navigationItem.title = titleString
                 
                 /* find groups for that course in Parse */
-                let courseId = currentSemester + subjectCode + courseNumber
+                let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
                 var query = PFQuery(className: PF_USER_CLASS_NAME)
                 query.whereKey(PF_USER_OBJECTID, equalTo: PFUser.currentUser())
 //                query.includeKey(<#key: String!#>)
@@ -54,15 +51,16 @@ class GroupSelectTableViewController: UITableViewController {
 //                        for group in objects as [PFObject]! {
 //                            if !self.hasGroup(group) {
 //                                self.groups.append(group)
-//                                //NSLog("GroupSelectTableViewController: add group")
+//                                NSLog("GroupSelectTableViewController: add group")
 //                            }
 //                        }
 //                        self.refreshGroupTable()
+//                        NSLog("GroupSelectTableViewController: finished loading course \(courseId)")
 //                    } else {
 //                        ProgressHUD.showError("Network error")
 //                    }
 //                })
-//                
+                
                 /* use strings as attributes */
                 self.course["course_name"] = titleString
                 self.course["course_id"] = courseId
@@ -121,7 +119,10 @@ class GroupSelectTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupCell
+        let curGroup:PFObject = self.groups[indexPath.item]
+        //cell.loadItem(curGroup[PF_GROUP_NAME], meetingDate: curGroup[PF_GROUP_DATETIME])
+        cell.loadItem(curGroup[PF_GROUP_NAME] as String, meetingDate: "none")
         return cell
     }
 

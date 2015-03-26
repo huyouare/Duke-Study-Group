@@ -50,5 +50,31 @@ class Utilities {
         }
         return false
     }
+    
+    class func getSemesterCode() -> String {
+        let springMonths:[Int] = [3, 4, 5]
+        let summerMonths:[Int] = [6, 7, 8]
+        let fallMonths:[Int] = [9, 10, 11]
+        let winterMonths:[Int] = [12, 1, 2]
+        
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitDay, fromDate: date)
+        let month = components.month
+        let year = components.year
+        var seasonCode = ""
+        if contains(springMonths, month) {
+            seasonCode = "SPRING"
+        } else if contains(summerMonths, month) {
+            seasonCode = "SUMMER"
+        } else if contains(fallMonths, month) {
+            seasonCode = "FALL"
+        }
+        var yearStr = String(year)
+        var yearCode = (yearStr as NSString).substringFromIndex(2)
+        var semesterCode = seasonCode + yearCode
+        NSLog("Utilities: Semester code is \(semesterCode)")
+        return semesterCode
+    }
 }
 

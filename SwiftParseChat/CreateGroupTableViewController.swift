@@ -77,16 +77,17 @@ class CreateGroupTableViewController: UITableViewController {
     @IBAction func createGroupPressed(sender: AnyObject) {
         let course = self.course["course_name"]
         let groupName = groupNameField.text
-
+        
         if countElements(groupName) > 0 {
             var group = PFObject(className: PF_GROUP_CLASS_NAME)
             group[PF_GROUP_NAME] = groupName
             group[PF_GROUP_COURSEID] = self.course["course_id"]
-            group[PF_GROUP_DESCRIPTION] = descriptionField.text
-            group[PF_GROUP_LOCATION] = locationField.text
+            group[PF_GROUP_DESCRIPTION] = self.descriptionField.text
+            group[PF_GROUP_LOCATION] = self.locationField.text
+            group[PF_GROUP_DATETIME] = self.noneSelected ? nil : self.datePicker.date
             group[PF_GROUP_USERS] = [PFUser.currentUser()]
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
-                if success {
+                if error == nil {
                     ProgressHUD.showSuccess("Saved")
                     NSLog("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {

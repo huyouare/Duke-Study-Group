@@ -51,12 +51,13 @@ let PF_CHAT_VIDEO						= "video"                   //	File
 let PF_CHAT_CREATEDAT					= "createdAt"               //	Date
 
 /* Group */
-let PF_GROUP_CLASS_NAME                 = "Group"                   //	Class name
-let PF_GROUP_NAME                       = "name"                     //	String
+let PF_GROUP_CLASS_NAME                 = "Group"                    //	 Class name
+let PF_GROUP_NAME                       = "name"                     //	 String
 let PF_GROUP_COURSEID                   = "courseId"                 //  String
 let PF_GROUP_DESCRIPTION                = "description"              //  String
 let PF_GROUP_LOCATION                   = "location"                 //  String
 let PF_GROUP_DATETIME                   = "dateTime"                 //  Date
+let PF_GROUP_USERS                      = "users"                    //  [PFUser]
 
 /* Messages*/
 let PF_MESSAGES_CLASS_NAME				= "Messages"				//	Class name
