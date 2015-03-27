@@ -75,12 +75,12 @@ class CreateGroupTableViewController: UITableViewController {
     }
     
     @IBAction func createGroupPressed(sender: AnyObject) {
-        let course = self.course["course_name"]
         let groupName = groupNameField.text
         
         if countElements(groupName) > 0 {
             var group = PFObject(className: PF_GROUP_CLASS_NAME)
             group[PF_GROUP_NAME] = groupName
+            group[PF_GROUP_COURSE_NAME] = self.course["course_name"]
             group[PF_GROUP_COURSEID] = self.course["course_id"]
             group[PF_GROUP_DESCRIPTION] = self.descriptionField.text
             group[PF_GROUP_LOCATION] = self.locationField.text
@@ -101,7 +101,7 @@ class CreateGroupTableViewController: UITableViewController {
             ProgressHUD.showError("Group name field must not be empty")
             return
         }
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*

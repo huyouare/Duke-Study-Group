@@ -52,7 +52,8 @@ let PF_CHAT_CREATEDAT					= "createdAt"               //	Date
 
 /* Group */
 let PF_GROUP_CLASS_NAME                 = "Group"                    //	 Class name
-let PF_GROUP_OBJECTID                 = "objectId"                 //	 String
+let PF_GROUP_OBJECTID                   = "objectId"                 //	 String
+let PF_GROUP_COURSE_NAME                = "courseName"               //  String
 let PF_GROUP_NAME                       = "name"                     //	 String
 let PF_GROUP_COURSEID                   = "courseId"                 //  String
 let PF_GROUP_DESCRIPTION                = "description"              //  String

@@ -42,24 +42,20 @@ class GroupSelectTableViewController: UITableViewController {
                 /* find groups for that course in Parse */
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
                 var query = PFQuery(className: PF_USER_CLASS_NAME)
-                query.whereKey(PF_USER_OBJECTID, equalTo: PFUser.currentUser())
-//                query.includeKey(<#key: String!#>)
                 
-//                query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
-//                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-//                    if error == nil {
-//                        for group in objects as [PFObject]! {
-//                            if !self.hasGroup(group) {
-//                                self.groups.append(group)
-//                                NSLog("GroupSelectTableViewController: add group")
-//                            }
-//                        }
-//                        self.refreshGroupTable()
-//                        NSLog("GroupSelectTableViewController: finished loading course \(courseId)")
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                    }
-//                })
+                query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
+                query.includeKey(PF_USER_OBJECTID)
+                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        self.groups.removeAll(keepCapacity: false)
+                        for group in objects as [PFObject]! {
+                            self.groups.append(group)
+                        }
+                        self.refreshGroupTable()
+                    } else {
+                        ProgressHUD.showError("Network error")
+                    }
+                })
                 
                 /* use strings as attributes */
                 self.course["course_name"] = titleString

@@ -29,9 +29,11 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
     func bindData(group: PFObject) {
         self.group = group
         var user = PFUser.currentUser()
-//        
-//        
-//        
+
+        self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
+        self.nameLabel.text = group[PF_GROUP_NAME] as? String
+        
+        
 //        userImageView.file = user[PF_USER_PICTURE] as? PFFile
 //        userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
 //            if error != nil {
