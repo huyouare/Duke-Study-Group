@@ -119,10 +119,8 @@ class GroupSelectTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupCell
-        let curGroup:PFObject = self.groups[indexPath.item]
-        //cell.loadItem(curGroup[PF_GROUP_NAME], meetingDate: curGroup[PF_GROUP_DATETIME])
-        cell.loadItem(curGroup[PF_GROUP_NAME] as String, meetingDate: "none")
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupsCell
+        cell.bindData(self.groups[indexPath.row])
         return cell
     }
 
