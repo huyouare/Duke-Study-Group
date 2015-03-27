@@ -84,8 +84,8 @@ class CreateGroupTableViewController: UITableViewController {
             group[PF_GROUP_COURSEID] = self.course["course_id"]
             group[PF_GROUP_DESCRIPTION] = self.descriptionField.text
             group[PF_GROUP_LOCATION] = self.locationField.text
-            group[PF_GROUP_DATETIME] = self.noneSelected ? nil : self.datePicker.date
-            group[PF_GROUP_USERS] = [PFUser.currentUser()]
+            group[PF_GROUP_DATETIME] = self.noneSelected ? NSNull() : self.datePicker.date
+            //group[PF_GROUP_USERS] = [PFUser.currentUser()]
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     ProgressHUD.showSuccess("Saved")

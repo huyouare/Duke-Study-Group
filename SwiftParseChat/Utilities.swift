@@ -55,7 +55,6 @@ class Utilities {
         let springMonths:[Int] = [3, 4, 5]
         let summerMonths:[Int] = [6, 7, 8]
         let fallMonths:[Int] = [9, 10, 11]
-        let winterMonths:[Int] = [12, 1, 2]
         
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
