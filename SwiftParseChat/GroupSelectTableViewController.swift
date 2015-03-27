@@ -125,7 +125,7 @@ class GroupSelectTableViewController: UITableViewController {
             self.performSegueWithIdentifier("groupSelectToCreateSegue", sender: self)
         }
         else {
-            self.selectedGroup = self.groups[indexPath.row] as? PFObject
+            self.selectedGroup = self.groups[indexPath.row]
             self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
                 if self.delegate != nil {
                     self.delegate.didSelectGroup(self.selectedGroup)
