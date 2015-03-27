@@ -887,7 +887,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0aV-EH-XAK"/>
                                 </constraints>
-                                <state key="normal" title="Connect with Facebook"/>
+                                <state key="normal" title="Login with Facebook"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
@@ -1213,7 +1213,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h49-ip-fB2" id="tl5-mo-iS7">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-im-SQf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Duke Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-im-SQf">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="hxf-oR-Efv"/>

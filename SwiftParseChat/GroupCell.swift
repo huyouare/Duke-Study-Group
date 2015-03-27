@@ -13,6 +13,7 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var labelGroupName: GroupCell!
     @IBOutlet weak var labelNumMembers: UILabel!
     @IBOutlet weak var labelMeetingDate: UILabel!
+    
     //TODO: change
     func loadItem(groupName:String, meetingDate: String) {
         labelGroupName.textLabel?.text = groupName

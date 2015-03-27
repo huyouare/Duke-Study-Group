@@ -121,8 +121,7 @@ class GroupSelectTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupCell
         let curGroup:PFObject = self.groups[indexPath.item]
-        //cell.loadItem(curGroup[PF_GROUP_NAME], meetingDate: curGroup[PF_GROUP_DATETIME])
-        cell.loadItem(curGroup[PF_GROUP_NAME] as String, meetingDate: "none")
+        cell.loadItem(curGroup[PF_GROUP_NAME] as String, meetingDate: curGroup[PF_GROUP_DATETIME] as String) //TODO: change
         return cell
     }
 
