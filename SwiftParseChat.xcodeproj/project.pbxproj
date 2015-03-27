@@ -131,6 +131,7 @@
 		83F02B7C1AA6C3F1008428DF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */; };
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
+		AA7BA7D61AC48A040091A400 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7BA7D51AC48A040091A400 /* GroupCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +344,7 @@
 		83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
+		AA7BA7D51AC48A040091A400 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -803,6 +805,7 @@
 				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
 				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
 				83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */,
+				AA7BA7D51AC48A040091A400 /* GroupCell.swift */,
 			);
 			name = GroupSelect;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				8348BEC41A9AB1E000A50EE6 /* Window.swift in Sources */,
 				8348BEC71A9AB31500A50EE6 /* PushNotification.swift in Sources */,
 				83ED1DF31AA413E500198FBF /* APPhoneWithLabel.m in Sources */,
+				AA7BA7D61AC48A040091A400 /* GroupCell.swift in Sources */,
 				83B4F5AD1AA1713B00C09791 /* JSQPhotoMediaItem.m in Sources */,
 				831C194C1A980970000FD6D0 /* PrivateViewController.swift in Sources */,
 				831C197A1A9823A8000FD6D0 /* Constants.swift in Sources */,
