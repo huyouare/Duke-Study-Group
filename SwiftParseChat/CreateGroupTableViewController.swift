@@ -84,15 +84,17 @@ class CreateGroupTableViewController: UITableViewController {
             group[PF_GROUP_COURSEID] = self.course["course_id"]
             group[PF_GROUP_DESCRIPTION] = self.descriptionField.text
             group[PF_GROUP_LOCATION] = self.locationField.text
-            group[PF_GROUP_DATETIME] = self.noneSelected ? NSNull() : self.datePicker.date
-            //group[PF_GROUP_USERS] = [PFUser.currentUser()]
+            if !self.noneSelected {
+                group[PF_GROUP_DATETIME] = self.datePicker.date
+            }
+            group[PF_GROUP_USERS] = [PFUser.currentUser()]
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     ProgressHUD.showSuccess("Saved")
-                    NSLog("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
+                    println("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {
                     ProgressHUD.showError("Network Error")
-                    NSLog("%@", error)
+                    println("%@", error)
                 }
             })
         } else {
