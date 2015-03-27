@@ -17,9 +17,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet var locationLabel: UILabel!
     
     @IBOutlet var moreImageView: UILabel!
-    @IBOutlet var avatarImageViews: PFImageView!
-    
-    var group: PFObject?
+//    @IBOutlet var avatarImageViews: [PFImageView]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,17 +25,21 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     func bindData(group: PFObject) {
-        self.group = group
-        var user = PFUser.currentUser()
+        var currentUser = PFUser.currentUser()
 
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
         
-        
-//        userImageView.file = user[PF_USER_PICTURE] as? PFFile
-//        userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
-//            if error != nil {
-//                println(error)
+        let users = group[PF_GROUP_USERS] as [PFUser]!
+//        for i in 0..<3 {
+//            if i < users.count {
+//                let user = users[i]
+//                self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
+//                self.avatarImageViews[i].loadInBackground({ (image: UIImage!, error: NSError!) -> Void in
+//                    if error != nil {
+//                        println(error)
+//                    }
+//                })
 //            }
 //        }
     }

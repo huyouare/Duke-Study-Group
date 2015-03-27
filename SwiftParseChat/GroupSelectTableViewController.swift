@@ -41,7 +41,7 @@ class GroupSelectTableViewController: UITableViewController {
                 
                 /* find groups for that course in Parse */
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
-                var query = PFQuery(className: PF_USER_CLASS_NAME)
+                var query = PFQuery(className: PF_GROUP_CLASS_NAME)
                 
                 query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
                 query.includeKey(PF_USER_OBJECTID)
@@ -125,6 +125,7 @@ class GroupSelectTableViewController: UITableViewController {
             self.performSegueWithIdentifier("groupSelectToCreateSegue", sender: self)
         }
         else {
+            self.selectedGroup = self.groups[indexPath.row] as? PFObject
             self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
                 if self.delegate != nil {
                     self.delegate.didSelectGroup(self.selectedGroup)
