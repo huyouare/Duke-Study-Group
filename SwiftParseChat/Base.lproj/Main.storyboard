@@ -379,7 +379,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRB-uS-fAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="-747"/>
+            <point key="canvasLocation" x="2399" y="-1498"/>
         </scene>
         <!--New Group-->
         <scene sceneID="EKG-i5-XFX">
@@ -645,11 +645,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vAE-2l-0Vx"/>
+                    <navigationItem key="navigationItem" id="vAE-2l-0Vx">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="5mA-8F-cBQ">
+                            <connections>
+                                <segue destination="hyy-yZ-04O" kind="push" id="t21-4r-o5T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzn-zA-DHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1394" y="-833"/>
+        </scene>
+        <!--Chat Settings View Controller-->
+        <scene sceneID="Old-9H-dFN">
+            <objects>
+                <tableViewController id="hyy-yZ-04O" customClass="ChatSettingsViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ryD-Gv-oh8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newCell" id="tmr-jr-hP8">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmr-jr-hP8" id="4m9-Xo-kf3">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hyy-yZ-04O" id="2Li-cd-OAd"/>
+                            <outlet property="delegate" destination="hyy-yZ-04O" id="335-Id-7Ww"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Qfe-qe-xeN"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dv-6U-MnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935" y="-833"/>
         </scene>
         <!--Groups-->
         <scene sceneID="4Bn-9f-pJZ">
