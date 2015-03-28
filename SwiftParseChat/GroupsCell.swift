@@ -33,8 +33,13 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
         self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
+        self.descriptionLabel.removeFromSuperview()
         
         let users = group[PF_GROUP_USERS] as [PFUser]!
+        
+        let countText = (users.count > 1) ? "\(users.count) Members" : "\(users.count) Member"
+        self.countLabel.text = countText
+        
         if users.count > self.avatarImageViews.count {
             let moreCount = users.count - self.avatarImageViews.count
             self.countLabel.text = "+\(moreCount)"
