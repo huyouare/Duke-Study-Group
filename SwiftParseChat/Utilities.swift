@@ -72,7 +72,7 @@ class Utilities {
         var yearStr = String(year)
         var yearCode = (yearStr as NSString).substringFromIndex(2)
         var semesterCode = seasonCode + yearCode
-        NSLog("Utilities: Semester code is \(semesterCode)")
+        println("Utilities: Semester code is \(semesterCode)")
         return semesterCode
     }
 }

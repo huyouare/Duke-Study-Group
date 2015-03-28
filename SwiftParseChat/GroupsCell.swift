@@ -29,11 +29,18 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
     func bindData(group: PFObject) {
         var currentUser = PFUser.currentUser()
-        
+
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
         self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
         self.descriptionLabel.removeFromSuperview()
+        var date = group[PF_GROUP_DATETIME] as? NSDate
+        if date != nil {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+            dateTimeLabel.text = dateFormatter.stringFromDate(date!)
+        }
+        locationLabel.text = group[PF_GROUP_LOCATION] as? String
         
         let users = group[PF_GROUP_USERS] as [PFUser]!
         

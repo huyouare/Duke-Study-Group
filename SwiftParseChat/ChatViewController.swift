@@ -29,7 +29,6 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     var senderImageUrl: String!
     var batchMessages = true
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +36,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         var user = PFUser.currentUser()
         self.senderId = user.objectId
         self.senderDisplayName = user[PF_USER_FULLNAME] as String
-        
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
         incomingBubbleImage = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
-        
+
         blankAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "profile_blank"), diameter: 30)
         
         isLoading = false

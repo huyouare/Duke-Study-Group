@@ -132,6 +132,7 @@
 		83F02B7C1AA6C3F1008428DF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */; };
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
+		AA45EBF61AC648FB00EDDB83 /* ChatSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +346,7 @@
 		83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
+		AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,6 +427,7 @@
 				831C191F1A97F5CA000FD6D0 /* Images.xcassets */,
 				831C19211A97F5CA000FD6D0 /* LaunchScreen.xib */,
 				831C19141A97F5CA000FD6D0 /* Supporting Files */,
+				AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */,
 			);
 			path = SwiftParseChat;
 			sourceTree = "<group>";
@@ -1090,6 +1093,7 @@
 				8348BEC51A9AB1E000A50EE6 /* WindowRootViewController.swift in Sources */,
 				83ED1DF61AA45CAA00198FBF /* Images.swift in Sources */,
 				831C19171A97F5CA000FD6D0 /* AppDelegate.swift in Sources */,
+				AA45EBF61AC648FB00EDDB83 /* ChatSettingsViewController.swift in Sources */,
 				8348BEC11A9AB1E000A50EE6 /* HUDController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
