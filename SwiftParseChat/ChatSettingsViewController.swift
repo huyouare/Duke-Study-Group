@@ -55,18 +55,18 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == 0 { /* member secion */
             let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = "Example Member" //TODO: change hardcoded info below
+            cell.textLabel?.text = "Example Member" //TODO: change hardcoded info
             cell.accessoryType = UITableViewCellAccessoryType.DetailButton
             return cell
-        } else {
+        } else { /* settings */
             let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             let row = indexPath.row
             cell.textLabel?.text = actionItems[row]
             if row == 0 { /* notifications */
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            } else { /* Leave group */
+            } else { /* leave group */
                 cell.textLabel?.textColor = UIColor.redColor()
             }
             return cell
