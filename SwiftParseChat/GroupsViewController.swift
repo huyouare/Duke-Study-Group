@@ -128,27 +128,8 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
-        
-        var group = self.groups[indexPath.row]
-        cell.textLabel?.text = group[PF_GROUP_NAME] as? String
-        
-        var query = PFQuery(className: PF_CHAT_CLASS_NAME)
-        query.whereKey(PF_CHAT_GROUPID, equalTo: group.objectId)
-        query.orderByDescending(PF_CHAT_CREATEDAT)
-        query.limit = 1000
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if let chat = objects.first as? PFObject {
-                let date = NSDate()
-                let seconds = date.timeIntervalSinceDate(chat.createdAt)
-                let elapsed = Utilities.timeElapsed(seconds);
-                let countString = (objects.count > 1) ? "\(objects.count) messages" : "\(objects.count) message"
-                cell.detailTextLabel?.text = "\(countString) \(elapsed)"
-            } else {
-                cell.detailTextLabel?.text = "0 messages"
-            }
-            cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
-        }
+        var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as GroupsCell
+        cell.bindData(self.groups[indexPath.row])
         
         return cell
     }
