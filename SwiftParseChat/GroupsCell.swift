@@ -44,9 +44,6 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         
         let users = group[PF_GROUP_USERS] as [PFUser]!
         
-        let countText = (users.count > 1) ? "\(users.count) Members" : "\(users.count) Member"
-        self.countLabel.text = countText
-        
         if users.count > self.avatarImageViews.count {
             let moreCount = users.count - self.avatarImageViews.count
             self.countLabel.text = "+\(moreCount)"
