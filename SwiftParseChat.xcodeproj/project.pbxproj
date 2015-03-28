@@ -61,6 +61,7 @@
 		83678F6A1AA94C1700A1C63E /* SelectMultipleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83678F691AA94C1700A1C63E /* SelectMultipleViewController.swift */; };
 		836AF4BB1A994C830057E827 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836AF4BA1A994C830057E827 /* Messages.swift */; };
 		83857E271AA84C9500FDF5AD /* SelectSingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83857E261AA84C9500FDF5AD /* SelectSingleViewController.swift */; };
+		838C334C1AC500DF0015A122 /* GroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838C334B1AC500DF0015A122 /* GroupsCell.swift */; };
 		839A20E01A99E207003248CE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A20DF1A99E207003248CE /* Social.framework */; };
 		839A20E21A99E20D003248CE /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A20E11A99E20D003248CE /* Accounts.framework */; };
 		839A20E41A99E244003248CE /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A20E31A99E244003248CE /* libstdc++.6.dylib */; };
@@ -131,7 +132,6 @@
 		83F02B7C1AA6C3F1008428DF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */; };
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
-		AA7BA7D61AC48A040091A400 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7BA7D51AC48A040091A400 /* GroupCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +208,7 @@
 		83678F691AA94C1700A1C63E /* SelectMultipleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMultipleViewController.swift; sourceTree = "<group>"; };
 		836AF4BA1A994C830057E827 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		83857E261AA84C9500FDF5AD /* SelectSingleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSingleViewController.swift; sourceTree = "<group>"; };
+		838C334B1AC500DF0015A122 /* GroupsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsCell.swift; sourceTree = "<group>"; };
 		839A20DF1A99E207003248CE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		839A20E11A99E20D003248CE /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		839A20E31A99E244003248CE /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
@@ -344,7 +345,6 @@
 		83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
-		AA7BA7D51AC48A040091A400 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -743,6 +743,7 @@
 				83F02B7D1AA6C671008428DF /* MessagesCell.swift */,
 				83B8DB971AA98BEB00ADE3BB /* MessagesCompose */,
 				831C19491A98090E000FD6D0 /* GroupsViewController.swift */,
+				838C334B1AC500DF0015A122 /* GroupsCell.swift */,
 				83ED6A4D1AB7F09F000DE3DB /* GroupSelect */,
 				831C194F1A9809C7000FD6D0 /* ProfileViewController.swift */,
 				831C194B1A980970000FD6D0 /* PrivateViewController.swift */,
@@ -805,7 +806,6 @@
 				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
 				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
 				83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */,
-				AA7BA7D51AC48A040091A400 /* GroupCell.swift */,
 			);
 			name = GroupSelect;
 			sourceTree = "<group>";
@@ -1031,6 +1031,7 @@
 				83B4F5A01AA1713B00C09791 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				83B4F5981AA1713B00C09791 /* NSString+JSQMessages.m in Sources */,
 				83ED1DF41AA413E500198FBF /* APSocialProfile.m in Sources */,
+				838C334C1AC500DF0015A122 /* GroupsCell.swift in Sources */,
 				83B4F5B91AA1713B00C09791 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				83B4F5A31AA1713B00C09791 /* JSQMessagesTimestampFormatter.m in Sources */,
 				83B4F59D1AA1713B00C09791 /* JSQMessagesKeyboardController.m in Sources */,
@@ -1076,7 +1077,6 @@
 				8348BEC41A9AB1E000A50EE6 /* Window.swift in Sources */,
 				8348BEC71A9AB31500A50EE6 /* PushNotification.swift in Sources */,
 				83ED1DF31AA413E500198FBF /* APPhoneWithLabel.m in Sources */,
-				AA7BA7D61AC48A040091A400 /* GroupCell.swift in Sources */,
 				83B4F5AD1AA1713B00C09791 /* JSQPhotoMediaItem.m in Sources */,
 				831C194C1A980970000FD6D0 /* PrivateViewController.swift in Sources */,
 				831C197A1A9823A8000FD6D0 /* Constants.swift in Sources */,

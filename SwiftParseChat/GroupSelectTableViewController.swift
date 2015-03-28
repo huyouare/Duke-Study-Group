@@ -41,25 +41,21 @@ class GroupSelectTableViewController: UITableViewController {
                 
                 /* find groups for that course in Parse */
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
-                var query = PFQuery(className: PF_USER_CLASS_NAME)
-                query.whereKey(PF_USER_OBJECTID, equalTo: PFUser.currentUser())
-//                query.includeKey(<#key: String!#>)
+                var query = PFQuery(className: PF_GROUP_CLASS_NAME)
                 
-//                query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
-//                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-//                    if error == nil {
-//                        for group in objects as [PFObject]! {
-//                            if !self.hasGroup(group) {
-//                                self.groups.append(group)
-//                                NSLog("GroupSelectTableViewController: add group")
-//                            }
-//                        }
-//                        self.refreshGroupTable()
-//                        NSLog("GroupSelectTableViewController: finished loading course \(courseId)")
-//                    } else {
-//                        ProgressHUD.showError("Network error")
-//                    }
-//                })
+                query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
+                query.includeKey(PF_USER_OBJECTID)
+                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        self.groups.removeAll(keepCapacity: false)
+                        for group in objects as [PFObject]! {
+                            self.groups.append(group)
+                        }
+                        self.refreshGroupTable()
+                    } else {
+                        ProgressHUD.showError("Network error")
+                    }
+                })
                 
                 /* use strings as attributes */
                 self.course["course_name"] = titleString
@@ -119,9 +115,8 @@ class GroupSelectTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupCell
-        let curGroup:PFObject = self.groups[indexPath.item]
-        cell.loadItem(curGroup[PF_GROUP_NAME] as String, meetingDate: curGroup[PF_GROUP_DATETIME] as String) //TODO: change
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupsCell
+        cell.bindData(self.groups[indexPath.row])
         return cell
     }
 
@@ -130,10 +125,14 @@ class GroupSelectTableViewController: UITableViewController {
             self.performSegueWithIdentifier("groupSelectToCreateSegue", sender: self)
         }
         else {
+            self.selectedGroup = self.groups[indexPath.row] as PFObject
             self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
                 if self.delegate != nil {
                     self.delegate.didSelectGroup(self.selectedGroup)
                 }
+//                let groupId = self.selectedGroup.objectId as String
+//                Messages.createMessageItem(PFUser(), groupId: groupId, description: self.selectedGroup[PF_GROUP_NAME] as String)
+//                self.performSegueWithIdentifier("groupEnterSegue", sender: groupId)
             })
         }
     }

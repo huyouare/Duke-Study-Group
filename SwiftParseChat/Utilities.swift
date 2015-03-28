@@ -52,9 +52,9 @@ class Utilities {
     }
     
     class func getSemesterCode() -> String {
-        let springMonths:[Int] = [3, 4, 5]
+        let springMonths:[Int] = [1, 2, 3, 4, 5]
         let summerMonths:[Int] = [6, 7, 8]
-        let fallMonths:[Int] = [9, 10, 11]
+        let fallMonths:[Int] = [9, 10, 11, 12]
         
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
@@ -72,7 +72,7 @@ class Utilities {
         var yearStr = String(year)
         var yearCode = (yearStr as NSString).substringFromIndex(2)
         var semesterCode = seasonCode + yearCode
-        NSLog("Utilities: Semester code is \(semesterCode)")
+        println("Utilities: Semester code is \(semesterCode)")
         return semesterCode
     }
 }
