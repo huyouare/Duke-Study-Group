@@ -51,22 +51,30 @@ class Utilities {
         return false
     }
     
+    class func isSpring(month:Int) -> Bool {
+        return month >= 1 && month <= 5
+    }
+    
+    class func isSummer(month:Int) -> Bool {
+        return month >= 6 && month <= 8
+    }
+    
+    class func isFall(month:Int) -> Bool {
+        return month >= 9 && month <= 12
+    }
+    
     class func getSemesterCode() -> String {
-        let springMonths:[Int] = [1, 2, 3, 4, 5]
-        let summerMonths:[Int] = [6, 7, 8]
-        let fallMonths:[Int] = [9, 10, 11, 12]
-        
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitDay, fromDate: date)
         let month = components.month
         let year = components.year
         var seasonCode = ""
-        if contains(springMonths, month) {
+        if isSpring(month) {
             seasonCode = "SPRING"
-        } else if contains(summerMonths, month) {
+        } else if isSummer(month) {
             seasonCode = "SUMMER"
-        } else if contains(fallMonths, month) {
+        } else if isFall(month) {
             seasonCode = "FALL"
         }
         var yearStr = String(year)
