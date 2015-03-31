@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateGroupTableViewController: UITableViewController {
+class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate {
 
     var course: [String: String]!
     var delegate: GroupSelectTableViewControllerDelegate!
@@ -29,6 +29,8 @@ class CreateGroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
         self.courseLabel.text = self.course["course_name"]
         self.noneButton.highlighted = true
         self.datePicker.addTarget(self, action: "datePickerChanged:", forControlEvents: UIControlEvents.ValueChanged)
@@ -41,6 +43,10 @@ class CreateGroupTableViewController: UITableViewController {
     
     // MARK: - User actions
     
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func dateButtonPressed(sender: UIButton) {
         dateTimePressed()
     }
@@ -50,6 +56,7 @@ class CreateGroupTableViewController: UITableViewController {
         self.noneButton.highlighted = true
         self.dateButton.titleLabel?.alpha = 1.0
         self.datePicker.alpha = 1.0
+        self.view.endEditing(true)
     }
     
     func datePickerChanged(datePicker: UIDatePicker) {
@@ -68,6 +75,7 @@ class CreateGroupTableViewController: UITableViewController {
         self.dateButton.highlighted = true
         self.dateButton.titleLabel?.alpha = 0.25
         self.datePicker.alpha = 0.25
+        self.view.endEditing(true)
     }
     
     @IBAction func cancelPressed(sender: AnyObject) {
@@ -102,6 +110,19 @@ class CreateGroupTableViewController: UITableViewController {
             return
         }
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - UITextFieldDelegate 
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == self.groupNameField {
+            self.descriptionField.becomeFirstResponder()
+        } else if textField == self.descriptionField {
+            self.locationField.becomeFirstResponder()
+        } else if textField == self.locationField {
+            self.view.endEditing(true)
+        }
+        return true
     }
 
     /*
