@@ -60,6 +60,9 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 120.0;
 
         if PFUser.currentUser() != nil {
             self.loadGroups()
@@ -76,6 +79,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     func loadGroups() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        query.includeKey(PF_USER_OBJECTID)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
