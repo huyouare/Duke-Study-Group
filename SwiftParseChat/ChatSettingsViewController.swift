@@ -35,7 +35,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 self.members.extend(users)
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
             }
         }
@@ -145,10 +145,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         self.group.removeObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
         self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
             if error == nil {
-                ProgressHUD.showSuccess("Success")
+                ProgressHUD.showSuccess(NETWORK_SUCCESS)
                 println("Removed self from group \(self.group[PF_GROUP_NAME] as String)")
             } else {
-                ProgressHUD.showError("Network Error")
+                ProgressHUD.showError(NETWORK_ERROR)
                 println("%@", error)
             }
         })
