@@ -530,10 +530,8 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BIM-HF-bv7" firstAttribute="centerX" secondItem="71p-X6-grj" secondAttribute="centerX" id="1Fc-Lp-Gzc"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="BIM-HF-bv7" secondAttribute="trailing" constant="12" id="Qgz-PG-tpi"/>
                                                 <constraint firstItem="BIM-HF-bv7" firstAttribute="leading" secondItem="71p-X6-grj" secondAttribute="leadingMargin" constant="12" id="WPq-wk-Lqb"/>
-                                                <constraint firstItem="BIM-HF-bv7" firstAttribute="top" secondItem="71p-X6-grj" secondAttribute="topMargin" constant="-3" id="cU8-qZ-sSf"/>
                                                 <constraint firstAttribute="centerY" secondItem="BIM-HF-bv7" secondAttribute="centerY" constant="-0.5" id="qpL-Lc-XIP"/>
                                             </constraints>
                                         </tableViewCellContentView>
