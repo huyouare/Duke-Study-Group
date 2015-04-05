@@ -14,6 +14,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     let actionItems = [NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
     var members = [PFUser]()
+    var group: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,8 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
                 let groups = objects as [PFObject]!
-                let group = groups[0]
-                let users = group[PF_GROUP_USERS] as [PFUser]!
+                self.group = groups[0]
+                let users = self.group[PF_GROUP_USERS] as [PFUser]!
                 self.members.removeAll()
                 self.members.extend(users)
                 self.tableView.reloadData()
@@ -141,29 +142,16 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     func removeSelfFromGroup() {
-        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
-        query.whereKey(PF_GROUP_OBJECTID  , equalTo: groupId)
-        query.includeKey(PF_GROUP_USERS)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!)  in
+        self.group.removeObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
+        self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
             if error == nil {
-                let groups = objects as [PFObject]!
-                let group = groups[0]
-                group.removeObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
-                group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
-                    if error == nil {
-                        ProgressHUD.showSuccess("Success")
-                        println("Removed self from group \(group[PF_GROUP_NAME] as String)")
-                    } else {
-                        ProgressHUD.showError("Network Error")
-                        println("%@", error)
-                    }
-                })
+                ProgressHUD.showSuccess("Success")
+                println("Removed self from group \(self.group[PF_GROUP_NAME] as String)")
             } else {
-                ProgressHUD.showError("Network error")
-                println(error)
+                ProgressHUD.showError("Network Error")
+                println("%@", error)
             }
-        }
+        })
     }
     
 }
