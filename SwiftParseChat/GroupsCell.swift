@@ -33,8 +33,6 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
-//        self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
-//        self.descriptionLabel.removeFromSuperview()
         var date = group[PF_GROUP_DATETIME] as? NSDate
         var location = group[PF_GROUP_LOCATION] as? String
         if date != nil {
@@ -45,7 +43,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 self.dateTimeLabel.text = dateText
             }
             self.locationLabel.text = location
-        } else if location != nil {
+        } else if location != nil && countElements(location!) > 0 {
             self.dateTimeLabel.removeFromSuperview()
             self.locationLabel.text = location
         } else {
@@ -57,8 +55,11 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         let users = group[PF_GROUP_USERS] as [PFUser]!
         
         if users.count > self.avatarImageViews.count {
+            self.moreImageView.hidden = false
             let moreCount = users.count - self.avatarImageViews.count
             self.countLabel.text = "+\(moreCount)"
+            self.moreImageView.layer.cornerRadius = CGFloat(15.0)
+            self.moreImageView.clipsToBounds = true
         } else {
             self.moreImageView.hidden = true
         }
