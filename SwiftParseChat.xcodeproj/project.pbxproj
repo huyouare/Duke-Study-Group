@@ -119,6 +119,7 @@
 		83B8DB9B1AAD750000ADE3BB /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */; };
 		83B8DB9D1AAD751200ADE3BB /* CourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */; };
 		83B8DB9F1AAD75BB00ADE3BB /* courses.json in Resources */ = {isa = PBXBuildFile; fileRef = 83B8DB9E1AAD75BB00ADE3BB /* courses.json */; };
+		83BCAA6E1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCAA6D1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift */; };
 		83C839A41A9977E3007AC2AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C839A31A9977E3007AC2AC /* RegisterViewController.swift */; };
 		83C839A81A997857007AC2AC /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C839A71A997857007AC2AC /* WelcomeViewController.swift */; };
 		83ED1DE01AA2E46E00198FBF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */; };
@@ -326,6 +327,7 @@
 		83B8DB9A1AAD750000ADE3BB /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
 		83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewController.swift; sourceTree = "<group>"; };
 		83B8DB9E1AAD75BB00ADE3BB /* courses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courses.json; sourceTree = "<group>"; };
+		83BCAA6D1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfoTableViewController.swift; sourceTree = "<group>"; };
 		83C839A31A9977E3007AC2AC /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		83C839A71A997857007AC2AC /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 				83B8DB9C1AAD751200ADE3BB /* CourseTableViewController.swift */,
 				83ED6A4B1AB7EE62000DE3DB /* GroupSelectTableViewController.swift */,
 				83A163251AB8BFF800DF969B /* CreateGroupTableViewController.swift */,
+				83BCAA6D1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift */,
 			);
 			name = GroupSelect;
 			sourceTree = "<group>";
@@ -1070,6 +1073,7 @@
 				83B4F5AC1AA1713B00C09791 /* JSQMessagesBubbleImage.m in Sources */,
 				83B4F5BE1AA1713B00C09791 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				83B4F59E1AA1713B00C09791 /* JSQMessagesViewController.m in Sources */,
+				83BCAA6E1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift in Sources */,
 				83ED1DF01AA413E500198FBF /* APAddress.m in Sources */,
 				83B4F5A41AA1713B00C09791 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				83B4F5B61AA1713B00C09791 /* JSQMessagesComposerTextView.m in Sources */,

@@ -12,10 +12,11 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
     @IBOutlet var courseLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var descriptionLabel: UILabel!
+//    @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var countLabel: UILabel!
     @IBOutlet var dateTimeLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var nextMeetingLabel: UILabel!
     
     @IBOutlet var moreImageView: UILabel!
     @IBOutlet var avatarImageViews: [PFImageView]!
@@ -32,15 +33,26 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
-        self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
-        self.descriptionLabel.removeFromSuperview()
+//        self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
+//        self.descriptionLabel.removeFromSuperview()
         var date = group[PF_GROUP_DATETIME] as? NSDate
+        var location = group[PF_GROUP_LOCATION] as? String
         if date != nil {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
-            dateTimeLabel.text = dateFormatter.stringFromDate(date!)
+            let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
+            if dateText == "Today" {
+                self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
+            } else {
+                self.dateTimeLabel.text = dateText
+            }
+            self.locationLabel.text = location
+        } else if location != nil {
+            self.dateTimeLabel.removeFromSuperview()
+            self.locationLabel.text = location
+        } else {
+            nextMeetingLabel.text = ""
+            dateTimeLabel.text = ""
+            locationLabel.text = ""
         }
-        locationLabel.text = group[PF_GROUP_LOCATION] as? String
         
         let users = group[PF_GROUP_USERS] as [PFUser]!
         
