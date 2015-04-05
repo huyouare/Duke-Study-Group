@@ -171,7 +171,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     // MARK: - GroupSelectTableViewController Delegate
     
-    func didSelectGroup(group: PFObject) {
+    func joinGroup(group: PFObject) {
         let users = group[PF_GROUP_USERS] as [PFUser]!
         
         if(!contains(users, PFUser.currentUser())) {

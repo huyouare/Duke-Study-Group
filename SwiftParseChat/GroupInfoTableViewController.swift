@@ -71,7 +71,7 @@ class GroupInfoTableViewController: UITableViewController {
     @IBAction func joinButtonPressed(sender: AnyObject) {
             self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             if self.delegate != nil {
-            self.delegate.didSelectGroup(self.selectedGroup)
+            self.delegate.joinGroup(self.selectedGroup)
             }
             })
     }
