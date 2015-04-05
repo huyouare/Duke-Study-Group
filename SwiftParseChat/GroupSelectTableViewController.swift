@@ -42,9 +42,9 @@ class GroupSelectTableViewController: UITableViewController {
                 /* find groups for that course in Parse */
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
                 var query = PFQuery(className: PF_GROUP_CLASS_NAME)
-                
                 query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
-                query.includeKey(PF_USER_OBJECTID)
+                query.includeKey(PF_GROUP_USERS)
+                
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.groups.removeAll(keepCapacity: false)
