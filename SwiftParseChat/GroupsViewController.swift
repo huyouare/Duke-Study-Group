@@ -79,6 +79,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     func loadGroups() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        query.whereKey(PF_GROUP_USERS, equalTo: PFUser.currentUser())
         query.orderByDescending(PF_GROUP_UPDATED_AT) //may consider number of users (popularity) as well
         query.includeKey(PF_GROUP_USERS)
         query.findObjectsInBackgroundWithBlock {
