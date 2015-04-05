@@ -79,7 +79,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     func loadGroups() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
-        query.includeKey(PF_USER_OBJECTID)
+        query.includeKey(PF_GROUP_USERS)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
