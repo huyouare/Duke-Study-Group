@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GroupSelectTableViewControllerDelegate {
-    func didSelectGroup(group: PFObject)
+    func joinGroup(group: PFObject)
 }
 
 class GroupSelectTableViewController: UITableViewController {

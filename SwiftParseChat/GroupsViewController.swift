@@ -171,6 +171,17 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     // MARK: - GroupSelectTableViewController Delegate
     
-    func didSelectGroup(group: PFObject) {
+    func joinGroup(group: PFObject) {
+        let users = group[PF_GROUP_USERS] as [PFUser]!
+        
+        if(!contains(users, PFUser.currentUser())) {
+            group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
+            group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+                if error != nil {
+                    ProgressHUD.showError("Network Error")
+                }
+            }
+        }
+        self.loadGroups()
     }
 }
