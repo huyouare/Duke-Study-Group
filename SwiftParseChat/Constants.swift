@@ -81,5 +81,8 @@ let NOTIFICATION_USER_LOGGED_OUT		= "NCUserLoggedOut"
 let NOTIFY_ACTION                       = "Notifications"
 let LEAVE_ACTION                        = "Leave Group"
 
+/* Error Messages */
+let NETWORK_ERROR                       = "Network Error"
+let NETWORK_SUCCESS                     = "Success"
 
 

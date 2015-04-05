@@ -6,16 +6,39 @@
 //  Copyright (c) 2015 Jesse Hu. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
     let actionItems = [NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
-    var users = [PFUser]()
+    var members = [PFUser]()
+    var group: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadMembers()
+    }
+    
+    func loadMembers() {
+        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        query.whereKey(PF_GROUP_OBJECTID  , equalTo: groupId)
+        query.includeKey(PF_GROUP_USERS)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!)  in
+            if error == nil {
+                let groups = objects as [PFObject]!
+                self.group = groups[0]
+                let users = self.group[PF_GROUP_USERS] as [PFUser]!
+                self.members.removeAll()
+                self.members.extend(users)
+                self.tableView.reloadData()
+            } else {
+                ProgressHUD.showError(NETWORK_ERROR)
+                println(error)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,7 +60,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return self.users.count
+            return self.members.count
         case 1:
             return 2
         default:
@@ -61,7 +84,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         if indexPath.section == 0 { /* member secion */
             
             let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
-            var user = self.users[indexPath.row]
+            var user = self.members[indexPath.row]
             cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
             
             /* load user's picture */
@@ -73,7 +96,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 }
             }
             cell.imageView?.image = userImageView.image
-            cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+            cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
             
         } else { /* settings */
@@ -81,7 +104,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             var action = actionItems[indexPath.row]
             cell.textLabel?.text = action
+            
             if action == NOTIFY_ACTION { /* notifications */
+                cell.textLabel?.textColor = UIColor.blackColor()
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             } else if action == LEAVE_ACTION { /* leave group */
                 cell.textLabel?.textColor = UIColor.redColor()
@@ -105,7 +130,8 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 }))
                 
                 leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
-                    //TODO: remove user from pointer array
+                    self.removeSelfFromGroup()
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }))
                 presentViewController(leaveAlert, animated: true, completion: nil)
                 
@@ -113,6 +139,19 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
             }
         }
+    }
+    
+    func removeSelfFromGroup() {
+        self.group.removeObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
+        self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
+            if error == nil {
+                ProgressHUD.showSuccess(NETWORK_SUCCESS)
+                println("Removed self from group \(self.group[PF_GROUP_NAME] as String)")
+            } else {
+                ProgressHUD.showError(NETWORK_ERROR)
+                println("%@", error)
+            }
+        })
     }
     
 }
