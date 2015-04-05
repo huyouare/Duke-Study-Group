@@ -140,6 +140,10 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         return cell
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     // MARK: - TableView Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
