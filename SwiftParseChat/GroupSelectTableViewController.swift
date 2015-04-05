@@ -126,14 +126,7 @@ class GroupSelectTableViewController: UITableViewController {
         }
         else {
             self.selectedGroup = self.groups[indexPath.row] as PFObject
-            self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-                if self.delegate != nil {
-                    self.delegate.didSelectGroup(self.selectedGroup)
-                }
-//                let groupId = self.selectedGroup.objectId as String
-//                Messages.createMessageItem(PFUser(), groupId: groupId, description: self.selectedGroup[PF_GROUP_NAME] as String)
-//                self.performSegueWithIdentifier("groupEnterSegue", sender: groupId)
-            })
+            self.performSegueWithIdentifier("groupSelectToGroupInfoSegue", sender: self)
         }
     }
 
@@ -145,6 +138,11 @@ class GroupSelectTableViewController: UITableViewController {
             let createVC = segue.destinationViewController as CreateGroupTableViewController
             createVC.delegate = self.delegate
             createVC.course = self.course
+        } else if segue.identifier == "groupSelectToGroupInfoSegue" {
+            let groupInfoVC = segue.destinationViewController as GroupInfoTableViewController
+            groupInfoVC.delegate = self.delegate
+            groupInfoVC.course = self.course
+            groupInfoVC.selectedGroup = self.selectedGroup
         }
     }
 
