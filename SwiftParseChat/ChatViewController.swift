@@ -340,4 +340,15 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PushToSettingsSegue" {
+            let createVC = segue.destinationViewController as ChatSettingsViewController
+            createVC.groupId = self.groupId
+            createVC.users = self.users
+        }
+    }
 }

@@ -75,3 +75,10 @@ let PF_MESSAGES_UPDATEDACTION			= "updatedAction"           //	Date
 let NOTIFICATION_APP_STARTED			= "NCAppStarted"
 let NOTIFICATION_USER_LOGGED_IN			= "NCUserLoggedIn"
 let NOTIFICATION_USER_LOGGED_OUT		= "NCUserLoggedOut"
+
+/* Chat Settings */
+let NOTIFY_ACTION                       = "Notifications"
+let LEAVE_ACTION                        = "Leave Group"
+
+
+
