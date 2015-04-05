@@ -119,6 +119,10 @@ class GroupSelectTableViewController: UITableViewController {
         cell.bindData(self.groups[indexPath.row])
         return cell
     }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == self.groups.count {
