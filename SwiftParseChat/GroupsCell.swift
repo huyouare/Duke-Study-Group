@@ -12,7 +12,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
     @IBOutlet var courseLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var descriptionLabel: UILabel!
+//    @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var countLabel: UILabel!
     @IBOutlet var dateTimeLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
@@ -32,8 +32,8 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
-        self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
-        self.descriptionLabel.removeFromSuperview()
+//        self.descriptionLabel.text = group[PF_GROUP_DESCRIPTION] as? String
+//        self.descriptionLabel.removeFromSuperview()
         var date = group[PF_GROUP_DATETIME] as? NSDate
         if date != nil {
             let dateFormatter = NSDateFormatter()
