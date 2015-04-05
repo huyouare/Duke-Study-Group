@@ -95,7 +95,7 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
             if !self.noneSelected {
                 group[PF_GROUP_DATETIME] = self.datePicker.date
             }
-            group[PF_GROUP_USERS] = [PFUser.currentUser()]
+            group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     ProgressHUD.showSuccess("Saved")

@@ -60,6 +60,7 @@ let PF_GROUP_DESCRIPTION                = "description"              //  String
 let PF_GROUP_LOCATION                   = "location"                 //  String
 let PF_GROUP_DATETIME                   = "dateTime"                 //  Date
 let PF_GROUP_USERS                      = "users"                    //  [PFUser]
+let PF_GROUP_UPDATED_AT                 = "updatedAt"                //  Date
 
 /* Messages*/
 let PF_MESSAGES_CLASS_NAME				= "Messages"				//	Class name
