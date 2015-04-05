@@ -96,7 +96,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 }
             }
             cell.imageView?.image = userImageView.image
-            //cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+            cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
             
         } else { /* settings */
