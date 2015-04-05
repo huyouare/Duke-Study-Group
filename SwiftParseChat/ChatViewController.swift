@@ -348,7 +348,6 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         if segue.identifier == "PushToSettingsSegue" {
             let createVC = segue.destinationViewController as ChatSettingsViewController
             createVC.groupId = self.groupId
-            createVC.users = self.users
         }
     }
 }
