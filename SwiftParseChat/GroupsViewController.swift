@@ -177,11 +177,12 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         if(!contains(users, PFUser.currentUser())) {
             group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
             group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
-                if error != nil {
+                if error == nil {
+                    self.loadGroups()
+                } else {
                     ProgressHUD.showError("Network Error")
                 }
             }
         }
-        self.loadGroups()
     }
 }
