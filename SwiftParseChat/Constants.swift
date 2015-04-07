@@ -80,6 +80,7 @@ let NOTIFICATION_USER_LOGGED_OUT		= "NCUserLoggedOut"
 /* Chat Settings */
 let NOTIFY_ACTION                       = "Notifications"
 let LEAVE_ACTION                        = "Leave Group"
+let EDIT_GROUP_NAME                     = "Group Name"
 
 /* Error Messages */
 let NETWORK_ERROR                       = "Network Error"

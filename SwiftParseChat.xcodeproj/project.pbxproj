@@ -134,6 +134,7 @@
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
 		AA45EBF61AC648FB00EDDB83 /* ChatSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */; };
+		AABABF781AD379F100C67A91 /* GroupNameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +350,7 @@
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
 		AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSettingsViewController.swift; sourceTree = "<group>"; };
+		AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNameEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -744,6 +746,7 @@
 		83C839AA1A9978A2007AC2AC /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				AABABF741AD3798800C67A91 /* GroupSettings */,
 				83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */,
 				83F02B7D1AA6C671008428DF /* MessagesCell.swift */,
 				83B8DB971AA98BEB00ADE3BB /* MessagesCompose */,
@@ -814,6 +817,14 @@
 				83BCAA6D1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift */,
 			);
 			name = GroupSelect;
+			sourceTree = "<group>";
+		};
+		AABABF741AD3798800C67A91 /* GroupSettings */ = {
+			isa = PBXGroup;
+			children = (
+				AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */,
+			);
+			name = GroupSettings;
 			sourceTree = "<group>";
 		};
 		BA1D0AD88CD4A1615707E353 /* Pods */ = {
@@ -1033,6 +1044,7 @@
 				831C19781A981AF6000FD6D0 /* Utilities.swift in Sources */,
 				8348BEBF1A9AB1E000A50EE6 /* HUDAssets.swift in Sources */,
 				83B4F5AF1AA1713B00C09791 /* JSQMessagesCellTextView.m in Sources */,
+				AABABF781AD379F100C67A91 /* GroupNameEditViewController.swift in Sources */,
 				8348BEC01A9AB1E000A50EE6 /* HUDContentView.swift in Sources */,
 				83B4F5A01AA1713B00C09791 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				83B4F5981AA1713B00C09791 /* NSString+JSQMessages.m in Sources */,
