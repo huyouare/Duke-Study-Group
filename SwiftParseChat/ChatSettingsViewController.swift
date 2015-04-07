@@ -22,7 +22,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         self.tableView.reloadData()
     }
     
