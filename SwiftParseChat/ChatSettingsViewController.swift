@@ -11,7 +11,7 @@ import Foundation
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
-    let actionItems = [NOTIFY_ACTION, LEAVE_ACTION]
+    let actionItems = [EDIT_GROUP_NAME, NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
     var members = [PFUser]()
     var group: PFObject!
@@ -19,6 +19,11 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMembers()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
     func loadMembers() {
@@ -62,7 +67,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         case 0:
             return self.members.count
         case 1:
-            return 2
+            return 3
         default:
             return 0
         }
@@ -86,6 +91,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             var user = self.members[indexPath.row]
             cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
+            cell.textLabel?.textColor = UIColor.blackColor()
             
             /* load user's picture */
             var userImageView = PFImageView()
@@ -95,24 +101,43 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                     println(error)
                 }
             }
-            cell.imageView?.image = userImageView.image
+            if(userImageView.image == nil) {
+                cell.imageView?.image = UIImage(named: "profile_blank")
+            } else {
+                cell.imageView?.image = userImageView.image
+            }
             cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
             
         } else { /* settings */
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             var action = actionItems[indexPath.row]
+            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             cell.textLabel?.text = action
             
             if action == NOTIFY_ACTION { /* notifications */
+                
                 cell.textLabel?.textColor = UIColor.blackColor()
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                cell.detailTextLabel?.text = ""
+                return cell
+                
             } else if action == LEAVE_ACTION { /* leave group */
+                
                 cell.textLabel?.textColor = UIColor.redColor()
+                cell.detailTextLabel?.text = ""
+                return cell
+                
+            } else { /* edit group name */
+                
+                cell.textLabel?.textColor = UIColor.blackColor()
+                if self.group != nil {
+                    cell.detailTextLabel?.text = self.group[PF_GROUP_NAME] as? String
+                } else {
+                    cell.detailTextLabel?.text = ""
+                }
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                return cell
             }
-            return cell
-            
         }
     }
     
@@ -126,7 +151,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
                 var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
                 leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
-                    NSLog("Cancelled leave group")
+                    println("Cancelled leave group")
                 }))
                 
                 leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
@@ -137,6 +162,8 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
             } else if action == NOTIFY_ACTION {
                 
+            } else if action == EDIT_GROUP_NAME {
+                self.performSegueWithIdentifier("EditTextSegue", sender: self)
             }
         }
     }
@@ -152,6 +179,13 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 println("%@", error)
             }
         })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EditTextSegue" {
+            let createVC = segue.destinationViewController as GroupNameEditViewController
+            createVC.group = self.group
+        }
     }
     
 }

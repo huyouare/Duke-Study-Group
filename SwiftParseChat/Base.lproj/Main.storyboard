@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -199,7 +199,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-ia-cUy">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-ia-cUy">
                                             <rect key="frame" x="84" y="46" width="120" height="10"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                             <nil key="highlightedColor"/>
@@ -566,6 +566,47 @@
             </objects>
             <point key="canvasLocation" x="2849" y="-1499"/>
         </scene>
+        <!--Group Name-->
+        <scene sceneID="daQ-Hc-foT">
+            <objects>
+                <viewController id="2Ub-wm-3yB" customClass="GroupNameEditViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aUd-dd-DUX"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y6k-Gh-C1Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qRA-Nb-4zF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-r4-JRe">
+                                <rect key="frame" x="16" y="123" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Uyt-r4-JRe" firstAttribute="top" secondItem="aUd-dd-DUX" secondAttribute="bottom" constant="59" id="N6b-zD-pBG"/>
+                            <constraint firstItem="Uyt-r4-JRe" firstAttribute="leading" secondItem="qRA-Nb-4zF" secondAttribute="leadingMargin" id="pGn-cl-YjK"/>
+                            <constraint firstItem="Uyt-r4-JRe" firstAttribute="trailing" secondItem="qRA-Nb-4zF" secondAttribute="trailingMargin" id="trr-Th-Zhy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Group Name" id="PhM-Wp-tPX">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="eLB-IY-G0g"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="wZQ-Hb-1re">
+                            <connections>
+                                <action selector="saveName:" destination="2Ub-wm-3yB" id="nuz-1d-Pyf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameField" destination="Uyt-r4-JRe" id="5DY-5R-tz6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDv-TD-vzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2431" y="-833"/>
+        </scene>
         <!--New Group-->
         <scene sceneID="EKG-i5-XFX">
             <objects>
@@ -805,7 +846,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sr-Npt">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sr-Npt">
                                             <rect key="frame" x="84" y="46" width="120" height="10"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                             <nil key="highlightedColor"/>
@@ -985,7 +1026,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newCell" id="tmr-jr-hP8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newCell" id="tmr-jr-hP8">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmr-jr-hP8" id="4m9-Xo-kf3">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -998,6 +1039,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Qfe-qe-xeN"/>
+                    <connections>
+                        <segue destination="2Ub-wm-3yB" kind="push" identifier="EditTextSegue" id="31I-Ao-zA5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dv-6U-MnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
