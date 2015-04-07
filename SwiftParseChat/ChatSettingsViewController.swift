@@ -21,10 +21,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         loadMembers()
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(true)
-//        self.tableView.reloadData()
-//    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.tableView.reloadData()
+    }
     
     func loadMembers() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
@@ -111,29 +111,29 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             
         } else { /* settings */
             var action = actionItems[indexPath.row]
+            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
+            cell.textLabel?.text = action
             
             if action == NOTIFY_ACTION { /* notifications */
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
-                cell.textLabel?.text = action
                 cell.textLabel?.textColor = UIColor.blackColor()
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                cell.detailTextLabel?.text = ""
                 return cell
                 
             } else if action == LEAVE_ACTION { /* leave group */
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
-                cell.textLabel?.text = action
                 cell.textLabel?.textColor = UIColor.redColor()
+                cell.detailTextLabel?.text = ""
                 return cell
                 
             } else { /* edit group name */
                 
-                let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
-                cell.textLabel?.text = action
                 cell.textLabel?.textColor = UIColor.blackColor()
                 if self.group != nil {
                     cell.detailTextLabel?.text = self.group[PF_GROUP_NAME] as? String
+                } else {
+                    cell.detailTextLabel?.text = ""
                 }
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 return cell
