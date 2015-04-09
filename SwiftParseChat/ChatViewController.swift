@@ -313,29 +313,31 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
         var message = self.messages[indexPath.item]
         if message.isMediaMessage {
+            
             if let mediaItem = message.media as? JSQVideoMediaItem {
                 var moviePlayer = MPMoviePlayerViewController(contentURL: mediaItem.fileURL)
                 self.presentMoviePlayerViewControllerAnimated(moviePlayer)
                 moviePlayer.moviePlayer.play()
+                
             } else if let mediaItem = message.media as? JSQPhotoMediaItem {
                 let image = mediaItem.image
                 var fullView = UIImageView(image: image)
                 var tapRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
                 tapRec.numberOfTapsRequired = 1
                 fullView.addGestureRecognizer(tapRec)
-                self.tappedImageView = fullView
-                self.view.addSubview(self.tappedImageView)
+                self.view.addSubview(fullView)
                 
                 UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                    self.prevFrame = self.tappedImageView.frame
-                    self.tappedImageView.frame = UIScreen.mainScreen().bounds
-                    self.tappedImageView.backgroundColor = UIColor.blackColor()
-                    self.tappedImageView.contentMode = UIViewContentMode.ScaleAspectFit
-                    self.tappedImageView.userInteractionEnabled = true
-                    self.tappedImageView.clipsToBounds = false
+                    self.prevFrame = fullView.frame
+                    fullView.frame = UIScreen.mainScreen().bounds
+                    fullView.backgroundColor = UIColor.blackColor()
+                    fullView.contentMode = UIViewContentMode.ScaleAspectFit
+                    fullView.userInteractionEnabled = true
+                    fullView.clipsToBounds = false
                     }, completion: { (value:Bool) in
                         self.isFullScreenPhoto = true
                 })
+                self.tappedImageView = fullView
             }
         }
     }
