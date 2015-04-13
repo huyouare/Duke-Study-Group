@@ -52,7 +52,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
             locationLabel.text = ""
         }
         
-        let users = group[PF_GROUP_USERS] as [PFUser]!
+        let users = group[PF_GROUP_USERS] as! [PFUser]!
         
         if users.count > self.avatarImageViews.count {
             self.moreImageView.hidden = false
