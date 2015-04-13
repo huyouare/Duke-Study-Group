@@ -189,8 +189,8 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
     // MARK: - Invite helper method
     
     func inviteUser(user: APContact) {
-        let emailsCount = countElements(user.emails)
-        let phonesCount = countElements(user.phones)
+        let emailsCount = count(user.emails)
+        let phonesCount = count(user.phones)
         
         if emailsCount > 0 && phonesCount > 0 {
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Email invitation", "SMS invitation")
@@ -223,7 +223,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         if MFMailComposeViewController.canSendMail() {
             var mailCompose = MFMailComposeViewController()
             // TODO: Use one email rather than all emails
-            mailCompose.setToRecipients(user.emails as [String]!)
+            mailCompose.setToRecipients(user.emails as? [String])
             mailCompose.setSubject("")
             mailCompose.setMessageBody(MESSAGE_INVITE, isHTML: true)
             mailCompose.mailComposeDelegate = self
@@ -248,7 +248,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         if MFMessageComposeViewController.canSendText() {
             var messageCompose = MFMessageComposeViewController()
             // TODO: Use primary phone rather than all numbers
-            messageCompose.recipients = user.phones as [String]!
+            messageCompose.recipients = user.phones as? [String]
             messageCompose.body = MESSAGE_INVITE
             messageCompose.messageComposeDelegate = self
             self.presentViewController(messageCompose, animated: true, completion: nil)
