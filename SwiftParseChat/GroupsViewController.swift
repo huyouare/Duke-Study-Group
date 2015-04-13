@@ -106,7 +106,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         if buttonIndex != alertView.cancelButtonIndex {
             var textField = alertView.textFieldAtIndex(0);
             if let text = textField!.text {
-                if countElements(text) > 0 {
+                if count(text) > 0 {
                     var object = PFObject(className: PF_GROUP_CLASS_NAME)
                     object[PF_GROUP_NAME] = text
                     object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in

@@ -39,7 +39,7 @@ class Messages {
         }
         
         for user in users {
-            if countElements(description) > 0 {
+            if count(description) > 0 {
                 description = description + " & "
             }
             description = description + (user[PF_USER_FULLNAME] as String)

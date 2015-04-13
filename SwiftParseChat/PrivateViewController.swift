@@ -187,8 +187,8 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     // MARK: - Invite helper method
     
     func inviteUser(user: APContact) {
-        let emailsCount = countElements(user.emails)
-        let phonesCount = countElements(user.phones)
+        let emailsCount = count(user.emails)
+        let phonesCount = count(user.phones)
         
         if emailsCount > 0 && phonesCount > 0 {
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Email invitation", "SMS invitation")

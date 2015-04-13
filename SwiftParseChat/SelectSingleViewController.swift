@@ -118,7 +118,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if countElements(searchText) > 0 {
+        if count(searchText) > 0 {
             self.searchUsers(searchText.lowercaseString)
         } else {
             self.loadUsers()

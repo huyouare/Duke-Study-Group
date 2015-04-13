@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     
     func saveUser() {
         let fullName = nameField.text
-        if countElements(fullName) > 0 {
+        if count(fullName) > 0 {
             var user = PFUser.currentUser()
             user[PF_USER_FULLNAME] = fullName
             user[PF_USER_FULLNAME_LOWER] = fullName.lowercaseString
