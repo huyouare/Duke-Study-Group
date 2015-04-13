@@ -47,7 +47,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
                 // self.activity.stopAnimating()
                 self.users1.removeAll(keepCapacity: false)
                 if contacts != nil {
-                    for contact in contacts as [APContact]! {
+                    for contact in contacts as! [APContact]! {
                         self.users1.append(contact)
                     }
                     self.loadUsers()
@@ -75,7 +75,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         
         for user in users1 {
             if let userEmails = user.emails {
-                emails += userEmails as [String]
+                emails += userEmails as! [String]
             }
         }
         
@@ -89,9 +89,9 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 self.users2.removeAll(keepCapacity: false)
-                for user in objects as [PFUser]! {
+                for user in objects as! [PFUser]! {
                     self.users2.append(user)
-                    self.removeUser(user[PF_USER_EMAILCOPY] as String)
+                    self.removeUser(user[PF_USER_EMAILCOPY] as! String)
                 }
                 self.tableView.reloadData()
             } else {
@@ -105,7 +105,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         
         for user in users1 {
             if let userEmails = user.emails {
-                for email in userEmails as [String] {
+                for email in userEmails as! [String] {
                     if email == removeEmail {
                         removeUsers.append(user)
                         break
@@ -149,7 +149,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
         if indexPath.section == 0 {
             let user = users2[indexPath.row]
