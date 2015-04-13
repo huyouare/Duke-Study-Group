@@ -35,7 +35,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         
         var user = PFUser.currentUser()
         self.senderId = user.objectId
-        self.senderDisplayName = user[PF_USER_FULLNAME] as String
+        self.senderDisplayName = user[PF_USER_FULLNAME] as! String
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
         incomingBubbleImage = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
 
@@ -75,7 +75,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
                     self.automaticallyScrollsToMostRecentMessage = false
-                    for object in (objects as [PFObject]!).reverse() {
+                    for object in (objects as! [PFObject]!).reverse() {
                         self.addMessage(object)
                     }
                     if objects.count > 0 {
@@ -94,8 +94,8 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     func addMessage(object: PFObject) {
         var message: JSQMessage!
         
-        var user = object[PF_CHAT_USER] as PFUser
-        var name = user[PF_USER_FULLNAME] as String
+        var user = object[PF_CHAT_USER] as! PFUser
+        var name = user[PF_USER_FULLNAME] as! String
         
         var videoFile = object[PF_CHAT_VIDEO] as? PFFile
         var pictureFile = object[PF_CHAT_PICTURE] as? PFFile
@@ -251,7 +251,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as JSQMessagesCollectionViewCell
+        var cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
         var message = self.messages[indexPath.item]
         if message.senderId == self.senderId {
@@ -346,7 +346,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PushToSettingsSegue" {
-            let createVC = segue.destinationViewController as ChatSettingsViewController
+            let createVC = segue.destinationViewController as! ChatSettingsViewController
             createVC.groupId = self.groupId
         }
     }
