@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import MediaPlayer
 
-class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     var timer: NSTimer = NSTimer()
     var isLoading: Bool = false
@@ -30,8 +30,17 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     var senderImageUrl: String!
     var batchMessages = true
     
+    var tapPhotoRec: UITapGestureRecognizer!
+    var isFullScreenPhoto = false
+    var prevFrame: CGRect!
+    var tappedImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* initialize tap photo variables */
+        tapPhotoRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
+        tapPhotoRec.delegate = self
         
         var user = PFUser.currentUser()
         self.senderId = user.objectId
@@ -304,11 +313,42 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
         var message = self.messages[indexPath.item]
         if message.isMediaMessage {
+            
             if let mediaItem = message.media as? JSQVideoMediaItem {
                 var moviePlayer = MPMoviePlayerViewController(contentURL: mediaItem.fileURL)
                 self.presentMoviePlayerViewControllerAnimated(moviePlayer)
                 moviePlayer.moviePlayer.play()
+                
+            } else if let mediaItem = message.media as? JSQPhotoMediaItem {
+                let image = mediaItem.image
+                var fullView = UIImageView(image: image)
+                var tapRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
+                tapRec.numberOfTapsRequired = 1
+                fullView.addGestureRecognizer(tapRec)
+                self.view.addSubview(fullView)
+                
+                UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                    self.prevFrame = fullView.frame
+                    fullView.frame = UIScreen.mainScreen().bounds
+                    fullView.backgroundColor = UIColor.blackColor()
+                    fullView.contentMode = UIViewContentMode.ScaleAspectFit
+                    fullView.userInteractionEnabled = true
+                    fullView.clipsToBounds = false
+                    }, completion: { (value:Bool) in
+                        self.isFullScreenPhoto = true
+                })
+                self.tappedImageView = fullView
             }
+        }
+    }
+    
+    func imageToFullScreen(sender: UITapGestureRecognizer) {
+        if isFullScreenPhoto {
+            UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                self.tappedImageView.removeFromSuperview()
+                }, completion: { (value:Bool) in
+                    self.isFullScreenPhoto = false
+            })
         }
     }
     
@@ -340,6 +380,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     // MARK: - Navigation
     
