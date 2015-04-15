@@ -54,7 +54,7 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
 
         if self.searchController.active {
             if let course = self.filteredCourses[indexPath.row] as? [String: String] {
@@ -111,7 +111,7 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "courseToGroupsSegue" {
-            let groupSelectVC = segue.destinationViewController as! GroupSelectTableViewController
+            let groupSelectVC = segue.destinationViewController as GroupSelectTableViewController
             groupSelectVC.delegate = self.delegate
             groupSelectVC.course = self.selectedCourse
         }

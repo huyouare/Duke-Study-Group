@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "cross.png"
+      "filename" : "ringer.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "cross@2x.png"
+      "filename" : "ringer@2x.png"
     }
   ],
   "info" : {

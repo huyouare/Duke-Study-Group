@@ -10,16 +10,17 @@ import UIKit
 
 /**
   HUDController controls showing and hiding of the HUD, as well as its contents and touch response behavior.
+  It is recommended to use the PKHUD.Controller.sharedController instance, nevertheless you are free to instantiate your own.
 */
-@objc public class PKHUD {
+@objc public class HUDController {
     private struct Constants {
-        static let sharedHUD = PKHUD()
+        static let sharedController = HUDController()
     }
     
     private let window = Window()
     
-    public class var sharedHUD: PKHUD {
-        return Constants.sharedHUD
+    public class var sharedController: HUDController {
+        return Constants.sharedController
     }
     
     public init () {

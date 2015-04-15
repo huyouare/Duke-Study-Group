@@ -48,7 +48,7 @@ class GroupSelectTableViewController: UITableViewController {
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.groups.removeAll(keepCapacity: false)
-                        for group in objects as! [PFObject]! {
+                        for group in objects as [PFObject]! {
                             self.groups.append(group)
                         }
                         self.refreshGroupTable()
@@ -111,11 +111,11 @@ class GroupSelectTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == self.groups.count {
-            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! GroupsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as GroupsCell
         cell.bindData(self.groups[indexPath.row])
         return cell
     }
@@ -139,11 +139,11 @@ class GroupSelectTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "groupSelectToCreateSegue" {
-            let createVC = segue.destinationViewController as! CreateGroupTableViewController
+            let createVC = segue.destinationViewController as CreateGroupTableViewController
             createVC.delegate = self.delegate
             createVC.course = self.course
         } else if segue.identifier == "groupSelectToGroupInfoSegue" {
-            let groupInfoVC = segue.destinationViewController as! GroupInfoTableViewController
+            let groupInfoVC = segue.destinationViewController as GroupInfoTableViewController
             groupInfoVC.delegate = self.delegate
             groupInfoVC.course = self.course
             groupInfoVC.selectedGroup = self.selectedGroup

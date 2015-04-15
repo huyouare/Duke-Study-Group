@@ -33,9 +33,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
-                let groups = objects as! [PFObject]!
+                let groups = objects as [PFObject]!
                 self.group = groups[0]
-                let users = self.group[PF_GROUP_USERS] as! [PFUser]!
+                let users = self.group[PF_GROUP_USERS] as [PFUser]!
                 self.members.removeAll()
                 self.members.extend(users)
                 self.tableView.reloadData()
@@ -88,7 +88,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         
         if indexPath.section == 0 { /* member secion */
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as UITableViewCell
             var user = self.members[indexPath.row]
             cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
             cell.textLabel?.textColor = UIColor.blackColor()
@@ -173,7 +173,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
             if error == nil {
                 ProgressHUD.showSuccess(NETWORK_SUCCESS)
-                println("Removed self from group \(self.group[PF_GROUP_NAME] as! String)")
+                println("Removed self from group \(self.group[PF_GROUP_NAME] as String)")
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println("%@", error)
@@ -183,7 +183,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EditTextSegue" {
-            let createVC = segue.destinationViewController as! GroupNameEditViewController
+            let createVC = segue.destinationViewController as GroupNameEditViewController
             createVC.group = self.group
         }
     }
