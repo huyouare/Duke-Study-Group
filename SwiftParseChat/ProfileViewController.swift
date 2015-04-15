@@ -55,12 +55,12 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             }
         }
         
-        nameField.text = user[PF_USER_FULLNAME] as String
+        nameField.text = user[PF_USER_FULLNAME] as! String
     }
     
     func saveUser() {
         let fullName = nameField.text
-        if countElements(fullName) > 0 {
+        if count(fullName) > 0 {
             var user = PFUser.currentUser()
             user[PF_USER_FULLNAME] = fullName
             user[PF_USER_FULLNAME_LOWER] = fullName.lowercaseString
@@ -140,7 +140,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     // MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        var image = info[UIImagePickerControllerEditedImage] as UIImage
+        var image = info[UIImagePickerControllerEditedImage] as! UIImage
         if image.size.width > 280 {
             image = Images.resizeImage(image, width: 280, height: 280)!
         }
@@ -183,7 +183,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         var request = FBRequest.requestForMe()
         request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var userData = result as [String: AnyObject]!
+                var userData = result as! [String: AnyObject]!
                 self.processFacebook(user, userData: userData)
             } else {
                 PFUser.logOut()
@@ -193,7 +193,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func processFacebook(user: PFUser, userData: [String: AnyObject]) {
-        let facebookUserId = userData["id"] as String
+        let facebookUserId = userData["id"] as! String
         var link = "http://graph.facebook.com/\(facebookUserId)/picture"
         let url = NSURL(string: link)
         var request = NSURLRequest(URL: url!)
@@ -202,7 +202,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             (request, response, data, error) in
             
             if error == nil {
-                var image = UIImage(data: data! as NSData)!
+                var image = UIImage(data: data! as! NSData)!
                 
                 if image.size.width > 280 {
                     image = Images.resizeImage(image, width: 280, height: 280)!
@@ -228,7 +228,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 
                 user[PF_USER_EMAILCOPY] = userData["email"]
                 user[PF_USER_FULLNAME] = userData["name"]
-                user[PF_USER_FULLNAME_LOWER] = (userData["name"] as String).lowercaseString
+                user[PF_USER_FULLNAME_LOWER] = (userData["name"] as! String).lowercaseString
                 user[PF_USER_FACEBOOKID] = userData["id"]
                 user[PF_USER_PICTURE] = filePicture
                 user[PF_USER_THUMBNAIL] = fileThumbnail
@@ -238,14 +238,14 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                     } else {
                         if let info = error!.userInfo {
                             ProgressHUD.showError("Login error")
-                            println(info["error"] as String)
+                            println(info["error"] as! String)
                         }
                     }
                 })
             } else {
                 if let info = error!.userInfo {
                     ProgressHUD.showError("Failed to fetch Facebook photo")
-                    println(info["error"] as String)
+                    println(info["error"] as! String)
                 }
             }
         }
