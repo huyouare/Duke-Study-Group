@@ -39,7 +39,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         super.viewDidLoad()
         
         /* initialize tap photo variables */
-        tapPhotoRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
+        tapPhotoRec = UITapGestureRecognizer(target: self, action: "shrinkImage:")
         tapPhotoRec.delegate = self
         
         var user = PFUser.currentUser()
