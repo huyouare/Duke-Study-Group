@@ -43,7 +43,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 self.dateTimeLabel.text = dateText
             }
             self.locationLabel.text = location
-        } else if location != nil && countElements(location!) > 0 {
+        } else if location != nil && count(location!) > 0 {
             self.dateTimeLabel.removeFromSuperview()
             self.locationLabel.text = location
         } else {
@@ -52,7 +52,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
             locationLabel.text = ""
         }
         
-        let users = group[PF_GROUP_USERS] as [PFUser]!
+        let users = group[PF_GROUP_USERS] as! [PFUser]!
         
         if users.count > self.avatarImageViews.count {
             self.moreImageView.hidden = false

@@ -86,7 +86,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
             (objects: [AnyObject]!, error: NSError!)  in
             if error == nil {
                 self.groups.removeAll()
-                self.groups.extend(objects as [PFObject]!)
+                self.groups.extend(objects as! [PFObject]!)
                 self.tableView.reloadData()
             } else {
                 ProgressHUD.showError("Network error")
@@ -106,7 +106,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         if buttonIndex != alertView.cancelButtonIndex {
             var textField = alertView.textFieldAtIndex(0);
             if let text = textField!.text {
-                if countElements(text) > 0 {
+                if count(text) > 0 {
                     var object = PFObject(className: PF_GROUP_CLASS_NAME)
                     object[PF_GROUP_NAME] = text
                     object.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
@@ -134,7 +134,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as GroupsCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
         cell.bindData(self.groups[indexPath.row])
         
         return cell
@@ -152,19 +152,19 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
         var group = self.groups[indexPath.row]
         let groupId = group.objectId as String
         
-        Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as String)
+        Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as! String)
         
         self.performSegueWithIdentifier("groupChatSegue", sender: groupId)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "groupChatSegue" {
-            let chatVC = segue.destinationViewController as ChatViewController
+            let chatVC = segue.destinationViewController as! ChatViewController
             chatVC.hidesBottomBarWhenPushed = true
-            let groupId = sender as String
+            let groupId = sender as! String
             chatVC.groupId = groupId
         } else if segue.identifier == "groupsToSubjectSegue" {
-            let subjectVC = segue.destinationViewController.topViewController as SubjectTableViewController
+            let subjectVC = segue.destinationViewController.topViewController as! SubjectTableViewController
             subjectVC.delegate = self
         }
     }
@@ -172,7 +172,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     // MARK: - GroupSelectTableViewController Delegate
     
     func joinGroup(group: PFObject) {
-        let users = group[PF_GROUP_USERS] as [PFUser]!
+        let users = group[PF_GROUP_USERS] as! [PFUser]!
         
         if(!contains(users, PFUser.currentUser())) {
             group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)

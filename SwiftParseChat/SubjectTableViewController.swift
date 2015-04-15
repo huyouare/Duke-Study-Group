@@ -25,8 +25,8 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, UI
 
         if let path = NSBundle.mainBundle().pathForResource("courses", ofType: "json") {
             if let jsonData = NSData.dataWithContentsOfMappedFile(path) as? NSData {
-                var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-                self.subjects = jsonResult.objectForKey("subjects") as NSArray!
+                var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
+                self.subjects = jsonResult.objectForKey("subjects") as! NSArray!
             }
         }
         
@@ -64,7 +64,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         if self.searchController.active {
             if let subject = self.filteredSubjects[indexPath.row] as? NSDictionary {
@@ -117,7 +117,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, UI
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "subjectToCourseSegue" {
-            let courseVC = segue.destinationViewController as CourseTableViewController
+            let courseVC = segue.destinationViewController as! CourseTableViewController
             courseVC.delegate = self.delegate
             courseVC.subject = self.selectedSubject
             courseVC.courses = self.courses

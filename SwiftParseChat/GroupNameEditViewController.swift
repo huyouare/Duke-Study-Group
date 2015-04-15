@@ -15,12 +15,12 @@ class GroupNameEditViewController:UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBAction func saveName(sender: AnyObject) {
         var name = nameField.text
-        if countElements(name) > 0 {
+        if count(name) > 0 {
             self.group[PF_GROUP_NAME] = nameField.text
             self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     ProgressHUD.showSuccess(NETWORK_SUCCESS)
-                    println("Renamed group to \(self.group[PF_GROUP_NAME] as String)")
+                    println("Renamed group to \(self.group[PF_GROUP_NAME] as! String)")
                 } else {
                     ProgressHUD.showError(NETWORK_ERROR)
                     println("%@", error)
