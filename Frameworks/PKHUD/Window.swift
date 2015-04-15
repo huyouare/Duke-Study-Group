@@ -66,7 +66,7 @@ internal class Window: UIWindow {
         willHide = true
         
         if anim {
-            UIView.animateWithDuration(0.8, animations: { self.frameView.alpha = 0.0 }, completion: completion)
+            UIView.animateWithDuration(0.8, animations: { self.frameView.alpha = 0.0 }, completion)
         } else {
             completion(finished: true)
         }

@@ -2,7 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "progress.pdf"
+      "scale" : "1x",
+      "filename" : "progress.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "progress@2x.png"
     }
   ],
   "info" : {

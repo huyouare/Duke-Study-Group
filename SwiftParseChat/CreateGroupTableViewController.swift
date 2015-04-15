@@ -85,7 +85,7 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
     @IBAction func createGroupPressed(sender: AnyObject) {
         let groupName = groupNameField.text
         
-        if count(groupName) > 0 {
+        if countElements(groupName) > 0 {
             var group = PFObject(className: PF_GROUP_CLASS_NAME)
             group[PF_GROUP_NAME] = groupName
             group[PF_GROUP_COURSE_NAME] = self.course["course_name"]

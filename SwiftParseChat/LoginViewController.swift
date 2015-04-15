@@ -55,7 +55,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let email = emailField.text.lowercaseString
         let password = passwordField.text
         
-        if count(email) == 0 {
+        if countElements(email) == 0 {
             ProgressHUD.showError("Email field is empty.")
             return
         } else {
@@ -70,7 +70,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let info = error.userInfo {
-                    ProgressHUD.showError(info["error"] as? String)
+                    ProgressHUD.showError(info["error"] as String)
                 }
             }
         }

@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "cross.png"
+      "filename" : "volume_muted.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "cross@2x.png"
+      "filename" : "volume_muted@2x.png"
     }
   ],
   "info" : {
