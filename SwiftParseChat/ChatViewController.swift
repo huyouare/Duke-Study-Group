@@ -39,7 +39,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         super.viewDidLoad()
         
         /* initialize tap photo variables */
-        tapPhotoRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
+        tapPhotoRec = UITapGestureRecognizer(target: self, action: "shrinkImage:")
         tapPhotoRec.delegate = self
         
         var user = PFUser.currentUser()
@@ -320,29 +320,32 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 moviePlayer.moviePlayer.play()
                 
             } else if let mediaItem = message.media as? JSQPhotoMediaItem {
-                let image = mediaItem.image
-                var fullView = UIImageView(image: image)
-                var tapRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
-                tapRec.numberOfTapsRequired = 1
-                fullView.addGestureRecognizer(tapRec)
-                self.view.addSubview(fullView)
-                
-                UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                    self.prevFrame = fullView.frame
-                    fullView.frame = UIScreen.mainScreen().bounds
-                    fullView.backgroundColor = UIColor.blackColor()
-                    fullView.contentMode = UIViewContentMode.ScaleAspectFit
-                    fullView.userInteractionEnabled = true
-                    fullView.clipsToBounds = false
-                    }, completion: { (value:Bool) in
-                        self.isFullScreenPhoto = true
-                })
-                self.tappedImageView = fullView
+                enlargeImage(mediaItem.image)
             }
         }
     }
     
-    func imageToFullScreen(sender: UITapGestureRecognizer) {
+    func enlargeImage(image:UIImage) {
+        var fullView = UIImageView(image: image)
+        var tapRec = UITapGestureRecognizer(target: self, action: "shrinkImage:")
+        tapRec.numberOfTapsRequired = 1
+        fullView.addGestureRecognizer(tapRec)
+        self.view.addSubview(fullView)
+        
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+            self.prevFrame = fullView.frame
+            fullView.frame = UIScreen.mainScreen().bounds
+            fullView.backgroundColor = UIColor.blackColor()
+            fullView.contentMode = UIViewContentMode.ScaleAspectFit
+            fullView.userInteractionEnabled = true
+            fullView.clipsToBounds = false
+            }, completion: { (value:Bool) in
+                self.isFullScreenPhoto = true
+        })
+        self.tappedImageView = fullView
+    }
+    
+    func shrinkImage(sender: UITapGestureRecognizer) {
         if isFullScreenPhoto {
             UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
                 self.tappedImageView.removeFromSuperview()
