@@ -155,13 +155,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 if self.group != nil {
                     if let dateTime = self.group[PF_GROUP_DATETIME] as? NSDate {
                         let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(dateTime)
-                        if dateText == "Today" {
-                            cell.detailTextLabel?.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(dateTime)
-                        } else {
-                            cell.detailTextLabel?.text = dateText
-                        }
+                        cell.detailTextLabel?.text = dateText + " " + JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(dateTime)
                     } else {
-                        cell.detailTextLabel?.text = ""
+                        cell.detailTextLabel?.text = "Not Set"
                     }
                 }
                 return cell

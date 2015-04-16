@@ -45,19 +45,16 @@ class GroupTextEditViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBar.title = self.editAttribute
         switch (editAttribute) {
         case EDIT_GROUP_NAME:
             attributeField.text = self.group[PF_GROUP_NAME] as? String
-            navigationBar.title = EDIT_GROUP_NAME
         case EDIT_LOCATION:
             attributeField.text = self.group[PF_GROUP_LOCATION] as? String
-            navigationBar.title = EDIT_LOCATION
         case EDIT_DESCRIPTION:
             attributeField.text = self.group[PF_GROUP_DESCRIPTION] as? String
-            navigationBar.title = EDIT_DESCRIPTION
         default:
             attributeField.text = ""
-            navigationBar.title = ""
         }
     }
 
