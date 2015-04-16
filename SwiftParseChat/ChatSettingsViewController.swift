@@ -11,7 +11,7 @@ import Foundation
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
-    let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
+    let actionItems = [DISPLAY_COURSE_NAME, EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
     var members = [PFUser]()
     var group: PFObject!
@@ -68,7 +68,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         case 0:
             return self.members.count
         case 1:
-            return 6
+            return actionItems.count
         default:
             return 0
         }
@@ -164,6 +164,14 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 }
                 return cell
                 
+            case DISPLAY_COURSE_NAME:
+                normalizeCell(cell)
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                if self.group != nil {
+                    cell.detailTextLabel?.text = self.group[PF_GROUP_COURSE_NAME] as? String
+                }
+                return cell
+                
             default:
                 normalizeCell(cell)
                 return cell
@@ -199,6 +207,8 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
             } else if action == NOTIFY_ACTION {
                 
+            } else if action == DISPLAY_COURSE_NAME {
+                // do nothing
             } else if action == EDIT_TIME {
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTimeSegue", sender: self)

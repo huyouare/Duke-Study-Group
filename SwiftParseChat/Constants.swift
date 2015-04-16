@@ -84,6 +84,7 @@ let EDIT_GROUP_NAME                     = "Group Name"
 let EDIT_DESCRIPTION                    = "Description"
 let EDIT_TIME                           = "Date & Time"
 let EDIT_LOCATION                       = "Location"
+let DISPLAY_COURSE_NAME                    = "courseName"
 
 /* Error Messages */
 let NETWORK_ERROR                       = "Network Error"
