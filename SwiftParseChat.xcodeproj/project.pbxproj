@@ -126,7 +126,7 @@
 		83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02B7D1AA6C671008428DF /* MessagesCell.swift */; };
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
 		AA45EBF61AC648FB00EDDB83 /* ChatSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */; };
-		AABABF781AD379F100C67A91 /* GroupNameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */; };
+		AAF465E91ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF465E81ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,7 +333,7 @@
 		83F02B7D1AA6C671008428DF /* MessagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
 		AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSettingsViewController.swift; sourceTree = "<group>"; };
-		AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNameEditViewController.swift; sourceTree = "<group>"; };
+		AAF465E81ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTextEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -788,7 +788,7 @@
 		AABABF741AD3798800C67A91 /* GroupSettings */ = {
 			isa = PBXGroup;
 			children = (
-				AABABF771AD379F100C67A91 /* GroupNameEditViewController.swift */,
+				AAF465E81ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift */,
 			);
 			name = GroupSettings;
 			sourceTree = "<group>";
@@ -1007,7 +1007,6 @@
 				8311CFF31AA97FDD0081674A /* AddressBookViewController.swift in Sources */,
 				831C19781A981AF6000FD6D0 /* Utilities.swift in Sources */,
 				83B4F5AF1AA1713B00C09791 /* JSQMessagesCellTextView.m in Sources */,
-				AABABF781AD379F100C67A91 /* GroupNameEditViewController.swift in Sources */,
 				83B4F5A01AA1713B00C09791 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				83B4F5981AA1713B00C09791 /* NSString+JSQMessages.m in Sources */,
 				83ED1DF41AA413E500198FBF /* APSocialProfile.m in Sources */,
@@ -1050,6 +1049,7 @@
 				83BCAA6E1AD0EAC6008FCDF7 /* GroupInfoTableViewController.swift in Sources */,
 				83ED1DF01AA413E500198FBF /* APAddress.m in Sources */,
 				83B4F5A41AA1713B00C09791 /* JSQMessagesToolbarButtonFactory.m in Sources */,
+				AAF465E91ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift in Sources */,
 				83B4F5B61AA1713B00C09791 /* JSQMessagesComposerTextView.m in Sources */,
 				83678F6A1AA94C1700A1C63E /* SelectMultipleViewController.swift in Sources */,
 				83B8DB961AA986EE00ADE3BB /* FacebookFriendsViewController.swift in Sources */,

@@ -11,10 +11,11 @@ import Foundation
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
-    let actionItems = [EDIT_GROUP_NAME, NOTIFY_ACTION, LEAVE_ACTION]
+    let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
     var members = [PFUser]()
     var group: PFObject!
+    var editAttribute:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +68,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         case 0:
             return self.members.count
         case 1:
-            return 3
+            return 6
         default:
             return 0
         }
@@ -88,10 +89,11 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         
         if indexPath.section == 0 { /* member secion */
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             var user = self.members[indexPath.row]
             cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
-            cell.textLabel?.textColor = UIColor.blackColor()
+            normalizeCell(cell)
+            cell.accessoryType = UITableViewCellAccessoryType.None
             
             /* load user's picture */
             var userImageView = PFImageView()
@@ -106,39 +108,74 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             } else {
                 cell.imageView?.image = userImageView.image
             }
-            cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
             
         } else { /* settings */
+            
             var action = actionItems[indexPath.row]
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             cell.textLabel?.text = action
             
-            if action == NOTIFY_ACTION { /* notifications */
+            switch (action) {
                 
-                cell.textLabel?.textColor = UIColor.blackColor()
-                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell.detailTextLabel?.text = ""
+            case NOTIFY_ACTION:
+                normalizeCell(cell)
                 return cell
                 
-            } else if action == LEAVE_ACTION { /* leave group */
-                
+            case LEAVE_ACTION:
                 cell.textLabel?.textColor = UIColor.redColor()
                 cell.detailTextLabel?.text = ""
                 return cell
                 
-            } else { /* edit group name */
-                
-                cell.textLabel?.textColor = UIColor.blackColor()
+            case EDIT_GROUP_NAME:
+                normalizeCell(cell)
                 if self.group != nil {
                     cell.detailTextLabel?.text = self.group[PF_GROUP_NAME] as? String
-                } else {
-                    cell.detailTextLabel?.text = ""
                 }
-                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                return cell
+                
+            case EDIT_LOCATION:
+                normalizeCell(cell)
+                if self.group != nil {
+                    cell.detailTextLabel?.text = self.group[PF_GROUP_LOCATION] as? String
+                }
+                return cell
+                
+            case EDIT_DESCRIPTION:
+                normalizeCell(cell)
+                if self.group != nil {
+                    cell.detailTextLabel?.text = self.group[PF_GROUP_DESCRIPTION] as? String
+                }
+                return cell
+                
+            case EDIT_TIME:
+                normalizeCell(cell)
+                if self.group != nil {
+                    if let dateTime = self.group[PF_GROUP_DATETIME] as? NSDate {
+                        let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(dateTime)
+                        if dateText == "Today" {
+                            cell.detailTextLabel?.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(dateTime)
+                        } else {
+                            cell.detailTextLabel?.text = dateText
+                        }
+                    } else {
+                        cell.detailTextLabel?.text = ""
+                    }
+                }
+                return cell
+                
+            default:
+                normalizeCell(cell)
                 return cell
             }
+            
         }
+    }
+    
+    func normalizeCell(cell:UITableViewCell) {
+        cell.textLabel?.textColor = UIColor.blackColor()
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.detailTextLabel?.text = ""
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -162,7 +199,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
             } else if action == NOTIFY_ACTION {
                 
-            } else if action == EDIT_GROUP_NAME {
+            } else if action == EDIT_TIME {
+                
+            } else {
+                self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
             }
         }
@@ -183,8 +223,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EditTextSegue" {
-            let createVC = segue.destinationViewController as! GroupNameEditViewController
+            let createVC = segue.destinationViewController as! GroupTextEditViewController
             createVC.group = self.group
+            createVC.editAttribute = self.editAttribute
         }
     }
     

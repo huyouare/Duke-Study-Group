@@ -77,10 +77,13 @@ let NOTIFICATION_APP_STARTED			= "NCAppStarted"
 let NOTIFICATION_USER_LOGGED_IN			= "NCUserLoggedIn"
 let NOTIFICATION_USER_LOGGED_OUT		= "NCUserLoggedOut"
 
-/* Chat Settings */
+/* Group Settings */
 let NOTIFY_ACTION                       = "Notifications"
 let LEAVE_ACTION                        = "Leave Group"
 let EDIT_GROUP_NAME                     = "Group Name"
+let EDIT_DESCRIPTION                    = "Description"
+let EDIT_TIME                           = "Time"
+let EDIT_LOCATION                       = "Location"
 
 /* Error Messages */
 let NETWORK_ERROR                       = "Network Error"
