@@ -11,12 +11,13 @@ import Foundation
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
-    let actionItems = [DISPLAY_COURSE_NAME, EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
+    let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
     var groupId: String = ""
     var members = [PFUser]()
     var group: PFObject!
     var editAttribute:String!
     
+    @IBOutlet weak var navBar: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMembers()
@@ -36,6 +37,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             if error == nil {
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
+                self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
                 let users = self.group[PF_GROUP_USERS] as! [PFUser]!
                 self.members.removeAll()
                 self.members.extend(users)
@@ -164,14 +166,6 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 }
                 return cell
                 
-            case DISPLAY_COURSE_NAME:
-                normalizeCell(cell)
-                cell.accessoryType = UITableViewCellAccessoryType.None
-                if self.group != nil {
-                    cell.detailTextLabel?.text = self.group[PF_GROUP_COURSE_NAME] as? String
-                }
-                return cell
-                
             default:
                 normalizeCell(cell)
                 return cell
@@ -207,8 +201,6 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 
             } else if action == NOTIFY_ACTION {
                 
-            } else if action == DISPLAY_COURSE_NAME {
-                // do nothing
             } else if action == EDIT_TIME {
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTimeSegue", sender: self)

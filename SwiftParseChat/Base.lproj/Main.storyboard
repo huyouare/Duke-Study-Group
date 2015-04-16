@@ -1087,7 +1087,7 @@
             </objects>
             <point key="canvasLocation" x="1394" y="-833"/>
         </scene>
-        <!--Settings-->
+        <!--Chat Settings View Controller-->
         <scene sceneID="Old-9H-dFN">
             <objects>
                 <tableViewController id="hyy-yZ-04O" customClass="ChatSettingsViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -1108,8 +1108,9 @@
                             <outlet property="delegate" destination="hyy-yZ-04O" id="335-Id-7Ww"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="Qfe-qe-xeN"/>
+                    <navigationItem key="navigationItem" id="Qfe-qe-xeN"/>
                     <connections>
+                        <outlet property="navBar" destination="Qfe-qe-xeN" id="Z1b-fB-r7Y"/>
                         <segue destination="2Ub-wm-3yB" kind="push" identifier="EditTextSegue" id="31I-Ao-zA5"/>
                         <segue destination="7cg-g4-KrR" kind="push" identifier="EditTimeSegue" id="DNc-yb-dHG"/>
                     </connections>
