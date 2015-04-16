@@ -51,6 +51,13 @@ class Utilities {
         return false
     }
     
+    class func getFormattedTextFromDate(date:NSDate) -> String {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        return dateFormatter.stringFromDate(date)
+    }
+    
     class func isSpring(month:Int) -> Bool {
         return month >= 1 && month <= 5
     }

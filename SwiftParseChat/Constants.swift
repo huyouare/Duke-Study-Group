@@ -82,7 +82,7 @@ let NOTIFY_ACTION                       = "Notifications"
 let LEAVE_ACTION                        = "Leave Group"
 let EDIT_GROUP_NAME                     = "Group Name"
 let EDIT_DESCRIPTION                    = "Description"
-let EDIT_TIME                           = "Time"
+let EDIT_TIME                           = "Date & Time"
 let EDIT_LOCATION                       = "Location"
 
 /* Error Messages */

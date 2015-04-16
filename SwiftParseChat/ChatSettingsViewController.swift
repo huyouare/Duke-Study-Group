@@ -200,8 +200,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             } else if action == NOTIFY_ACTION {
                 
             } else if action == EDIT_TIME {
-                
-            } else {
+                self.editAttribute = action
+                self.performSegueWithIdentifier("EditTimeSegue", sender: self)
+            } else { /* text attribute settings */
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
             }
@@ -224,6 +225,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EditTextSegue" {
             let createVC = segue.destinationViewController as! GroupTextEditViewController
+            createVC.group = self.group
+            createVC.editAttribute = self.editAttribute
+        } else if segue.identifier == "EditTimeSegue" {
+            let createVC = segue.destinationViewController as! GroupDateEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
         }
