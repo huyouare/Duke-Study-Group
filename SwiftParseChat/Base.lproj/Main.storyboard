@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -199,7 +199,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-ia-cUy">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-ia-cUy">
                                             <rect key="frame" x="84" y="46" width="120" height="10"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                             <nil key="highlightedColor"/>
@@ -566,10 +566,10 @@
             </objects>
             <point key="canvasLocation" x="2849" y="-1499"/>
         </scene>
-        <!--Group Name-->
+        <!--Attribute-->
         <scene sceneID="daQ-Hc-foT">
             <objects>
-                <viewController id="2Ub-wm-3yB" customClass="GroupNameEditViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2Ub-wm-3yB" customClass="GroupTextEditViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aUd-dd-DUX"/>
                         <viewControllerLayoutGuide type="bottom" id="Y6k-Gh-C1Q"/>
@@ -591,21 +591,91 @@
                             <constraint firstItem="Uyt-r4-JRe" firstAttribute="trailing" secondItem="qRA-Nb-4zF" secondAttribute="trailingMargin" id="trr-Th-Zhy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Group Name" id="PhM-Wp-tPX">
+                    <navigationItem key="navigationItem" title="Attribute" id="PhM-Wp-tPX">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="eLB-IY-G0g"/>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="wZQ-Hb-1re">
                             <connections>
-                                <action selector="saveName:" destination="2Ub-wm-3yB" id="nuz-1d-Pyf"/>
+                                <action selector="saveButton:" destination="2Ub-wm-3yB" id="of1-Wp-7gq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="nameField" destination="Uyt-r4-JRe" id="5DY-5R-tz6"/>
+                        <outlet property="attributeField" destination="Uyt-r4-JRe" id="heL-la-AF5"/>
+                        <outlet property="navigationBar" destination="PhM-Wp-tPX" id="CL5-dp-nu0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDv-TD-vzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2431" y="-833"/>
+        </scene>
+        <!--Attribute-->
+        <scene sceneID="OIA-gV-yr8">
+            <objects>
+                <viewController id="7cg-g4-KrR" customClass="GroupDateEditViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="piS-e4-5X5"/>
+                        <viewControllerLayoutGuide type="bottom" id="0jt-Og-kwL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Zq-6l-WUj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pxS-xX-Paf">
+                                <rect key="frame" x="0.0" y="167" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="450903020.40155798">
+                                    <!--2015-04-16 18:50:20 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux6-gt-RWC">
+                                <rect key="frame" x="255" y="106" width="49" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="None">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noneButtonPressed:" destination="7cg-g4-KrR" eventType="touchUpInside" id="iE2-2e-3jN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTg-wW-aDQ">
+                                <rect key="frame" x="16" y="106" width="181" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Not Set">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dateButtonPressed:" destination="7cg-g4-KrR" eventType="touchUpInside" id="iek-MK-mZT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pxS-xX-Paf" firstAttribute="top" secondItem="XTg-wW-aDQ" secondAttribute="bottom" constant="28" id="FwO-vX-NPh"/>
+                            <constraint firstItem="XTg-wW-aDQ" firstAttribute="leading" secondItem="4Zq-6l-WUj" secondAttribute="leadingMargin" id="NXm-7h-l04"/>
+                            <constraint firstItem="XTg-wW-aDQ" firstAttribute="top" secondItem="Ux6-gt-RWC" secondAttribute="top" id="T5y-EE-2sl"/>
+                            <constraint firstItem="pxS-xX-Paf" firstAttribute="leading" secondItem="4Zq-6l-WUj" secondAttribute="leading" id="Thz-fM-GDg"/>
+                            <constraint firstItem="Ux6-gt-RWC" firstAttribute="leading" secondItem="XTg-wW-aDQ" secondAttribute="trailing" constant="58" id="edG-GA-Isn"/>
+                            <constraint firstItem="XTg-wW-aDQ" firstAttribute="top" secondItem="piS-e4-5X5" secondAttribute="bottom" constant="42" id="i6e-m4-iw8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Attribute" id="Bh6-Ft-PWd">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="sTG-Ye-WiA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="K6l-HY-uQi">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="7cg-g4-KrR" id="bRw-Tm-ozi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dateButton" destination="XTg-wW-aDQ" id="Tmw-H4-EKq"/>
+                        <outlet property="datePicker" destination="pxS-xX-Paf" id="YPJ-dT-sa6"/>
+                        <outlet property="navBar" destination="Bh6-Ft-PWd" id="4nP-IM-65f"/>
+                        <outlet property="noneButton" destination="Ux6-gt-RWC" id="vLa-Np-Np6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8HN-0V-LPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2431" y="-180"/>
         </scene>
         <!--New Group-->
         <scene sceneID="EKG-i5-XFX">
@@ -846,7 +916,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sr-Npt">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Meeting:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sr-Npt">
                                             <rect key="frame" x="84" y="46" width="120" height="10"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                             <nil key="highlightedColor"/>
@@ -1040,7 +1110,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Qfe-qe-xeN"/>
                     <connections>
+                        <outlet property="navBar" destination="Qfe-qe-xeN" id="Z1b-fB-r7Y"/>
                         <segue destination="2Ub-wm-3yB" kind="push" identifier="EditTextSegue" id="31I-Ao-zA5"/>
+                        <segue destination="7cg-g4-KrR" kind="push" identifier="EditTimeSegue" id="DNc-yb-dHG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dv-6U-MnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2167,6 +2239,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="e7F-Ci-38C"/>
+        <segue reference="y1X-T3-N16"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -61,13 +61,7 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
     
     func datePickerChanged(datePicker: UIDatePicker) {
         dateTimePressed()
-        
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        
-        var date = dateFormatter.stringFromDate(datePicker.date)
-        self.dateButton.setTitle(date, forState: UIControlState.Normal)
+        self.dateButton.setTitle(Utilities.getFormattedTextFromDate(datePicker.date), forState: UIControlState.Normal)
     }
     
     @IBAction func noneButtonPressed(sender: UIButton) {
