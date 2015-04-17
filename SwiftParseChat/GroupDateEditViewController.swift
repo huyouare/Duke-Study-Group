@@ -32,10 +32,10 @@ class GroupDateEditViewController:UIViewController {
         super.viewDidLoad()
         self.navBar.title = self.editAttribute
         self.datePicker.addTarget(self, action: "datePickerChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        if self.group[PF_GROUP_DATETIME] as? NSObject != NSNull() {
+        if let dateTime = self.group[PF_GROUP_DATETIME] as? NSDate {
             dateTimePressed()
-            updateDateButtonText(self.group[PF_GROUP_DATETIME] as! NSDate)
-            self.datePicker.date = self.group[PF_GROUP_DATETIME] as! NSDate
+            updateDateButtonText(dateTime)
+            self.datePicker.date = dateTime
         } else {
             nonePressed()
         }

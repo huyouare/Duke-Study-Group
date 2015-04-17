@@ -117,11 +117,13 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             var action = actionItems[indexPath.row]
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             cell.textLabel?.text = action
+            cell.detailTextLabel?.text = "Not Set"
             
             switch (action) {
                 
             case NOTIFY_ACTION:
                 normalizeCell(cell)
+                cell.detailTextLabel?.text = ""
                 return cell
                 
             case LEAVE_ACTION:
@@ -132,21 +134,27 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             case EDIT_GROUP_NAME:
                 normalizeCell(cell)
                 if self.group != nil {
-                    cell.detailTextLabel?.text = self.group[PF_GROUP_NAME] as? String
+                    if let name = self.group[PF_GROUP_NAME] as? String {
+                        cell.detailTextLabel?.text = name
+                    }
                 }
                 return cell
                 
             case EDIT_LOCATION:
                 normalizeCell(cell)
                 if self.group != nil {
-                    cell.detailTextLabel?.text = self.group[PF_GROUP_LOCATION] as? String
+                    if let location = self.group[PF_GROUP_LOCATION] as? String {
+                        cell.detailTextLabel?.text = location
+                    }
                 }
                 return cell
                 
             case EDIT_DESCRIPTION:
                 normalizeCell(cell)
                 if self.group != nil {
-                    cell.detailTextLabel?.text = self.group[PF_GROUP_DESCRIPTION] as? String
+                    if let description = self.group[PF_GROUP_DESCRIPTION] as? String {
+                        cell.detailTextLabel?.text = description
+                    }
                 }
                 return cell
                 
@@ -156,8 +164,6 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                     if let dateTime = self.group[PF_GROUP_DATETIME] as? NSDate {
                         let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(dateTime)
                         cell.detailTextLabel?.text = dateText + " " + JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(dateTime)
-                    } else {
-                        cell.detailTextLabel?.text = "Not Set"
                     }
                 }
                 return cell
