@@ -19,7 +19,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="xFB-eq-jJH" kind="relationship" relationship="viewControllers" id="NUk-1Y-9HS"/>
-                        <segue destination="1dK-w3-FRG" kind="relationship" relationship="viewControllers" id="kUw-iK-UpN"/>
                         <segue destination="clF-9l-r0A" kind="relationship" relationship="viewControllers" id="5qw-BU-T8g"/>
                     </connections>
                 </tabBarController>
@@ -2239,6 +2238,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="y1X-T3-N16"/>
+        <segue reference="Rx5-ve-5Y3"/>
     </inferredMetricsTieBreakers>
 </document>
