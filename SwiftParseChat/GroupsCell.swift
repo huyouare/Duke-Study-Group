@@ -30,26 +30,35 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
     func bindData(group: PFObject) {
         var currentUser = PFUser.currentUser()
-
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
         var date = group[PF_GROUP_DATETIME] as? NSDate
         var location = group[PF_GROUP_LOCATION] as? String
-        if date != nil {
+        var dateSet = (date != nil)
+        var locationSet = (location != nil && count(location!) > 0)
+        
+        if dateSet {
             let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
             if dateText == "Today" {
                 self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
+                self.dateTimeLabel.textColor = UIColor.redColor()
             } else {
                 self.dateTimeLabel.text = dateText
+                self.dateTimeLabel.textColor = UIColor.blackColor()
             }
-            self.locationLabel.text = location
-        } else if location != nil && count(location!) > 0 {
-            self.dateTimeLabel.removeFromSuperview()
-            self.locationLabel.text = location
         } else {
-            nextMeetingLabel.text = ""
-            dateTimeLabel.text = ""
-            locationLabel.text = ""
+            self.dateTimeLabel.removeFromSuperview()
+        }
+        
+        if locationSet {
+            self.locationLabel.text = location
+            
+        }
+        
+        if !dateSet && !locationSet {
+            self.nextMeetingLabel.text = ""
+            self.dateTimeLabel.text = ""
+            self.locationLabel.text = ""
         }
         
         let users = group[PF_GROUP_USERS] as! [PFUser]!
