@@ -79,8 +79,13 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 self.avatarImageViews[i].layer.masksToBounds = true
                 
                 let user = users[i]
-                self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
-                self.avatarImageViews[i].loadInBackground(nil)
+                let picFile = user[PF_USER_PICTURE] as? PFFile
+                if picFile != nil {
+                    self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
+                    self.avatarImageViews[i].loadInBackground(nil)
+                } else {
+                    self.avatarImageViews[i].image = UIImage(named: "profile_blank")
+                }
             }
         }
     }
