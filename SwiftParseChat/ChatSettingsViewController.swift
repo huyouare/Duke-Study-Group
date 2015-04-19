@@ -182,15 +182,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 { /* member section */
-            if indexPath.row == self.members.count { /* add poeple part */
-                var actionSheet: UIActionSheet!
-                let user = PFUser.currentUser()
-                if user[PF_USER_FACEBOOKID] == nil {
-                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book")
-                } else {
-                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book", "Facebook Friends")
-                }
-                actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+            if indexPath.row == self.members.count { /* add people part */
+                showInviteActionSheet()
+                
             } else { /* person profile */
                 
             }
@@ -198,28 +192,43 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             var action = actionItems[indexPath.row]
             
             if action == LEAVE_ACTION {
-                
-                var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
-                leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
-                    println("Cancelled leave group")
-                }))
-                
-                leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
-                    self.removeSelfFromGroup()
-                    self.navigationController?.popToRootViewControllerAnimated(true)
-                }))
-                presentViewController(leaveAlert, animated: true, completion: nil)
+                showLeaveDialog()
                 
             } else if action == NOTIFY_ACTION {
                 
             } else if action == EDIT_TIME {
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTimeSegue", sender: self)
+                
             } else { /* text attribute settings */
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
             }
         }
+    }
+    
+    func showInviteActionSheet() {
+        var actionSheet: UIActionSheet!
+        let user = PFUser.currentUser()
+        if user[PF_USER_FACEBOOKID] == nil {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book")
+        } else {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book", "Facebook Friends")
+        }
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func showLeaveDialog() {
+        var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
+        leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+            println("Cancelled leave group")
+        }))
+        
+        leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
+            self.removeSelfFromGroup()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }))
+        presentViewController(leaveAlert, animated: true, completion: nil)
     }
     
     // MARK: - UIActionSheetDelegate
