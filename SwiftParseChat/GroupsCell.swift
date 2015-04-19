@@ -41,7 +41,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
             let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
             if dateText == "Today" {
                 self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
-                self.dateTimeLabel.textColor = UIColor.redColor()
+                self.dateTimeLabel.textColor = UIColor.blueColor()
             } else {
                 self.dateTimeLabel.text = dateText
                 self.dateTimeLabel.textColor = UIColor.blackColor()
