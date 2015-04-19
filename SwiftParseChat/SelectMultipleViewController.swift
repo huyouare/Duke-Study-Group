@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectMultipleViewControllerDelegate {
-    func didSelectMultipleUsers(selectedUsers: [PFUser]!)
+    func didSelectMultipleUsers(selectedUsers: [PFUser])
 }
 
 class SelectMultipleViewController: UITableViewController {
@@ -65,7 +65,7 @@ class SelectMultipleViewController: UITableViewController {
                         selectedUsers.append(user)
                     }
                 }
-                selectedUsers.append(PFUser.currentUser())
+                println("number of users selected: \(selectedUsers.count) and \(self.selection.count)")
                 self.delegate.didSelectMultipleUsers(selectedUsers)
             })
         }

@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
+class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate {
 
     let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
     var members = [PFUser]()
@@ -185,9 +185,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
                 var actionSheet: UIActionSheet!
                 let user = PFUser.currentUser()
                 if user[PF_USER_FACEBOOKID] == nil {
-                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "User Directory")
+                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book")
                 } else {
-                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Facebook Friends", "User Directory")
+                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book", "Facebook Friends")
                 }
                 actionSheet.showFromTabBar(self.tabBarController?.tabBar)
             } else { /* person profile */
@@ -226,12 +226,16 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
             switch buttonIndex {
-            case 1: /* */
-                break //TODO
+            case 1:
+                self.performSegueWithIdentifier("selectSingleSegue", sender: self)
             case 2:
-                break //TODO
+                self.performSegueWithIdentifier("selectMultipleSegue", sender: self)
+            case 3:
+                self.performSegueWithIdentifier("addressBookSegue", sender: self)
+            case 4:
+                self.performSegueWithIdentifier("facebookFriendsSegue", sender: self)
             default:
-                break
+                return
             }
         }
     }
@@ -258,7 +262,64 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             let createVC = segue.destinationViewController as! GroupDateEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
+        } else if segue.identifier == "selectSingleSegue" {
+            let selectSingleVC = segue.destinationViewController.topViewController as! SelectSingleViewController
+            selectSingleVC.delegate = self
+        } else if segue.identifier == "selectMultipleSegue" {
+            let selectMultipleVC = segue.destinationViewController.topViewController as! SelectMultipleViewController
+            selectMultipleVC.delegate = self
+        } else if segue.identifier == "addressBookSegue" {
+            let addressBookVC = segue.destinationViewController.topViewController as! AddressBookViewController
+            addressBookVC.delegate = self
+        } else if segue.identifier == "facebookFriendsSegue" {
+            let facebookFriendsVC = segue.destinationViewController.topViewController as! FacebookFriendsViewController
+            facebookFriendsVC.delegate = self
         }
     }
     
+    // MARK: - SelectSingleDelegate
+    
+    func didSelectSingleUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    // MARK: - SelectMultipleDelegate
+    
+    func didSelectMultipleUsers(users: [PFUser]) {
+        joinGroup(users)
+    }
+    
+    // MARK: - AddressBookDelegate
+    
+    func didSelectAddressBookUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    // MARK: - FacebookFriendsDelegate
+    
+    func didSelectFacebookUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    func joinGroup(users: [PFUser]) {
+        let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+        for user in users {
+            if(!contains(groupUsers, user)) {
+                group.addObject(user, forKey: PF_GROUP_USERS)
+            }
+        }
+        group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+            if error == nil {
+                self.loadMembers()
+            } else {
+                ProgressHUD.showError("Network Error")
+            }
+        }
+    }
 }

@@ -1115,6 +1115,10 @@
                         <outlet property="navBar" destination="Qfe-qe-xeN" id="Z1b-fB-r7Y"/>
                         <segue destination="2Ub-wm-3yB" kind="push" identifier="EditTextSegue" id="31I-Ao-zA5"/>
                         <segue destination="7cg-g4-KrR" kind="push" identifier="EditTimeSegue" id="DNc-yb-dHG"/>
+                        <segue destination="pPU-x3-RF2" kind="modal" identifier="selectSingleSegue" id="Tat-B4-Nds"/>
+                        <segue destination="uqH-ZS-B4w" kind="modal" identifier="selectMultipleSegue" id="PNG-cX-ehM"/>
+                        <segue destination="OAW-Rs-8sy" kind="modal" identifier="addressBookSegue" id="HUX-1E-l5o"/>
+                        <segue destination="8Ue-8h-Cig" kind="modal" identifier="facebookFriendsSegue" id="oT5-jv-uhW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dv-6U-MnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1380,10 +1384,6 @@
                         <outlet property="composeButton" destination="oKr-dk-sNJ" id="IT6-f1-Xe2"/>
                         <outlet property="emptyView" destination="xrf-0j-bD7" id="utE-Jw-Lde"/>
                         <segue destination="0wk-ai-jpb" kind="push" identifier="messagesChatSegue" id="Rx5-ve-5Y3"/>
-                        <segue destination="pPU-x3-RF2" kind="modal" identifier="selectSingleSegue" id="CeS-gD-Xmz"/>
-                        <segue destination="uqH-ZS-B4w" kind="modal" identifier="selectMultipleSegue" id="Klu-2m-QWy"/>
-                        <segue destination="OAW-Rs-8sy" kind="modal" identifier="addressBookSegue" id="yr9-1T-P6H"/>
-                        <segue destination="8Ue-8h-Cig" kind="modal" identifier="facebookFriendsSegue" id="7iq-bM-a4b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZe-PC-E0V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2030,7 +2030,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uoa-MW-HKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1858" y="0.0"/>
+            <point key="canvasLocation" x="1986" y="-63"/>
         </scene>
         <!--Select Multiple-->
         <scene sceneID="UUh-M4-uuh">
@@ -2121,7 +2121,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZ9-7a-Rar" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="0.0"/>
+            <point key="canvasLocation" x="1400" y="-63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lNg-Mx-EMn">
@@ -2241,6 +2241,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="y1X-T3-N16"/>
+        <segue reference="Rx5-ve-5Y3"/>
     </inferredMetricsTieBreakers>
 </document>
