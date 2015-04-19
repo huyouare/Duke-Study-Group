@@ -72,6 +72,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         } else {
             self.moreImageView.hidden = true
         }
+        
         for i in 0..<self.avatarImageViews.count {
             if i < users.count {
                 self.avatarImageViews[i].layer.cornerRadius = self.avatarImageViews[i].frame.size.width / 2
@@ -84,5 +85,17 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
     
+    func clear() {
+        self.courseLabel.text = ""
+        self.nameLabel.text = ""
+        self.nextMeetingLabel.text = "Next Meeting:"
+        self.dateTimeLabel.text = ""
+        self.locationLabel.text = ""
+        for i in 0..<self.avatarImageViews.count {
+            self.avatarImageViews[i].file = nil
+        }
+        self.moreImageView.hidden = false
+        self.countLabel.text = ""
+    }
 
 }
