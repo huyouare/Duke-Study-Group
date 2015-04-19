@@ -180,6 +180,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 { /* member section */
             if indexPath.row == self.members.count { /* add poeple part */
                 var actionSheet: UIActionSheet!
