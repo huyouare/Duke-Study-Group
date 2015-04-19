@@ -65,7 +65,6 @@ class SelectMultipleViewController: UITableViewController {
                         selectedUsers.append(user)
                     }
                 }
-                println("number of users selected: \(selectedUsers.count) and \(self.selection.count)")
                 self.delegate.didSelectMultipleUsers(selectedUsers)
             })
         }
