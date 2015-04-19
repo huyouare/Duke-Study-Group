@@ -1081,6 +1081,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navBar" destination="vAE-2l-0Vx" id="rq1-d8-6OT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzn-zA-DHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

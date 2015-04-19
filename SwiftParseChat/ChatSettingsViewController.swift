@@ -12,7 +12,6 @@ import Foundation
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
 
     let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
-    var groupId: String = ""
     var members = [PFUser]()
     var group: PFObject!
     var editAttribute:String!
@@ -29,24 +28,11 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     func loadMembers() {
-        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
-        query.whereKey(PF_GROUP_OBJECTID  , equalTo: groupId)
-        query.includeKey(PF_GROUP_USERS)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!)  in
-            if error == nil {
-                let groups = objects as! [PFObject]!
-                self.group = groups[0]
-                self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
-                let users = self.group[PF_GROUP_USERS] as! [PFUser]!
-                self.members.removeAll()
-                self.members.extend(users)
-                self.tableView.reloadData()
-            } else {
-                ProgressHUD.showError(NETWORK_ERROR)
-                println(error)
-            }
-        }
+        self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
+        let users = self.group[PF_GROUP_USERS] as! [PFUser]!
+        self.members.removeAll()
+        self.members.extend(users)
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

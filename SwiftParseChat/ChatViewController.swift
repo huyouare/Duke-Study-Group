@@ -12,10 +12,12 @@ import MediaPlayer
 
 class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
+    @IBOutlet weak var navBar: UINavigationItem!
     var timer: NSTimer = NSTimer()
     var isLoading: Bool = false
     
     var groupId: String = ""
+    var group: PFObject!
     
     var users = [PFUser]()
     var messages = [JSQMessage]()
@@ -59,11 +61,29 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         super.viewDidAppear(animated)
         self.collectionView.collectionViewLayout.springinessEnabled = true
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "loadMessages", userInfo: nil, repeats: true)
+        self.loadGroup()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         timer.invalidate()
+    }
+    
+    func loadGroup() {
+        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        query.whereKey(PF_GROUP_OBJECTID  , equalTo: self.groupId)
+        query.includeKey(PF_GROUP_USERS)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!)  in
+            if error == nil {
+                let groups = objects as! [PFObject]!
+                self.group = groups[0]
+                self.navBar.title = self.group[PF_GROUP_NAME] as? String
+            } else {
+                ProgressHUD.showError(NETWORK_ERROR)
+                println(error)
+            }
+        }
     }
     
     // Mark: - Backend methods
@@ -388,7 +408,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PushToSettingsSegue" {
             let createVC = segue.destinationViewController as! ChatSettingsViewController
-            createVC.groupId = self.groupId
+            createVC.group = self.group
         }
     }
 }
