@@ -1669,7 +1669,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NqL-Ld-2vD" id="Q7O-pi-FaS">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Duke Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fLR-SQ-qYo">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fLR-SQ-qYo">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="Xe8-Tn-swY"/>
@@ -1772,7 +1772,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h49-ip-fB2" id="tl5-mo-iS7">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Duke Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-im-SQf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-im-SQf">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="hxf-oR-Efv"/>
@@ -2241,6 +2241,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rx5-ve-5Y3"/>
+        <segue reference="y1X-T3-N16"/>
     </inferredMetricsTieBreakers>
 </document>

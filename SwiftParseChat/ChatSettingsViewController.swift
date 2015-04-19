@@ -28,11 +28,13 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     func loadMembers() {
-        self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
-        let users = self.group[PF_GROUP_USERS] as! [PFUser]!
-        self.members.removeAll()
-        self.members.extend(users)
-        self.tableView.reloadData()
+        if self.group != nil {
+            self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
+            let users = self.group[PF_GROUP_USERS] as! [PFUser]!
+            self.members.removeAll()
+            self.members.extend(users)
+            self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +56,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return self.members.count
+            return self.members.count + 1
         case 1:
             return actionItems.count
         default:
@@ -78,25 +80,34 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         if indexPath.section == 0 { /* member secion */
             
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
-            var user = self.members[indexPath.row]
-            cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
-            normalizeCell(cell)
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            
-            /* load user's picture */
-            var userImageView = PFImageView()
-            userImageView.file = user[PF_USER_PICTURE] as? PFFile
-            userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
-                if error != nil {
-                    println(error)
+            if indexPath.row < self.members.count {
+                var user = self.members[indexPath.row]
+                cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
+                normalizeCell(cell)
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                
+                /* load user's picture */
+                var userImageView = PFImageView()
+                userImageView.file = user[PF_USER_PICTURE] as? PFFile
+                userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
+                    if error != nil {
+                        println(error)
+                    }
                 }
+                if(userImageView.image == nil) {
+                    cell.imageView?.image = UIImage(named: "profile_blank")
+                } else {
+                    cell.imageView?.image = userImageView.image
+                }
+                return cell
+                
+            } else { /* invite friends row */
+                normalizeCell(cell)
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.imageView?.image = UIImage(named: "invite")
+                cell.textLabel?.text = "Add People"
+                return cell
             }
-            if(userImageView.image == nil) {
-                cell.imageView?.image = UIImage(named: "profile_blank")
-            } else {
-                cell.imageView?.image = userImageView.image
-            }
-            return cell
             
         } else { /* settings */
             
@@ -170,7 +181,18 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 { /* member section */
-            
+            if indexPath.row == self.members.count { /* add poeple part */
+                var actionSheet: UIActionSheet!
+                let user = PFUser.currentUser()
+                if user[PF_USER_FACEBOOKID] == nil {
+                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "User Directory")
+                } else {
+                    actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Facebook Friends", "User Directory")
+                }
+                actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+            } else { /* person profile */
+                
+            }
         } else { /* settings */
             var action = actionItems[indexPath.row]
             
@@ -195,6 +217,21 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             } else { /* text attribute settings */
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
+            }
+        }
+    }
+    
+    // MARK: - UIActionSheetDelegate
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            switch buttonIndex {
+            case 1: /* */
+                break //TODO
+            case 2:
+                break //TODO
+            default:
+                break
             }
         }
     }
