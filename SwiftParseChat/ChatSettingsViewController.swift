@@ -258,19 +258,24 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             let createVC = segue.destinationViewController as! GroupTextEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
+            
         } else if segue.identifier == "EditTimeSegue" {
             let createVC = segue.destinationViewController as! GroupDateEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
+            
         } else if segue.identifier == "selectSingleSegue" {
             let selectSingleVC = segue.destinationViewController.topViewController as! SelectSingleViewController
             selectSingleVC.delegate = self
+            
         } else if segue.identifier == "selectMultipleSegue" {
             let selectMultipleVC = segue.destinationViewController.topViewController as! SelectMultipleViewController
             selectMultipleVC.delegate = self
+            
         } else if segue.identifier == "addressBookSegue" {
             let addressBookVC = segue.destinationViewController.topViewController as! AddressBookViewController
             addressBookVC.delegate = self
+            
         } else if segue.identifier == "facebookFriendsSegue" {
             let facebookFriendsVC = segue.destinationViewController.topViewController as! FacebookFriendsViewController
             facebookFriendsVC.delegate = self
