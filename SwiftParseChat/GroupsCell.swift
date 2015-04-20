@@ -26,7 +26,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 
     func bindData(group: PFObject) {
         var currentUser = PFUser.currentUser()
