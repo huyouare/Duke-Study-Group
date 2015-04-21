@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         if user[PF_USER_FACEBOOKID] == nil {
             actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery")
         } else {
-            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Facebook Profile Picture", "Camera",  "Photo Gallery")
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Camera",  "Photo Gallery", "Facebook Profile Picture")
         }
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
@@ -121,11 +121,11 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         if buttonIndex != actionSheet.cancelButtonIndex {
             switch buttonIndex {
             case 1:
-                self.requestFacebook(PFUser.currentUser());
-            case 2:
                 Camera.shouldStartFrontCamera(self, canEdit: true)
-            case 3:
+            case 2:
                 Camera.shouldStartPhotoLibrary(self, canEdit: true)
+            case 3:
+                self.requestFacebook(PFUser.currentUser());
             default:
                 break
             }

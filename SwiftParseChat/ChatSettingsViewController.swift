@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
+class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate {
 
     let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
     var members = [PFUser]()
@@ -28,11 +28,13 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     func loadMembers() {
-        self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
-        let users = self.group[PF_GROUP_USERS] as! [PFUser]!
-        self.members.removeAll()
-        self.members.extend(users)
-        self.tableView.reloadData()
+        if self.group != nil {
+            self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
+            let users = self.group[PF_GROUP_USERS] as! [PFUser]!
+            self.members.removeAll()
+            self.members.extend(users)
+            self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +56,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return self.members.count
+            return self.members.count + 1
         case 1:
             return actionItems.count
         default:
@@ -78,25 +80,34 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
         if indexPath.section == 0 { /* member secion */
             
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
-            var user = self.members[indexPath.row]
-            cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
-            normalizeCell(cell)
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            
-            /* load user's picture */
-            var userImageView = PFImageView()
-            userImageView.file = user[PF_USER_PICTURE] as? PFFile
-            userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
-                if error != nil {
-                    println(error)
+            if indexPath.row < self.members.count {
+                var user = self.members[indexPath.row]
+                cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
+                normalizeCell(cell)
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                
+                /* load user's picture */
+                var userImageView = PFImageView()
+                userImageView.file = user[PF_USER_PICTURE] as? PFFile
+                userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
+                    if error != nil {
+                        println(error)
+                    }
                 }
+                if(userImageView.image == nil) {
+                    cell.imageView?.image = UIImage(named: "profile_blank")
+                } else {
+                    cell.imageView?.image = userImageView.image
+                }
+                return cell
+                
+            } else { /* invite friends row */
+                normalizeCell(cell)
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.imageView?.image = UIImage(named: "invite")
+                cell.textLabel?.text = "Add People"
+                return cell
             }
-            if(userImageView.image == nil) {
-                cell.imageView?.image = UIImage(named: "profile_blank")
-            } else {
-                cell.imageView?.image = userImageView.image
-            }
-            return cell
             
         } else { /* settings */
             
@@ -169,32 +180,72 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 { /* member section */
-            
+            if indexPath.row == self.members.count { /* add people part */
+                showInviteActionSheet()
+                
+            } else { /* person profile */
+                
+            }
         } else { /* settings */
             var action = actionItems[indexPath.row]
             
             if action == LEAVE_ACTION {
-                
-                var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
-                leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
-                    println("Cancelled leave group")
-                }))
-                
-                leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
-                    self.removeSelfFromGroup()
-                    self.navigationController?.popToRootViewControllerAnimated(true)
-                }))
-                presentViewController(leaveAlert, animated: true, completion: nil)
+                showLeaveDialog()
                 
             } else if action == NOTIFY_ACTION {
                 
             } else if action == EDIT_TIME {
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTimeSegue", sender: self)
+                
             } else { /* text attribute settings */
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
+            }
+        }
+    }
+    
+    func showInviteActionSheet() {
+        var actionSheet: UIActionSheet!
+        let user = PFUser.currentUser()
+        if user[PF_USER_FACEBOOKID] == nil {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book")
+        } else {
+            actionSheet = UIActionSheet(title:nil, delegate:self, cancelButtonTitle:"Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Single recipient", "Multiple recipients", "Address Book", "Facebook Friends")
+        }
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func showLeaveDialog() {
+        var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
+        leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+            println("Cancelled leave group")
+        }))
+        
+        leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
+            self.removeSelfFromGroup()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }))
+        presentViewController(leaveAlert, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIActionSheetDelegate
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            switch buttonIndex {
+            case 1:
+                self.performSegueWithIdentifier("selectSingleSegue", sender: self)
+            case 2:
+                self.performSegueWithIdentifier("selectMultipleSegue", sender: self)
+            case 3:
+                self.performSegueWithIdentifier("addressBookSegue", sender: self)
+            case 4:
+                self.performSegueWithIdentifier("facebookFriendsSegue", sender: self)
+            default:
+                return
             }
         }
     }
@@ -217,11 +268,73 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate {
             let createVC = segue.destinationViewController as! GroupTextEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
+            
         } else if segue.identifier == "EditTimeSegue" {
             let createVC = segue.destinationViewController as! GroupDateEditViewController
             createVC.group = self.group
             createVC.editAttribute = self.editAttribute
+            
+        } else if segue.identifier == "selectSingleSegue" {
+            let selectSingleVC = segue.destinationViewController.topViewController as! SelectSingleViewController
+            selectSingleVC.delegate = self
+            
+        } else if segue.identifier == "selectMultipleSegue" {
+            let selectMultipleVC = segue.destinationViewController.topViewController as! SelectMultipleViewController
+            selectMultipleVC.delegate = self
+            
+        } else if segue.identifier == "addressBookSegue" {
+            let addressBookVC = segue.destinationViewController.topViewController as! AddressBookViewController
+            addressBookVC.delegate = self
+            
+        } else if segue.identifier == "facebookFriendsSegue" {
+            let facebookFriendsVC = segue.destinationViewController.topViewController as! FacebookFriendsViewController
+            facebookFriendsVC.delegate = self
         }
     }
     
+    // MARK: - SelectSingleDelegate
+    
+    func didSelectSingleUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    // MARK: - SelectMultipleDelegate
+    
+    func didSelectMultipleUsers(users: [PFUser]) {
+        joinGroup(users)
+    }
+    
+    // MARK: - AddressBookDelegate
+    
+    func didSelectAddressBookUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    // MARK: - FacebookFriendsDelegate
+    
+    func didSelectFacebookUser(user: PFUser) {
+        var users = [PFUser]()
+        users.append(user)
+        joinGroup(users)
+    }
+    
+    func joinGroup(users: [PFUser]) {
+        let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+        for user in users {
+            if(!contains(groupUsers, user)) {
+                group.addObject(user, forKey: PF_GROUP_USERS)
+            }
+        }
+        group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+            if error == nil {
+                self.loadMembers()
+            } else {
+                ProgressHUD.showError("Network Error")
+            }
+        }
+    }
 }

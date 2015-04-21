@@ -866,6 +866,7 @@
 				TargetAttributes = {
 					831C19101A97F5CA000FD6D0 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = U6J58C8CJT;
 					};
 					831C19271A97F5CA000FD6D0 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1219,6 +1220,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1233,6 +1236,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftParseChat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftParseChat/SwiftParseChat-Bridging-Header.h";
 				VALID_ARCHS = "armv7s armv7 arm64";
@@ -1245,6 +1249,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1259,6 +1265,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftParseChat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftParseChat/SwiftParseChat-Bridging-Header.h";
 				VALID_ARCHS = "armv7s armv7 arm64";
