@@ -26,30 +26,39 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 
     func bindData(group: PFObject) {
         var currentUser = PFUser.currentUser()
-
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
         var date = group[PF_GROUP_DATETIME] as? NSDate
         var location = group[PF_GROUP_LOCATION] as? String
-        if date != nil {
+        var dateSet = (date != nil)
+        var locationSet = (location != nil && count(location!) > 0)
+        
+        if dateSet {
             let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
             if dateText == "Today" {
                 self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
+                self.dateTimeLabel.textColor = UIColor.blueColor()
             } else {
                 self.dateTimeLabel.text = dateText
+                self.dateTimeLabel.textColor = UIColor.blackColor()
             }
-            self.locationLabel.text = location
-        } else if location != nil && count(location!) > 0 {
-            self.dateTimeLabel.removeFromSuperview()
-            self.locationLabel.text = location
         } else {
-            nextMeetingLabel.text = ""
-            dateTimeLabel.text = ""
-            locationLabel.text = ""
+            self.dateTimeLabel.removeFromSuperview()
+        }
+        
+        if locationSet {
+            self.locationLabel.text = location
+            
+        }
+        
+        if !dateSet && !locationSet {
+            self.nextMeetingLabel.text = ""
+            self.dateTimeLabel.text = ""
+            self.locationLabel.text = ""
         }
         
         let users = group[PF_GROUP_USERS] as! [PFUser]!
@@ -63,17 +72,35 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         } else {
             self.moreImageView.hidden = true
         }
+        
         for i in 0..<self.avatarImageViews.count {
             if i < users.count {
                 self.avatarImageViews[i].layer.cornerRadius = self.avatarImageViews[i].frame.size.width / 2
                 self.avatarImageViews[i].layer.masksToBounds = true
                 
                 let user = users[i]
-                self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
-                self.avatarImageViews[i].loadInBackground(nil)
+                let picFile = user[PF_USER_PICTURE] as? PFFile
+                if picFile != nil {
+                    self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
+                    self.avatarImageViews[i].loadInBackground(nil)
+                } else {
+                    self.avatarImageViews[i].image = UIImage(named: "profile_blank")
+                }
             }
         }
     }
     
+    func clear() {
+        self.courseLabel.text = ""
+        self.nameLabel.text = ""
+        self.nextMeetingLabel.text = "Next Meeting:"
+        self.dateTimeLabel.text = ""
+        self.locationLabel.text = ""
+        for i in 0..<self.avatarImageViews.count {
+            self.avatarImageViews[i].file = nil
+        }
+        self.moreImageView.hidden = false
+        self.countLabel.text = ""
+    }
 
 }
