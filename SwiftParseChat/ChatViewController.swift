@@ -332,7 +332,6 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 moviePlayer.moviePlayer.play()
                 
             } else if let mediaItem = message.media as? JSQPhotoMediaItem {
-//                enlargeImage(mediaItem.image)
                 let image = mediaItem.image
                 let imageView = UIImageView()
                 imageView.image = image
