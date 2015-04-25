@@ -40,6 +40,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navBar.title = "Loading..."
+        ProgressHUD.show("")
+        
         /* initialize tap photo variables */
         tapPhotoRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
         tapPhotoRec.delegate = self
@@ -79,6 +82,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
+                ProgressHUD.dismiss()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
