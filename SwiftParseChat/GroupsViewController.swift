@@ -135,8 +135,8 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
+        cell.clear()
         cell.bindData(self.groups[indexPath.row])
-        
         return cell
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessagesViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate {
+class MessagesViewController: UITableViewController, UIActionSheetDelegate {
     
     var messages = [PFObject]()
     // UITableViewController already declares refreshControl
@@ -103,24 +103,24 @@ class MessagesViewController: UITableViewController, UIActionSheetDelegate, Sele
     // MARK: - Prepare for segue to chatVC
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "messagesChatSegue" {
-            let chatVC = segue.destinationViewController as! ChatViewController
-            chatVC.hidesBottomBarWhenPushed = true
-            let groupId = sender as! String
-            chatVC.groupId = groupId
-        } else if segue.identifier == "selectSingleSegue" {
-            let selectSingleVC = segue.destinationViewController.topViewController as! SelectSingleViewController
-            selectSingleVC.delegate = self
-        } else if segue.identifier == "selectMultipleSegue" {
-            let selectMultipleVC = segue.destinationViewController.topViewController as! SelectMultipleViewController
-            selectMultipleVC.delegate = self
-        } else if segue.identifier == "addressBookSegue" {
-            let addressBookVC = segue.destinationViewController.topViewController as! AddressBookViewController
-            addressBookVC.delegate = self
-        } else if segue.identifier == "facebookFriendsSegue" {
-            let facebookFriendsVC = segue.destinationViewController.topViewController as! FacebookFriendsViewController
-            facebookFriendsVC.delegate = self
-        }
+//        if segue.identifier == "messagesChatSegue" {
+//            let chatVC = segue.destinationViewController as! ChatViewController
+//            chatVC.hidesBottomBarWhenPushed = true
+//            let groupId = sender as! String
+//            chatVC.groupId = groupId
+//        } else if segue.identifier == "selectSingleSegue" {
+//            let selectSingleVC = segue.destinationViewController.topViewController as! SelectSingleViewController
+//            selectSingleVC.delegate = self
+//        } else if segue.identifier == "selectMultipleSegue" {
+//            let selectMultipleVC = segue.destinationViewController.topViewController as! SelectMultipleViewController
+//            selectMultipleVC.delegate = self
+//        } else if segue.identifier == "addressBookSegue" {
+//            let addressBookVC = segue.destinationViewController.topViewController as! AddressBookViewController
+//            addressBookVC.delegate = self
+//        } else if segue.identifier == "facebookFriendsSegue" {
+//            let facebookFriendsVC = segue.destinationViewController.topViewController as! FacebookFriendsViewController
+//            facebookFriendsVC.delegate = self
+//        }
     }
 
     // MARK: - UIActionSheetDelegate
