@@ -36,6 +36,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navBar.title = "Loading..."
+        ProgressHUD.show("")
+        
         var user = PFUser.currentUser()
         self.senderId = user.objectId
         self.senderDisplayName = user[PF_USER_FULLNAME] as! String
@@ -71,6 +74,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
+                ProgressHUD.dismiss()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
