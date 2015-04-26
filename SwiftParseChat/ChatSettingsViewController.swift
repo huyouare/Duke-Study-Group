@@ -8,10 +8,11 @@
 
 import UIKit
 import Foundation
+import EventKit
 
 class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate {
 
-    let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, NOTIFY_ACTION, LEAVE_ACTION]
+    let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, SAVE_TO_CALENDAR, NOTIFY_ACTION, LEAVE_ACTION]
     var members = [PFUser]()
     var group: PFObject!
     var editAttribute:String!
@@ -120,7 +121,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                 
             case NOTIFY_ACTION:
                 normalizeCell(cell)
-                cell.detailTextLabel?.text = ""
+                return cell
+                
+            case SAVE_TO_CALENDAR:
+                normalizeCell(cell)
                 return cell
                 
             case LEAVE_ACTION:
@@ -191,19 +195,67 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         } else { /* settings */
             var action = actionItems[indexPath.row]
             
-            if action == LEAVE_ACTION {
+            switch (action) {
+            case LEAVE_ACTION:
                 showLeaveDialog()
-                
-            } else if action == NOTIFY_ACTION {
-                
-            } else if action == EDIT_TIME {
+                break
+            case NOTIFY_ACTION:
+                break
+            case SAVE_TO_CALENDAR:
+                saveToCalendar()
+                break
+            case EDIT_TIME:
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTimeSegue", sender: self)
-                
-            } else { /* text attribute settings */
+                break
+            default: /* text attribute settings */
                 self.editAttribute = action
                 self.performSegueWithIdentifier("EditTextSegue", sender: self)
+                break
             }
+        }
+    }
+    
+    func saveToCalendar() {
+        let eventStore = EKEventStore()
+        switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
+        case .Authorized:
+            insertEvent(eventStore)
+            break
+        case .Denied:
+            ProgressHUD.showError("Access Denied")
+            break
+        case .NotDetermined:
+            eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
+                {[weak self] (granted: Bool, error: NSError!) -> Void in
+                    if granted {
+                        self!.insertEvent(eventStore)
+                    } else {
+                        println("Access denied")
+                    }
+                })
+            break
+        default:
+            println("Case Default")
+        }
+    }
+    
+    func insertEvent(store: EKEventStore) {
+        var event:EKEvent = EKEvent(eventStore: store)
+        event.title = self.group[PF_GROUP_COURSE_NAME] as? String
+        event.startDate = self.group[PF_GROUP_DATETIME] as? NSDate
+        event.endDate = event.startDate.dateByAddingTimeInterval(60 * 60) //TODO: end date may be changed later
+        event.notes = "Added from DukeStudies App"
+        event.calendar = store.defaultCalendarForNewEvents
+        var error: NSError?
+        let result = store.saveEvent(event, span: EKSpanThisEvent, error: &error)
+        
+        if result == false {
+            if let theError = error {
+                ProgressHUD.showError("Failed to save to calendar")
+            }
+        } else {
+            ProgressHUD.showSuccess("Saved to calendar")
         }
     }
     
