@@ -85,7 +85,17 @@ let EDIT_GROUP_NAME                     = "Group Name"
 let EDIT_DESCRIPTION                    = "Description"
 let EDIT_TIME                           = "Date & Time"
 let EDIT_LOCATION                       = "Location"
-let DISPLAY_COURSE_NAME                    = "courseName"
+let DISPLAY_COURSE_NAME                 = "courseName"
+
+/* Profile Settings */
+let EDIT_PROFILE_NAME                   = "Name"
+let EDIT_PASSWORD                       = "Password"
+let EDIT_EMAIL                          = "Email"
+let SEND_FEEDBACK                       = "Feedback"
+
+let EDIT_TEXT_SEGUE                     = "editTextSegue"
+let EDIT_PASSWORD_SEGUE                 = "editPasswordSegue"
+let SEND_FEEDBACK_SEGUE                 = "sendFeedbackSegue"
 
 /* Error Messages */
 let NETWORK_ERROR                       = "Network Error"

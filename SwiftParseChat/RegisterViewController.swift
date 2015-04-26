@@ -68,7 +68,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
             ProgressHUD.showError("Name must be set.")
             return
         }
-        if !validateEmail() {
+        if !Utilities.validateEmail(self.emailField.text) {
             return
         }
         if count(password) == 0 || count(repassword) == 0 {
@@ -101,37 +101,4 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    func validateEmail() -> Bool {
-        var error: NSError?
-        let validator = SHEmailValidator()
-        validator.validateSyntaxOfEmailAddress(self.emailField.text, withError: &error)
-        if error != nil {
-            let code = error?.code
-            switch UInt32(code!) {
-            case SHBlankAddressError.value:
-                ProgressHUD.showError("Email must be set")
-                break
-            case SHInvalidSyntaxError.value:
-                ProgressHUD.showError("Email has invalid syntax")
-                break
-            case SHInvalidUsernameError.value:
-                ProgressHUD.showError("Email local portion is invalid")
-                break
-            case SHInvalidDomainError.value:
-                ProgressHUD.showError("Email domain is invalid")
-                break
-            case SHInvalidTLDError.value:
-                ProgressHUD.showError("Email TLD is invalid")
-                break
-            default:
-                ProgressHUD.showError("Email is invalid")
-                break
-            }
-        } else {
-            return true
-        }
-        return false
-    }
-
 }

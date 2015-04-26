@@ -9,16 +9,14 @@
 import UIKit
 import Alamofire
 
-class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditProfileDelegate {
     
     @IBOutlet var userImageView: PFImageView!
-    @IBOutlet var nameField: UITextField!
     @IBOutlet var imageButton: UIButton!
+    var toEditAttribute = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,10 +39,6 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         imageButton.layer.masksToBounds = true;
     }
     
-    func dismissKeyboard() {
-        self.view.endEditing(true)
-    }
-    
     func loadUser() {
         var user = PFUser.currentUser()
         
@@ -54,33 +48,12 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 println(error)
             }
         }
-        
-        nameField.text = user[PF_USER_FULLNAME] as! String
-    }
-    
-    func saveUser() {
-        let fullName = nameField.text
-        if count(fullName) > 0 {
-            var user = PFUser.currentUser()
-            user[PF_USER_FULLNAME] = fullName
-            user[PF_USER_FULLNAME_LOWER] = fullName.lowercaseString
-            user.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
-                if error == nil {
-                    ProgressHUD.showSuccess("Saved")
-                } else {
-                    ProgressHUD.showError("Network error")
-                }
-            })
-        } else {
-            ProgressHUD.showError("Name field must not be empty")
-        }
     }
     
     // MARK: - User actions
     
     func cleanup() {
         userImageView.image = UIImage(named: "profile_blank")
-        nameField.text = nil;
     }
     
     func logout() {
@@ -130,11 +103,6 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 break
             }
         }
-    }
-    
-    @IBAction func saveButtonPressed(sender: UIButton) {
-        self.dismissKeyboard()
-        self.saveUser()
     }
     
     // MARK: - UIImagePickerControllerDelegate
@@ -248,6 +216,21 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                     println(info["error"] as! String)
                 }
             }
+        }
+    }
+    
+    func didSelectProfileTableRow(segueID: String, action: String) {
+        self.toEditAttribute = action
+        self.performSegueWithIdentifier(segueID, sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "embedProfileTableSegue" {
+            let profileTableVC = segue.destinationViewController as! ProfileTableViewController
+            profileTableVC.delegate = self
+        } else if segue.identifier == EDIT_TEXT_SEGUE {
+            let editTextVC = segue.destinationViewController as! ProfileTextEditViewController
+            editTextVC.editAttribute = self.toEditAttribute
         }
     }
 

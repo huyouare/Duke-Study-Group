@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SHEmailValidator
 
 class Utilities {
     
@@ -88,6 +89,38 @@ class Utilities {
         var yearCode = (yearStr as NSString).substringFromIndex(2)
         var semesterCode = seasonCode + yearCode
         return semesterCode
+    }
+    
+    class func validateEmail(email:String) -> Bool {
+        var error: NSError?
+        let validator = SHEmailValidator()
+        validator.validateSyntaxOfEmailAddress(email, withError: &error)
+        if error != nil {
+            let code = error?.code
+            switch UInt32(code!) {
+            case SHBlankAddressError.value:
+                ProgressHUD.showError("Email must be set")
+                break
+            case SHInvalidSyntaxError.value:
+                ProgressHUD.showError("Email has invalid syntax")
+                break
+            case SHInvalidUsernameError.value:
+                ProgressHUD.showError("Email local portion is invalid")
+                break
+            case SHInvalidDomainError.value:
+                ProgressHUD.showError("Email domain is invalid")
+                break
+            case SHInvalidTLDError.value:
+                ProgressHUD.showError("Email TLD is invalid")
+                break
+            default:
+                ProgressHUD.showError("Email is invalid")
+                break
+            }
+        } else {
+            return true
+        }
+        return false
     }
 }
 
