@@ -36,6 +36,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         var location = group[PF_GROUP_LOCATION] as? String
         var dateSet = (date != nil)
         var locationSet = (location != nil && count(location!) > 0)
+        let todayDate = NSDate()
         
         if dateSet {
             let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
@@ -45,6 +46,9 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
             } else {
                 self.dateTimeLabel.text = dateText
                 self.dateTimeLabel.textColor = UIColor.blackColor()
+                if date?.compare(todayDate) == NSComparisonResult.OrderedAscending { /* meeting date is past */
+                    self.nextMeetingLabel.text = "Last Meeting"
+                }
             }
         } else {
             self.dateTimeLabel.removeFromSuperview()
@@ -80,7 +84,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 
                 let user = users[i]
                 let picFile = user[PF_USER_PICTURE] as? PFFile
-                if picFile != nil {
+                if picFile != nil && picFile != NSNull() {
                     self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
                     self.avatarImageViews[i].loadInBackground(nil)
                 } else {

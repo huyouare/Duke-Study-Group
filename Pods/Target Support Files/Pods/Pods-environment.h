@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Alamofire 2
 #define COCOAPODS_VERSION_PATCH_Alamofire 0
 
+// ExPhotoViewer
+#define COCOAPODS_POD_AVAILABLE_ExPhotoViewer
+#define COCOAPODS_VERSION_MAJOR_ExPhotoViewer 1
+#define COCOAPODS_VERSION_MINOR_ExPhotoViewer 1
+#define COCOAPODS_VERSION_PATCH_ExPhotoViewer 2
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
