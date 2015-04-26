@@ -19,7 +19,6 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     @IBOutlet weak var navBar: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navBar.title = "Not Loaded"
         loadMembers()
     }
     
