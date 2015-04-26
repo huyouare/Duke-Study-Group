@@ -1711,11 +1711,27 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5GG-xZ-aHz" id="Whu-h3-TRB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eq1-eQ-cyB">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-QO-URf">
+                                                    <rect key="frame" x="20" y="0.0" width="280" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="jVA-KN-Hb6"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Pvu-Y0-OLj">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pvu-Y0-OLj" id="J0g-I9-cId">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCP-kf-OXH">
                                                     <rect key="frame" x="20" y="5" width="280" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="Q2K-4Q-cVa"/>
+                                                        <constraint firstAttribute="height" constant="50" id="qF7-ii-CDa"/>
                                                     </constraints>
                                                     <state key="normal" title="Register"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1724,15 +1740,15 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="registerButtonPressed:" destination="cWU-bd-GZR" eventType="touchUpInside" id="byG-oA-ILG"/>
+                                                        <action selector="registerButtonPressed:" destination="cWU-bd-GZR" eventType="touchUpInside" id="qep-6U-jgw"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="Eq1-eQ-cyB" secondAttribute="centerY" constant="-0.5" id="9bV-aC-pCx"/>
-                                                <constraint firstItem="Eq1-eQ-cyB" firstAttribute="centerX" secondItem="Whu-h3-TRB" secondAttribute="centerX" id="WPR-n7-uxa"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Eq1-eQ-cyB" secondAttribute="trailing" constant="12" id="beW-4D-oLD"/>
-                                                <constraint firstItem="Eq1-eQ-cyB" firstAttribute="leading" secondItem="Whu-h3-TRB" secondAttribute="leadingMargin" constant="12" id="ka7-z4-IoV"/>
+                                                <constraint firstItem="TCP-kf-OXH" firstAttribute="leading" secondItem="J0g-I9-cId" secondAttribute="leadingMargin" constant="12" id="3H5-0Y-DGv"/>
+                                                <constraint firstAttribute="centerY" secondItem="TCP-kf-OXH" secondAttribute="centerY" constant="-0.5" id="EUN-d1-6JS"/>
+                                                <constraint firstItem="TCP-kf-OXH" firstAttribute="centerX" secondItem="J0g-I9-cId" secondAttribute="centerX" id="HCV-9c-DiD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="TCP-kf-OXH" secondAttribute="trailing" constant="12" id="HJI-1j-aEY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1750,6 +1766,7 @@
                         <outlet property="emailField" destination="fLR-SQ-qYo" id="uM2-0e-GYs"/>
                         <outlet property="nameField" destination="dCJ-Zg-fZo" id="gsE-ke-Xs4"/>
                         <outlet property="passwordField" destination="MdI-Wk-S9F" id="A7Y-pB-50e"/>
+                        <outlet property="rePasswordField" destination="wYW-QO-URf" id="btP-Lr-BTU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQT-aJ-P05" userLabel="First Responder" sceneMemberID="firstResponder"/>

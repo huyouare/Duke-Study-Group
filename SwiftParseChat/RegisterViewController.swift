@@ -13,6 +13,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailField: UITextField!
     @IBOutlet var passwordField: UITextField!
+    @IBOutlet weak var rePasswordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
