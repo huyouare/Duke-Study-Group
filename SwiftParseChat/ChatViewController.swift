@@ -9,8 +9,9 @@
 import UIKit
 import Foundation
 import MediaPlayer
+import EXPhotoViewer
 
-class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     var timer: NSTimer = NSTimer()
@@ -32,17 +33,11 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     var senderImageUrl: String!
     var batchMessages = true
     
-    var tapPhotoRec: UITapGestureRecognizer!
-    var isFullScreenPhoto = false
-    var prevFrame: CGRect!
-    var tappedImageView: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* initialize tap photo variables */
-        tapPhotoRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
-        tapPhotoRec.delegate = self
+        self.navBar.title = "Loading..."
+        ProgressHUD.show("")
         
         var user = PFUser.currentUser()
         self.senderId = user.objectId
@@ -79,6 +74,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
+                ProgressHUD.dismiss()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
@@ -341,34 +337,10 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 
             } else if let mediaItem = message.media as? JSQPhotoMediaItem {
                 let image = mediaItem.image
-                var fullView = UIImageView(image: image)
-                var tapRec = UITapGestureRecognizer(target: self, action: "imageToFullScreen:")
-                tapRec.numberOfTapsRequired = 1
-                fullView.addGestureRecognizer(tapRec)
-                self.view.addSubview(fullView)
-                
-                UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                    self.prevFrame = fullView.frame
-                    fullView.frame = UIScreen.mainScreen().bounds
-                    fullView.backgroundColor = UIColor.blackColor()
-                    fullView.contentMode = UIViewContentMode.ScaleAspectFit
-                    fullView.userInteractionEnabled = true
-                    fullView.clipsToBounds = false
-                    }, completion: { (value:Bool) in
-                        self.isFullScreenPhoto = true
-                })
-                self.tappedImageView = fullView
+                let imageView = UIImageView()
+                imageView.image = image
+                EXPhotoViewer.showImageFrom(imageView)
             }
-        }
-    }
-    
-    func imageToFullScreen(sender: UITapGestureRecognizer) {
-        if isFullScreenPhoto {
-            UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-                self.tappedImageView.removeFromSuperview()
-                }, completion: { (value:Bool) in
-                    self.isFullScreenPhoto = false
-            })
         }
     }
     
