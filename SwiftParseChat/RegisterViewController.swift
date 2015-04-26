@@ -22,6 +22,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         self.nameField.delegate = self
         self.emailField.delegate = self
         self.passwordField.delegate = self
+        self.rePasswordField.delegate = self
         self.tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
     
@@ -45,6 +46,8 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         } else if textField == self.emailField {
             self.passwordField.becomeFirstResponder()
         } else if textField == self.passwordField {
+            self.rePasswordField.becomeFirstResponder()
+        } else if textField == self.rePasswordField {
             self.register()
         }
         return true
@@ -58,17 +61,22 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         let name = nameField.text
         let email = emailField.text
         let password = passwordField.text.lowercaseString
+        let repassword = self.rePasswordField.text.lowercaseString
         
         if count(name) == 0 {
             ProgressHUD.showError("Name must be set.")
             return
         }
-        if count(password) == 0 {
+        if count(email) == 0 {
+            ProgressHUD.showError("Email must be set.")
+            return
+        }
+        if count(password) == 0 || count(repassword) == 0 {
             ProgressHUD.showError("Password must be set.")
             return
         }
-        if count(email) == 0 {
-            ProgressHUD.showError("Email must be set.")
+        if password != repassword {
+            ProgressHUD.showError("Passwords do not match!")
             return
         }
         

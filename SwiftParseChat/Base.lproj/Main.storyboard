@@ -1711,7 +1711,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5GG-xZ-aHz" id="Whu-h3-TRB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-QO-URf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-QO-URf">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="jVA-KN-Hb6"/>
@@ -1720,6 +1720,11 @@
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wYW-QO-URf" firstAttribute="top" secondItem="Whu-h3-TRB" secondAttribute="top" id="K0A-Nf-PfB"/>
+                                                <constraint firstItem="wYW-QO-URf" firstAttribute="leading" secondItem="Whu-h3-TRB" secondAttribute="leadingMargin" constant="12" id="hTl-qe-PhK"/>
+                                                <constraint firstItem="wYW-QO-URf" firstAttribute="centerX" secondItem="Whu-h3-TRB" secondAttribute="centerX" id="zPj-Re-zbS"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Pvu-Y0-OLj">
