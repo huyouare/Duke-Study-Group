@@ -61,8 +61,8 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     func register() {
         let name = nameField.text
         let email = emailField.text
-        let password = passwordField.text.lowercaseString
-        let confirmPassword = confirmPasswordField.text.lowercaseString
+        let password = passwordField.text
+        let confirmPassword = confirmPasswordField.text
         
         if count(name) == 0 {
             ProgressHUD.showError("Name must be set")
