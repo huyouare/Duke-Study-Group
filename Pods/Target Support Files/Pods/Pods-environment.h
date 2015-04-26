@@ -24,3 +24,9 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 9
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
 
+// SHEmailValidator
+#define COCOAPODS_POD_AVAILABLE_SHEmailValidator
+#define COCOAPODS_VERSION_MAJOR_SHEmailValidator 1
+#define COCOAPODS_VERSION_MINOR_SHEmailValidator 0
+#define COCOAPODS_VERSION_PATCH_SHEmailValidator 2
+

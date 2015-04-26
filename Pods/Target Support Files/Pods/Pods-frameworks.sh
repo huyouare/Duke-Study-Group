@@ -51,9 +51,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Alamofire.framework'
   install_framework 'EXPhotoViewer.framework'
   install_framework 'MBProgressHUD.framework'
+  install_framework 'SHEmailValidator.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Alamofire.framework'
   install_framework 'EXPhotoViewer.framework'
   install_framework 'MBProgressHUD.framework'
+  install_framework 'SHEmailValidator.framework'
 fi
