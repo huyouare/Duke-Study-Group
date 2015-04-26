@@ -32,12 +32,15 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     var senderImageUrl: String!
     var batchMessages = true
+    var messagesLoaded = false
+    var groupLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navBar.title = "Loading..."
         ProgressHUD.show("")
+        showSettingsButton()
         
         var user = PFUser.currentUser()
         self.senderId = user.objectId
@@ -64,15 +67,6 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         timer.invalidate()
     }
     
-    func addSettingsBarButton() {
-        let item = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.Plain, target: self, action: "settingsButtonClicked")
-        self.navBar.rightBarButtonItem = item
-    }
-    
-    func settingsButtonClicked() {
-        self.performSegueWithIdentifier("pushToSettingsSegue", sender: self)
-    }
-    
     func loadGroup() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
         query.whereKey(PF_GROUP_OBJECTID  , equalTo: self.groupId)
@@ -84,11 +78,20 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
                 ProgressHUD.dismiss()
-                self.addSettingsBarButton()
+                self.groupLoaded = true
+                self.showSettingsButton()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
             }
+        }
+    }
+    
+    func showSettingsButton() {
+        if groupLoaded && messagesLoaded {
+            self.navBar.rightBarButtonItem?.enabled = true
+        } else {
+            self.navBar.rightBarButtonItem?.enabled = false
         }
     }
     
@@ -118,6 +121,8 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                         self.scrollToBottomAnimated(false)
                     }
                     self.automaticallyScrollsToMostRecentMessage = true
+                    self.messagesLoaded = true
+                    self.showSettingsButton()
                 } else {
                     ProgressHUD.showError("Network error")
                 }

@@ -1074,10 +1074,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vAE-2l-0Vx"/>
+                    <navigationItem key="navigationItem" id="vAE-2l-0Vx">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="hAg-7T-M5g">
+                            <connections>
+                                <segue destination="hyy-yZ-04O" kind="push" identifier="pushToSettingsSegue" id="riY-zG-IOg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="navBar" destination="vAE-2l-0Vx" id="rq1-d8-6OT"/>
-                        <segue destination="hyy-yZ-04O" kind="push" identifier="pushToSettingsSegue" id="mT5-3l-awr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzn-zA-DHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
