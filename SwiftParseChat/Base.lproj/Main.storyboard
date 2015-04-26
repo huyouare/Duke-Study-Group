@@ -1075,9 +1075,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vAE-2l-0Vx">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="5mA-8F-cBQ">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="hAg-7T-M5g">
                             <connections>
-                                <segue destination="hyy-yZ-04O" kind="push" identifier="PushToSettingsSegue" id="t21-4r-o5T"/>
+                                <segue destination="hyy-yZ-04O" kind="push" identifier="pushToSettingsSegue" id="riY-zG-IOg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

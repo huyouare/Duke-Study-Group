@@ -32,12 +32,15 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     var senderImageUrl: String!
     var batchMessages = true
+    var messagesLoaded = false
+    var groupLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navBar.title = "Loading..."
         ProgressHUD.show("")
+        showSettingsButton()
         
         var user = PFUser.currentUser()
         self.senderId = user.objectId
@@ -75,10 +78,20 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
                 ProgressHUD.dismiss()
+                self.groupLoaded = true
+                self.showSettingsButton()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
             }
+        }
+    }
+    
+    func showSettingsButton() {
+        if groupLoaded && messagesLoaded {
+            self.navBar.rightBarButtonItem?.enabled = true
+        } else {
+            self.navBar.rightBarButtonItem?.enabled = false
         }
     }
     
@@ -108,6 +121,8 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                         self.scrollToBottomAnimated(false)
                     }
                     self.automaticallyScrollsToMostRecentMessage = true
+                    self.messagesLoaded = true
+                    self.showSettingsButton()
                 } else {
                     ProgressHUD.showError("Network error")
                 }
@@ -378,7 +393,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PushToSettingsSegue" {
+        if segue.identifier == "pushToSettingsSegue" {
             let createVC = segue.destinationViewController as! ChatSettingsViewController
             createVC.group = self.group
         }
