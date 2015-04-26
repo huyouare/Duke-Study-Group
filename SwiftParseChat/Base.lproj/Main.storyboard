@@ -1768,10 +1768,10 @@
                     <navigationItem key="navigationItem" title="Register" id="0SO-XE-ZsL"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="confirmPasswordField" destination="wYW-QO-URf" id="cyu-DP-GnI"/>
                         <outlet property="emailField" destination="fLR-SQ-qYo" id="uM2-0e-GYs"/>
                         <outlet property="nameField" destination="dCJ-Zg-fZo" id="gsE-ke-Xs4"/>
                         <outlet property="passwordField" destination="MdI-Wk-S9F" id="A7Y-pB-50e"/>
-                        <outlet property="rePasswordField" destination="wYW-QO-URf" id="btP-Lr-BTU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQT-aJ-P05" userLabel="First Responder" sceneMemberID="firstResponder"/>

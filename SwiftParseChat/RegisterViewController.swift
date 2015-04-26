@@ -62,21 +62,21 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         let name = nameField.text
         let email = emailField.text
         let password = passwordField.text.lowercaseString
-        let repassword = confirmPasswordField.text.lowercaseString
+        let confirmPassword = confirmPasswordField.text.lowercaseString
         
         if count(name) == 0 {
-            ProgressHUD.showError("Name must be set.")
+            ProgressHUD.showError("Name must be set")
             return
         }
         if !validateEmail() {
             return
         }
-        if count(password) == 0 || count(repassword) == 0 {
-            ProgressHUD.showError("Password must be set.")
+        if count(password) == 0 {
+            ProgressHUD.showError("Password must be set")
             return
         }
-        if password != repassword {
-            ProgressHUD.showError("Passwords do not match!")
+        if count(confirmPassword) == 0 || password != confirmPassword {
+            ProgressHUD.showError("Passwords do not match")
             return
         }
         
@@ -92,7 +92,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         user.signUpInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error == nil {
                 PushNotication.parsePushUserAssign()
-                ProgressHUD.showSuccess("Succeeded.")
+                ProgressHUD.showSuccess("Success")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let userInfo = error.userInfo {
@@ -107,31 +107,32 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         let validator = SHEmailValidator()
         validator.validateSyntaxOfEmailAddress(emailField.text, withError: &error)
         if error != nil {
-            let code = error?.code
-            switch UInt32(code!) {
-            case SHBlankAddressError.value:
-                ProgressHUD.showError("Email must be set")
-                break
-            case SHInvalidSyntaxError.value:
-                ProgressHUD.showError("Email has invalid syntax")
-                break
-            case SHInvalidUsernameError.value:
-                ProgressHUD.showError("Email local portion is invalid")
-                break
-            case SHInvalidDomainError.value:
-                ProgressHUD.showError("Email domain is invalid")
-                break
-            case SHInvalidTLDError.value:
-                ProgressHUD.showError("Email TLD is invalid")
-                break
-            default:
-                ProgressHUD.showError("Email is invalid")
-                break
+            if let code = error?.code {
+                switch UInt32(code) {
+                case SHBlankAddressError.value:
+                    ProgressHUD.showError("Email must be set")
+                    break
+//                case SHInvalidSyntaxError.value:
+//                    ProgressHUD.showError("Email has invalid syntax")
+//                    break
+//                case SHInvalidUsernameError.value:
+//                    ProgressHUD.showError("Email local portion is invalid")
+//                    break
+//                case SHInvalidDomainError.value:
+//                    ProgressHUD.showError("Email domain is invalid")
+//                    break
+//                case SHInvalidTLDError.value:
+//                    ProgressHUD.showError("Email TLD is invalid")
+//                    break
+                default:
+                    ProgressHUD.showError("Invalid email")
+                    break
+                }
             }
+            return false
         } else {
             return true
         }
-        return false
     }
 
 }
