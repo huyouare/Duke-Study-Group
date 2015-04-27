@@ -14,22 +14,22 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailField: SHEmailValidationTextField!
     @IBOutlet var passwordField: UITextField!
-    @IBOutlet weak var rePasswordField: UITextField!
+    @IBOutlet var confirmPasswordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
-        self.nameField.delegate = self
-        self.emailField.delegate = self
-        self.passwordField.delegate = self
-        self.rePasswordField.delegate = self
+        nameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+        confirmPasswordField.delegate = self
         self.tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.nameField.becomeFirstResponder()
+        nameField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,13 +42,13 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == self.nameField {
-            self.emailField.becomeFirstResponder()
-        } else if textField == self.emailField {
-            self.passwordField.becomeFirstResponder()
-        } else if textField == self.passwordField {
-            self.rePasswordField.becomeFirstResponder()
-        } else if textField == self.rePasswordField {
+        if textField == nameField {
+            emailField.becomeFirstResponder()
+        } else if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            confirmPasswordField.becomeFirstResponder()
+        } else if textField == confirmPasswordField {
             self.register()
         }
         return true
@@ -61,22 +61,22 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     func register() {
         let name = nameField.text
         let email = emailField.text
-        let password = passwordField.text.lowercaseString
-        let repassword = self.rePasswordField.text.lowercaseString
+        let password = passwordField.text
+        let confirmPassword = confirmPasswordField.text
         
         if count(name) == 0 {
-            ProgressHUD.showError("Name must be set.")
+            ProgressHUD.showError("Name must be set")
             return
         }
         if !validateEmail() {
             return
         }
-        if count(password) == 0 || count(repassword) == 0 {
-            ProgressHUD.showError("Password must be set.")
+        if count(password) == 0 {
+            ProgressHUD.showError("Password must be set")
             return
         }
-        if password != repassword {
-            ProgressHUD.showError("Passwords do not match!")
+        if count(confirmPassword) == 0 || password != confirmPassword {
+            ProgressHUD.showError("Passwords do not match")
             return
         }
         
@@ -92,7 +92,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         user.signUpInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error == nil {
                 PushNotication.parsePushUserAssign()
-                ProgressHUD.showSuccess("Succeeded.")
+                ProgressHUD.showSuccess("Success")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let userInfo = error.userInfo {
@@ -105,33 +105,34 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
     func validateEmail() -> Bool {
         var error: NSError?
         let validator = SHEmailValidator()
-        validator.validateSyntaxOfEmailAddress(self.emailField.text, withError: &error)
+        validator.validateSyntaxOfEmailAddress(emailField.text, withError: &error)
         if error != nil {
-            let code = error?.code
-            switch UInt32(code!) {
-            case SHBlankAddressError.value:
-                ProgressHUD.showError("Email must be set")
-                break
-            case SHInvalidSyntaxError.value:
-                ProgressHUD.showError("Email has invalid syntax")
-                break
-            case SHInvalidUsernameError.value:
-                ProgressHUD.showError("Email local portion is invalid")
-                break
-            case SHInvalidDomainError.value:
-                ProgressHUD.showError("Email domain is invalid")
-                break
-            case SHInvalidTLDError.value:
-                ProgressHUD.showError("Email TLD is invalid")
-                break
-            default:
-                ProgressHUD.showError("Email is invalid")
-                break
+            if let code = error?.code {
+                switch UInt32(code) {
+                case SHBlankAddressError.value:
+                    ProgressHUD.showError("Email must be set")
+                    break
+//                case SHInvalidSyntaxError.value:
+//                    ProgressHUD.showError("Email has invalid syntax")
+//                    break
+//                case SHInvalidUsernameError.value:
+//                    ProgressHUD.showError("Email local portion is invalid")
+//                    break
+//                case SHInvalidDomainError.value:
+//                    ProgressHUD.showError("Email domain is invalid")
+//                    break
+//                case SHInvalidTLDError.value:
+//                    ProgressHUD.showError("Email TLD is invalid")
+//                    break
+                default:
+                    ProgressHUD.showError("Invalid email")
+                    break
+                }
             }
+            return false
         } else {
             return true
         }
-        return false
     }
 
 }

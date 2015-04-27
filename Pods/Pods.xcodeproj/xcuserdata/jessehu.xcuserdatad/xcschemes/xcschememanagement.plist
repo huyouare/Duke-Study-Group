@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-EXPhotoViewer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SHEmailValidator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>22A9B60115A7688046CCBCE5</key>
+		<key>09302E18C4AB8230411BB7EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C14A57B0AE3355B19D438986</key>
+		<key>0E73C085DD8C249D6CD9A7F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1910F278338D7FFD4FA1F6F</key>
+		<key>6EB0DC5FF5E0AE73DE69A290</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A89B8998F29F15E853F2B9EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6DC8830B777424937E99BA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
