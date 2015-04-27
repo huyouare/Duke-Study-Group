@@ -242,8 +242,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     
     func insertEvent(store: EKEventStore) {
         var event:EKEvent = EKEvent(eventStore: store)
-        event.title = self.group[PF_GROUP_COURSE_NAME] as! String
-        event.title = "Study Group: " + event.title
+        event.title = "\(self.group[PF_GROUP_NAME] as! String) (\(self.group[PF_GROUP_COURSE_NAME] as! String))"
         event.startDate = self.group[PF_GROUP_DATETIME] as? NSDate
         event.endDate = event.startDate.dateByAddingTimeInterval(60 * 60) //TODO: end date may be changed later
         event.notes = "Added from DukeStudies App"
