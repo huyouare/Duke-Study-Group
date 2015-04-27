@@ -1711,7 +1711,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5GG-xZ-aHz" id="Whu-h3-TRB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-QO-URf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-QO-URf">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="jVA-KN-Hb6"/>
@@ -1768,10 +1768,10 @@
                     <navigationItem key="navigationItem" title="Register" id="0SO-XE-ZsL"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="confirmPasswordField" destination="wYW-QO-URf" id="cyu-DP-GnI"/>
                         <outlet property="emailField" destination="fLR-SQ-qYo" id="uM2-0e-GYs"/>
                         <outlet property="nameField" destination="dCJ-Zg-fZo" id="gsE-ke-Xs4"/>
                         <outlet property="passwordField" destination="MdI-Wk-S9F" id="A7Y-pB-50e"/>
-                        <outlet property="rePasswordField" destination="wYW-QO-URf" id="btP-Lr-BTU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQT-aJ-P05" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1917,7 +1917,7 @@
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clM-cD-I7E">
-                                <rect key="frame" x="0.0" y="157" width="320" height="369"/>
+                                <rect key="frame" x="0.0" y="179" width="320" height="347"/>
                                 <connections>
                                     <segue destination="zIk-yq-4PW" kind="embed" identifier="embedProfileTableSegue" id="JgD-rq-LUr"/>
                                 </connections>
@@ -1929,7 +1929,7 @@
                             <constraint firstAttribute="centerX" secondItem="eZf-mw-yN3" secondAttribute="centerX" id="983-me-PF8"/>
                             <constraint firstItem="clM-cD-I7E" firstAttribute="leading" secondItem="HRV-xk-jE1" secondAttribute="leading" id="EXZ-sf-24T"/>
                             <constraint firstItem="pRc-fL-eoK" firstAttribute="top" secondItem="bNg-F3-Xkc" secondAttribute="bottom" constant="8" id="M9B-5Y-Cy6"/>
-                            <constraint firstItem="clM-cD-I7E" firstAttribute="top" secondItem="pRc-fL-eoK" secondAttribute="bottom" constant="15" id="YXH-fZ-gIX"/>
+                            <constraint firstItem="clM-cD-I7E" firstAttribute="top" secondItem="pRc-fL-eoK" secondAttribute="bottom" constant="37" id="YXH-fZ-gIX"/>
                             <constraint firstItem="eZf-mw-yN3" firstAttribute="top" secondItem="bNg-F3-Xkc" secondAttribute="bottom" constant="8" id="i09-zS-coM"/>
                             <constraint firstAttribute="centerX" secondItem="pRc-fL-eoK" secondAttribute="centerX" id="uKJ-wb-pKN"/>
                             <constraint firstAttribute="bottomMargin" secondItem="clM-cD-I7E" secondAttribute="bottom" constant="42" id="xOR-VV-hne"/>
@@ -1958,7 +1958,7 @@
             <objects>
                 <tableViewController id="zIk-yq-4PW" customClass="ProfileTableViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VaS-qL-Ml0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
