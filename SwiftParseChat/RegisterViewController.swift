@@ -101,38 +101,4 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    func validateEmail() -> Bool {
-        var error: NSError?
-        let validator = SHEmailValidator()
-        validator.validateSyntaxOfEmailAddress(emailField.text, withError: &error)
-        if error != nil {
-            if let code = error?.code {
-                switch UInt32(code) {
-                case SHBlankAddressError.value:
-                    ProgressHUD.showError("Email must be set")
-                    break
-//                case SHInvalidSyntaxError.value:
-//                    ProgressHUD.showError("Email has invalid syntax")
-//                    break
-//                case SHInvalidUsernameError.value:
-//                    ProgressHUD.showError("Email local portion is invalid")
-//                    break
-//                case SHInvalidDomainError.value:
-//                    ProgressHUD.showError("Email domain is invalid")
-//                    break
-//                case SHInvalidTLDError.value:
-//                    ProgressHUD.showError("Email TLD is invalid")
-//                    break
-                default:
-                    ProgressHUD.showError("Invalid email")
-                    break
-                }
-            }
-            return false
-        } else {
-            return true
-        }
-    }
-
 }
