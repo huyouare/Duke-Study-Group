@@ -105,7 +105,7 @@ class ProfileTableViewController: UITableViewController {
             break
         case SEND_FEEDBACK:
             if self.delegate != nil {
-//                self.delegate.didSelectProfileTableRow(SEND_FEEDBACK_SEGUE, action: action)
+                self.delegate.didSelectProfileTableRow(SEND_FEEDBACK_SEGUE, action: action)
             }
             break
         default:

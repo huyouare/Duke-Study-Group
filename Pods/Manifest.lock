@@ -1,17 +1,20 @@
 PODS:
   - Alamofire (1.2.0)
+  - CTFeedback (1.0.17)
   - EXPhotoViewer (1.1.2)
   - MBProgressHUD (0.9)
   - SHEmailValidator (1.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 1.2)
+  - CTFeedback
   - ExPhotoViewer
   - MBProgressHUD (~> 0.8)
   - SHEmailValidator (~> 1.0.2)
 
 SPEC CHECKSUMS:
   Alamofire: d765c5c1713aa64106b0228aaa600a1e6851f68d
+  CTFeedback: 8706fc51355f04646262441193983f6d10702d0c
   EXPhotoViewer: 01d391c4e5f7d25470d92b26837d40a362714ce0
   MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
   SHEmailValidator: b897320322e52eddc894173ef6fa8f98ca7e3639
