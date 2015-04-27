@@ -79,6 +79,7 @@ let NOTIFICATION_USER_LOGGED_OUT		= "NCUserLoggedOut"
 
 /* Group Settings */
 let NOTIFY_ACTION                       = "Notifications"
+let SAVE_TO_CALENDAR                    = "Save to Calendar"
 let LEAVE_ACTION                        = "Leave Group"
 let EDIT_GROUP_NAME                     = "Group Name"
 let EDIT_DESCRIPTION                    = "Description"
