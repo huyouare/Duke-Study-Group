@@ -720,18 +720,18 @@
 		83C839AA1A9978A2007AC2AC /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				AAE3EBF31AED8771008052FA /* ProfileEdit */,
-				AABABF741AD3798800C67A91 /* GroupSettings */,
 				83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */,
 				83F02B7D1AA6C671008428DF /* MessagesCell.swift */,
 				83B8DB971AA98BEB00ADE3BB /* MessagesCompose */,
 				831C19491A98090E000FD6D0 /* GroupsViewController.swift */,
 				838C334B1AC500DF0015A122 /* GroupsCell.swift */,
+				AABABF741AD3798800C67A91 /* GroupSettings */,
 				83ED6A4D1AB7F09F000DE3DB /* GroupSelect */,
 				831C194F1A9809C7000FD6D0 /* ProfileViewController.swift */,
+				AAE3EBF11AED6D4F008052FA /* ProfileTableViewController.swift */,
+				AAE3EBF31AED8771008052FA /* ProfileEdit */,
 				831C194B1A980970000FD6D0 /* PrivateViewController.swift */,
 				83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */,
-				AAE3EBF11AED6D4F008052FA /* ProfileTableViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
