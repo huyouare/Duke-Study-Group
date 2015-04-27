@@ -54,14 +54,14 @@ class ProfileTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var action:String!
+        var action: String!
         if isLoginByFB() {
             action = actionItemsWithFB[indexPath.row]
         } else {
             action = actionItemsWithoutFB[indexPath.row]
         }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) as! UITableViewCell
-//        normalizeCell(cell)
         cell.textLabel?.text = action
         cell.detailTextLabel?.text = "Not Set"
         var user = PFUser.currentUser()
@@ -72,6 +72,9 @@ class ProfileTableViewController: UITableViewController {
             break
         case EDIT_EMAIL:
             cell.detailTextLabel?.text = user[PF_USER_EMAIL] as? String
+            println(cell.detailTextLabel?.text)
+            println(user[PF_USER_EMAIL] as? String)
+            println(user[PF_USER_EMAIL])
             break
         default:
             cell.detailTextLabel?.text = ""
@@ -112,11 +115,5 @@ class ProfileTableViewController: UITableViewController {
             println("No profile attribute selected")
         }
     }
-//    
-//    func normalizeCell(cell:UITableViewCell) {
-//        cell.textLabel?.textColor = UIColor.blackColor()
-//        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-//        cell.detailTextLabel?.text = ""
-//    }
     
 }

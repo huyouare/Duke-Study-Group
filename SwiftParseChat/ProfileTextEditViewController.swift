@@ -36,6 +36,9 @@ class ProfileTextEditViewController: UIViewController {
         let attribute = self.textField.text
         var user = PFUser.currentUser()
         
+        let oldName = user[PF_USER_FULLNAME] as! String
+        let oldEmail = user[PF_USER_EMAIL] as! String
+        
         if count(attribute) > 0 {
             switch (self.editAttribute) {
             case EDIT_PROFILE_NAME:
@@ -43,13 +46,15 @@ class ProfileTextEditViewController: UIViewController {
                 user[PF_USER_FULLNAME_LOWER] = attribute.lowercaseString
                 break
             case EDIT_EMAIL:
-                if !Utilities.validateEmail(attribute) {
+                if Utilities.validateEmail(attribute) == false {
+                    ProgressHUD.showError("Invalid email")
                     return
                 }
                 user[PF_USER_EMAIL] = attribute
                 break
             default:
-                println("save unknown attribute")
+                println("unknown attribute")
+                break
             }
             
             user.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
@@ -57,11 +62,18 @@ class ProfileTextEditViewController: UIViewController {
                     ProgressHUD.showSuccess("Saved")
                     self.navigationController?.popViewControllerAnimated(true)
                 } else {
-                    ProgressHUD.showError("Email is already taken or network error")
+                    if let userError = error.userInfo?["error"] as? String {
+                        ProgressHUD.showError(userError)
+                    } else {
+                        ProgressHUD.showError("Network error")
+                    }
+                    user[PF_USER_FULLNAME] = oldName
+                    user[PF_USER_FULLNAME_LOWER] = oldName.lowercaseString
+                    user[PF_USER_EMAIL] = oldEmail
                 }
             })
         } else {
-            ProgressHUD.showError("Text field must not be empty")
+            ProgressHUD.showError("\(self.editAttribute) field must not be empty")
         }
     }
 }
