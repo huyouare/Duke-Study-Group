@@ -60,8 +60,8 @@ class ProfileTableViewController: UITableViewController {
         } else {
             action = actionItemsWithoutFB[indexPath.row]
         }
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
-        normalizeCell(cell)
+        let cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) as! UITableViewCell
+//        normalizeCell(cell)
         cell.textLabel?.text = action
         cell.detailTextLabel?.text = "Not Set"
         var user = PFUser.currentUser()
@@ -112,11 +112,11 @@ class ProfileTableViewController: UITableViewController {
             println("No profile attribute selected")
         }
     }
-    
-    func normalizeCell(cell:UITableViewCell) {
-        cell.textLabel?.textColor = UIColor.blackColor()
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.detailTextLabel?.text = ""
-    }
+//    
+//    func normalizeCell(cell:UITableViewCell) {
+//        cell.textLabel?.textColor = UIColor.blackColor()
+//        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+//        cell.detailTextLabel?.text = ""
+//    }
     
 }
