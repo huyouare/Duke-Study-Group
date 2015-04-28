@@ -15,8 +15,8 @@ protocol EditProfileDelegate {
 
 class ProfileTableViewController: UITableViewController {
     
-    let actionItemsWithoutFB = [EDIT_PROFILE_NAME, EDIT_EMAIL, EDIT_PASSWORD, SEND_FEEDBACK]
-    let actionItemsWithFB = [EDIT_PROFILE_NAME, EDIT_EMAIL, SEND_FEEDBACK]
+    let actionItemsWithoutFB = [EDIT_PROFILE_NAME, EDIT_PASSWORD, SEND_FEEDBACK]
+    let actionItemsWithFB = [EDIT_PROFILE_NAME, SEND_FEEDBACK]
     var delegate: EditProfileDelegate!
     
     override func viewDidLoad() {
