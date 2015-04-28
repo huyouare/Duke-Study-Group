@@ -68,7 +68,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
             ProgressHUD.showError("Name must be set")
             return
         }
-        if !validateEmail() {
+        if !Utilities.validateEmail(self.emailField.text) {
             return
         }
         if count(password) == 0 {

@@ -127,6 +127,9 @@
 		83F2E8F51ABD3AD100FC8825 /* DukeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */; };
 		AA1372041AE0419200480E70 /* GroupDateEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1372031AE0419200480E70 /* GroupDateEditViewController.swift */; };
 		AA45EBF61AC648FB00EDDB83 /* ChatSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */; };
+		AAE3EBF21AED6D4F008052FA /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3EBF11AED6D4F008052FA /* ProfileTableViewController.swift */; };
+		AAE3EBF71AED87A0008052FA /* ProfileTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3EBF61AED87A0008052FA /* ProfileTextEditViewController.swift */; };
+		AAE3EBF91AED919B008052FA /* ProfilePasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3EBF81AED919B008052FA /* ProfilePasswordEditViewController.swift */; };
 		AAF465E91ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF465E81ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -335,6 +338,9 @@
 		83F2E8F41ABD3AD100FC8825 /* DukeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DukeLoginViewController.swift; sourceTree = "<group>"; };
 		AA1372031AE0419200480E70 /* GroupDateEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDateEditViewController.swift; sourceTree = "<group>"; };
 		AA45EBF51AC648FB00EDDB83 /* ChatSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSettingsViewController.swift; sourceTree = "<group>"; };
+		AAE3EBF11AED6D4F008052FA /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		AAE3EBF61AED87A0008052FA /* ProfileTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextEditViewController.swift; sourceTree = "<group>"; };
+		AAE3EBF81AED919B008052FA /* ProfilePasswordEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEditViewController.swift; sourceTree = "<group>"; };
 		AAF465E81ADF7F7A00B6D2D4 /* GroupTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTextEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -714,14 +720,16 @@
 		83C839AA1A9978A2007AC2AC /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				AABABF741AD3798800C67A91 /* GroupSettings */,
 				83F02B7B1AA6C3F1008428DF /* MessagesViewController.swift */,
 				83F02B7D1AA6C671008428DF /* MessagesCell.swift */,
 				83B8DB971AA98BEB00ADE3BB /* MessagesCompose */,
 				831C19491A98090E000FD6D0 /* GroupsViewController.swift */,
 				838C334B1AC500DF0015A122 /* GroupsCell.swift */,
+				AABABF741AD3798800C67A91 /* GroupSettings */,
 				83ED6A4D1AB7F09F000DE3DB /* GroupSelect */,
 				831C194F1A9809C7000FD6D0 /* ProfileViewController.swift */,
+				AAE3EBF11AED6D4F008052FA /* ProfileTableViewController.swift */,
+				AAE3EBF31AED8771008052FA /* ProfileEdit */,
 				831C194B1A980970000FD6D0 /* PrivateViewController.swift */,
 				83ED1DDF1AA2E46E00198FBF /* SearchViewController.swift */,
 			);
@@ -794,6 +802,15 @@
 				AA1372031AE0419200480E70 /* GroupDateEditViewController.swift */,
 			);
 			name = GroupSettings;
+			sourceTree = "<group>";
+		};
+		AAE3EBF31AED8771008052FA /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				AAE3EBF61AED87A0008052FA /* ProfileTextEditViewController.swift */,
+				AAE3EBF81AED919B008052FA /* ProfilePasswordEditViewController.swift */,
+			);
+			name = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		BA1D0AD88CD4A1615707E353 /* Pods */ = {
@@ -1020,6 +1037,7 @@
 				83B4F59D1AA1713B00C09791 /* JSQMessagesKeyboardController.m in Sources */,
 				83B4F5B81AA1713B00C09791 /* JSQMessagesLabel.m in Sources */,
 				83B4F5971AA1713B00C09791 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
+				AAE3EBF91AED919B008052FA /* ProfilePasswordEditViewController.swift in Sources */,
 				83ED1DF11AA413E500198FBF /* APAddressBook.m in Sources */,
 				83B4F5AE1AA1713B00C09791 /* JSQVideoMediaItem.m in Sources */,
 				83857E271AA84C9500FDF5AD /* SelectSingleViewController.swift in Sources */,
@@ -1027,6 +1045,7 @@
 				83B8DB9D1AAD751200ADE3BB /* CourseTableViewController.swift in Sources */,
 				83B4F5B11AA1713B00C09791 /* JSQMessagesCollectionViewCell.m in Sources */,
 				83B4F5B71AA1713B00C09791 /* JSQMessagesInputToolbar.m in Sources */,
+				AAE3EBF71AED87A0008052FA /* ProfileTextEditViewController.swift in Sources */,
 				83B4F5BB1AA1713B00C09791 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				83B8DB9B1AAD750000ADE3BB /* SubjectTableViewController.swift in Sources */,
 				83C839A81A997857007AC2AC /* WelcomeViewController.swift in Sources */,
@@ -1037,6 +1056,7 @@
 				83F02B7E1AA6C671008428DF /* MessagesCell.swift in Sources */,
 				83B4F5C91AA1718300C09791 /* JSQSystemSoundPlayer.m in Sources */,
 				83ED6A4C1AB7EE62000DE3DB /* GroupSelectTableViewController.swift in Sources */,
+				AAE3EBF21AED6D4F008052FA /* ProfileTableViewController.swift in Sources */,
 				831C19501A9809C7000FD6D0 /* ProfileViewController.swift in Sources */,
 				83ED1DE01AA2E46E00198FBF /* SearchViewController.swift in Sources */,
 				83B4F5B01AA1713B00C09791 /* JSQMessagesCollectionView.m in Sources */,
