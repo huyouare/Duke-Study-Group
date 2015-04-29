@@ -85,8 +85,13 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 let user = users[i]
                 let picFile = user[PF_USER_PICTURE] as? PFFile
                 if picFile != nil && picFile != NSNull() {
-                    self.avatarImageViews[i].file = user[PF_USER_PICTURE] as? PFFile
-                    self.avatarImageViews[i].loadInBackground(nil)
+                    self.avatarImageViews[i].file = picFile
+                    self.avatarImageViews[i].loadInBackground { (image: UIImage!, error: NSError!) -> Void in
+                        if error != nil {
+                            self.avatarImageViews[i].image = UIImage(named: "profile_blank")
+                            println(error)
+                        }
+                    }
                 } else {
                     self.avatarImageViews[i].image = UIImage(named: "profile_blank")
                 }
