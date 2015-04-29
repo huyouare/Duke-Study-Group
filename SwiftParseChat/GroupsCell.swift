@@ -93,7 +93,6 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                         }
                     }
                 }
-                self.avatarImageViews[i].loadInBackground(nil)
             }
         }
     }
