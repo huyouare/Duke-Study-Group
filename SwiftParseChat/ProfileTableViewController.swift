@@ -15,8 +15,8 @@ protocol EditProfileDelegate {
 
 class ProfileTableViewController: UITableViewController {
     
-    let actionItemsWithoutFB = [EDIT_PROFILE_NAME, EDIT_EMAIL, EDIT_PASSWORD, SEND_FEEDBACK]
-    let actionItemsWithFB = [EDIT_PROFILE_NAME, EDIT_EMAIL, SEND_FEEDBACK]
+    let actionItemsWithoutFB = [EDIT_PROFILE_NAME, EDIT_PASSWORD, SEND_FEEDBACK]
+    let actionItemsWithFB = [EDIT_PROFILE_NAME, SEND_FEEDBACK]
     var delegate: EditProfileDelegate!
     
     override func viewDidLoad() {
@@ -54,14 +54,14 @@ class ProfileTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var action:String!
+        var action: String!
         if isLoginByFB() {
             action = actionItemsWithFB[indexPath.row]
         } else {
             action = actionItemsWithoutFB[indexPath.row]
         }
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
-        normalizeCell(cell)
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = action
         cell.detailTextLabel?.text = "Not Set"
         var user = PFUser.currentUser()
@@ -72,6 +72,9 @@ class ProfileTableViewController: UITableViewController {
             break
         case EDIT_EMAIL:
             cell.detailTextLabel?.text = user[PF_USER_EMAIL] as? String
+            println(cell.detailTextLabel?.text)
+            println(user[PF_USER_EMAIL] as? String)
+            println(user[PF_USER_EMAIL])
             break
         default:
             cell.detailTextLabel?.text = ""
@@ -111,12 +114,6 @@ class ProfileTableViewController: UITableViewController {
         default:
             println("No profile attribute selected")
         }
-    }
-    
-    func normalizeCell(cell:UITableViewCell) {
-        cell.textLabel?.textColor = UIColor.blackColor()
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.detailTextLabel?.text = ""
     }
     
 }

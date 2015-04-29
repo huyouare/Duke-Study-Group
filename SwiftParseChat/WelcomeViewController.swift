@@ -123,6 +123,7 @@ class WelcomeViewController: UIViewController {
                     }
                 })
                 
+                user[PF_USER_EMAIL] = userData["email"]
                 user[PF_USER_EMAILCOPY] = userData["email"]
                 user[PF_USER_FULLNAME] = userData["name"]
                 user[PF_USER_FULLNAME_LOWER] = (userData["name"] as! String).lowercaseString

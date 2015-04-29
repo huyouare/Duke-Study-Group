@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -674,7 +674,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HN-0V-LPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2431" y="-180"/>
+            <point key="canvasLocation" x="2889" y="-644"/>
         </scene>
         <!--New Group-->
         <scene sceneID="EKG-i5-XFX">
@@ -875,7 +875,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j65-28-idP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2861" y="-833"/>
+            <point key="canvasLocation" x="2409" y="-2177"/>
         </scene>
         <!--My Study Groups-->
         <scene sceneID="hBU-2h-de9">
@@ -1198,7 +1198,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-252" y="2141"/>
+            <point key="canvasLocation" x="-460" y="2999"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="LaV-vf-T2R">
@@ -1248,7 +1248,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="818" y="2141"/>
+            <point key="canvasLocation" x="610" y="2999"/>
         </scene>
         <!--Private-->
         <scene sceneID="qaW-Dr-oCB">
@@ -1265,7 +1265,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dk6-bV-rES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-757" y="2141"/>
+            <point key="canvasLocation" x="-965" y="2999"/>
         </scene>
         <!--Messages-->
         <scene sceneID="dsh-2N-ndq">
@@ -1388,7 +1388,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZe-PC-E0V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856" y="0.0"/>
+            <point key="canvasLocation" x="-452" y="2252"/>
         </scene>
         <!--Messages-->
         <scene sceneID="x3d-am-tOe">
@@ -1405,7 +1405,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdc-PG-sfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="0.0"/>
+            <point key="canvasLocation" x="-957" y="2252"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e4W-6C-eEJ">
@@ -1951,7 +1951,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7VD-k0-wlw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-131" y="1307"/>
+            <point key="canvasLocation" x="805" y="0.0"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="maf-s2-r3W">
@@ -1962,10 +1962,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" id="yfR-eP-Utp">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="profileCell" textLabel="aub-3Q-gM6" detailTextLabel="lc7-gm-hcG" style="IBUITableViewCellStyleValue1" id="yfR-eP-Utp">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yfR-eP-Utp" id="VsJ-JM-HPq">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aub-3Q-gM6">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Full Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lc7-gm-hcG">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1977,7 +1991,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f06-gb-a8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="1306.5"/>
+            <point key="canvasLocation" x="805" y="648.5"/>
         </scene>
         <!--Profile Password Edit View Controller-->
         <scene sceneID="QZm-31-rfV">
@@ -1991,12 +2005,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CO8-0E-fAD">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CO8-0E-fAD">
                                 <rect key="frame" x="16" y="124" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fN7-P1-I3n">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fN7-P1-I3n">
                                 <rect key="frame" x="16" y="215" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -2020,14 +2034,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="confirmPasswordField" destination="fN7-P1-I3n" id="Wq8-1Q-n3D"/>
                         <outlet property="navBar" destination="WY8-8D-D8O" id="Nq2-i5-Lnu"/>
                         <outlet property="passwordField" destination="CO8-0E-fAD" id="bbK-AT-qx7"/>
-                        <outlet property="repasswordField" destination="fN7-P1-I3n" id="j4V-gn-yiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cP3-fe-1Ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="882" y="1548"/>
+            <point key="canvasLocation" x="1287" y="721"/>
         </scene>
         <!--Profile-->
         <scene sceneID="y6p-0p-lXK">
@@ -2046,7 +2060,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jj6-dg-crh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="1307"/>
+            <point key="canvasLocation" x="391" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BJU-Gu-Y62">
@@ -2064,7 +2078,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMV-aG-Ke8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="286" y="2141"/>
+            <point key="canvasLocation" x="78" y="2999"/>
         </scene>
         <!--Select Single-->
         <scene sceneID="rSb-Jx-oat">
@@ -2105,7 +2119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uoa-MW-HKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1986" y="-63"/>
+            <point key="canvasLocation" x="2919" y="45"/>
         </scene>
         <!--Select Multiple-->
         <scene sceneID="UUh-M4-uuh">
@@ -2145,7 +2159,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DIO-FX-wkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1858" y="642"/>
+            <point key="canvasLocation" x="2889" y="750"/>
         </scene>
         <!--Address Book-->
         <scene sceneID="WlB-AQ-IKq">
@@ -2178,7 +2192,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8L-gY-RLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1858" y="1282"/>
+            <point key="canvasLocation" x="2889" y="1390"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PnB-ry-waj">
@@ -2196,7 +2210,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZ9-7a-Rar" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="-63"/>
+            <point key="canvasLocation" x="2431" y="45"/>
         </scene>
         <!--Profile Text Edit View Controller-->
         <scene sceneID="6T1-26-XjC">
@@ -2237,7 +2251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMx-vQ-NVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="810.5"/>
+            <point key="canvasLocation" x="1287" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lNg-Mx-EMn">
@@ -2255,7 +2269,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RB2-gb-5WL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="650"/>
+            <point key="canvasLocation" x="2437" y="758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Gp-ly-Vld">
@@ -2273,7 +2287,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F89-CP-8KG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="1290"/>
+            <point key="canvasLocation" x="2437" y="1398"/>
         </scene>
         <!--Facebook Friends-->
         <scene sceneID="BVY-8c-vA8">
@@ -2306,7 +2320,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jh0-4z-wxI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1858" y="1956"/>
+            <point key="canvasLocation" x="2889" y="2064"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kBs-xH-aqx">
@@ -2322,7 +2336,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbX-EU-Evi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="1956"/>
+            <point key="canvasLocation" x="2437" y="2064"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gVl-ek-YqF">
@@ -2357,6 +2371,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="e7F-Ci-38C"/>
+        <segue reference="Rx5-ve-5Y3"/>
     </inferredMetricsTieBreakers>
 </document>

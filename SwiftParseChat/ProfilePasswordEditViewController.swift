@@ -12,24 +12,24 @@ import UIKit
 class ProfilePasswordEditViewController:UIViewController {
     
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var repasswordField: UITextField!
+    @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var navBar: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navBar.title = EDIT_PASSWORD
+        navBar.title = EDIT_PASSWORD
     }
     
     @IBAction func saveClicked(sender: AnyObject) {
-        let password = self.passwordField.text
-        let repassword = self.repasswordField.text
+        let password = passwordField.text
+        let confirmPassword = confirmPasswordField.text
         var user = PFUser.currentUser()
         
-        if count(password) == 0 || count(repassword) == 0 {
+        if count(password) == 0 {
             ProgressHUD.showError("Password must be set.")
             return
         }
-        if password != repassword {
+        if count(confirmPassword) == 0 || password != confirmPassword {
             ProgressHUD.showError("Passwords do not match!")
             return
         }
