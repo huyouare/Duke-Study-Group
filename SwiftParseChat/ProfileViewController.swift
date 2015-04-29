@@ -228,8 +228,8 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             self.navigationController?.pushViewController(feedbackView, animated: true)
             return
         }
-        self.toEditAttribute = action
-        self.performSegueWithIdentifier(segueID, sender: self)
+        toEditAttribute = action
+        performSegueWithIdentifier(segueID, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
