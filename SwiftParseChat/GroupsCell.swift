@@ -81,20 +81,19 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
             if i < users.count {
                 self.avatarImageViews[i].layer.cornerRadius = self.avatarImageViews[i].frame.size.width / 2
                 self.avatarImageViews[i].layer.masksToBounds = true
+                self.avatarImageViews[i].image = UIImage(named: "profile_blank") //placeholder image
                 
                 let user = users[i]
                 let picFile = user[PF_USER_PICTURE] as? PFFile
-                if picFile != nil && picFile != NSNull() {
-                    self.avatarImageViews[i].file = picFile
-                    self.avatarImageViews[i].loadInBackground { (image: UIImage!, error: NSError!) -> Void in
-                        if error != nil {
-                            self.avatarImageViews[i].image = UIImage(named: "profile_blank")
-                            println(error)
+                picFile?.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if error == nil {
+                        if let imageData = imageData {
+                            self.avatarImageViews[i].image = UIImage(data:imageData)
                         }
                     }
-                } else {
-                    self.avatarImageViews[i].image = UIImage(named: "profile_blank")
                 }
+                self.avatarImageViews[i].loadInBackground(nil)
             }
         }
     }
