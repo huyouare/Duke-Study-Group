@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import MediaPlayer
 import EXPhotoViewer
+import MBProgressHUD
 
 class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -34,38 +35,61 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     var batchMessages = true
     var messagesLoaded = false
     var groupLoaded = false
+    var isShowingHUD = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navBar.title = "Loading..."
-        ProgressHUD.show("")
+        navBar.title = "Loading..."
+        showHUDProgress()
         showSettingsButton()
         
         var user = PFUser.currentUser()
-        self.senderId = user.objectId
-        self.senderDisplayName = user[PF_USER_FULLNAME] as! String
+        senderId = user.objectId
+        senderDisplayName = user[PF_USER_FULLNAME] as! String
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
         incomingBubbleImage = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
 
         blankAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "profile_blank"), diameter: 30)
         
         isLoading = false
-        self.loadMessages()
+        loadMessages()
         Messages.clearMessageCounter(groupId);
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.collectionView.collectionViewLayout.springinessEnabled = true
+        collectionView.collectionViewLayout.springinessEnabled = true
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "loadMessages", userInfo: nil, repeats: true)
-        self.loadGroup()
+        loadGroup()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         timer.invalidate()
     }
+    
+    func showHUDProgress() {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        isShowingHUD = true
+    }
+    
+    func hideHUDProgress() {
+        if isShowingHUD && groupLoaded && messagesLoaded {
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            isShowingHUD = false
+        }
+    }
+    
+    func showSettingsButton() {
+        if groupLoaded && messagesLoaded {
+            navBar.rightBarButtonItem?.enabled = true
+        } else {
+            navBar.rightBarButtonItem?.enabled = false
+        }
+    }
+    
+    // Mark: - Backend methods
     
     func loadGroup() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
@@ -77,9 +101,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
-                ProgressHUD.dismiss()
                 self.groupLoaded = true
                 self.showSettingsButton()
+                self.hideHUDProgress()
             } else {
                 ProgressHUD.showError(NETWORK_ERROR)
                 println(error)
@@ -87,19 +111,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         }
     }
     
-    func showSettingsButton() {
-        if groupLoaded && messagesLoaded {
-            self.navBar.rightBarButtonItem?.enabled = true
-        } else {
-            self.navBar.rightBarButtonItem?.enabled = false
-        }
-    }
-    
-    // Mark: - Backend methods
-    
     func loadMessages() {
-        if self.isLoading == false {
-            self.isLoading = true
+        if isLoading == false {
+            isLoading = true
             var lastMessage = messages.last
             
             var query = PFQuery(className: PF_CHAT_CLASS_NAME)
@@ -123,6 +137,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                     self.automaticallyScrollsToMostRecentMessage = true
                     self.messagesLoaded = true
                     self.showSettingsButton()
+                    self.hideHUDProgress()
                 } else {
                     ProgressHUD.showError("Network error")
                 }
