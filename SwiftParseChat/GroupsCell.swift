@@ -44,11 +44,11 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
                 self.dateTimeLabel.textColor = UIColor.blueColor()
             } else {
-                self.dateTimeLabel.text = dateText
-                self.dateTimeLabel.textColor = UIColor.blackColor()
                 if date?.compare(todayDate) == NSComparisonResult.OrderedAscending { /* meeting date is past */
-                    self.nextMeetingLabel.text = "Last Meeting"
+                    self.nextMeetingLabel.text = "Last Meeting:"
                 }
+                self.dateTimeLabel.text = dateText.substringToIndex(dateText.rangeOfString(",")!.startIndex) //year is preceded by a colon
+                self.dateTimeLabel.textColor = UIColor.blackColor()
             }
         } else {
             self.dateTimeLabel.removeFromSuperview()

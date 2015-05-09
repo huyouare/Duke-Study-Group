@@ -216,6 +216,17 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         }
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 { /* member section */
+            if editingStyle == UITableViewCellEditingStyle.Delete {
+                var user = self.members[indexPath.row]
+                removeFromGroup(user, index: indexPath.row)
+                members.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+        }
+    }
+    
     func saveToCalendar() {
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
@@ -377,9 +388,12 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     
     func joinGroup(users: [PFUser]) {
         let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+        var addedUsers = [PFUser]()
+        
         for user in users {
             if(!contains(groupUsers, user)) {
                 group.addObject(user, forKey: PF_GROUP_USERS)
+                addedUsers.append(user)
             }
         }
         group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
@@ -387,6 +401,30 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                 self.loadMembers()
             } else {
                 ProgressHUD.showError("Network Error")
+                //undo join group
+                for user in addedUsers {
+                    self.group.removeObject(user, forKey: PF_GROUP_USERS)
+                }
+            }
+        }
+    }
+    
+    func removeFromGroup(user: PFUser, index: Int) {
+        let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+        
+        if(contains(groupUsers, user)) {
+            group.removeObject(user, forKey: PF_GROUP_USERS)
+            
+            group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+                if error == nil {
+                    self.loadMembers()
+                } else {
+                    ProgressHUD.showError("Network Error")
+                    //undo remove from group
+                    self.group.addObject(user, forKey: PF_GROUP_USERS)
+                    self.members.insert(user, atIndex: index)
+                    self.loadMembers()
+                }
             }
         }
     }
