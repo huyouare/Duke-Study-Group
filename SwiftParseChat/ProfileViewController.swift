@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CTFeedback
 
 class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditProfileDelegate {
     
@@ -220,8 +221,15 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func didSelectProfileTableRow(segueID: String, action: String) {
-        self.toEditAttribute = action
-        self.performSegueWithIdentifier(segueID, sender: self)
+        if segueID == SEND_FEEDBACK_SEGUE {
+            var feedbackView = CTFeedbackViewController(topics: CTFeedbackViewController.defaultTopics(), localizedTopics: CTFeedbackViewController.defaultLocalizedTopics())
+            feedbackView.toRecipients = ["justinzihaozhang@gmail.com", "huyouare@gmail.com"] //TODO: change to DukeStudies email
+            feedbackView.useHTML = false
+            self.navigationController?.pushViewController(feedbackView, animated: true)
+            return
+        }
+        toEditAttribute = action
+        performSegueWithIdentifier(segueID, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

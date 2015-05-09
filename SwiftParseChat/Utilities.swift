@@ -101,20 +101,20 @@ class Utilities {
             case SHBlankAddressError.value:
                 ProgressHUD.showError("Email must be set")
                 break
-            case SHInvalidSyntaxError.value:
-                ProgressHUD.showError("Email has invalid syntax")
-                break
-            case SHInvalidUsernameError.value:
-                ProgressHUD.showError("Email local portion is invalid")
-                break
-            case SHInvalidDomainError.value:
-                ProgressHUD.showError("Email domain is invalid")
-                break
-            case SHInvalidTLDError.value:
-                ProgressHUD.showError("Email TLD is invalid")
-                break
+//            case SHInvalidSyntaxError.value:
+//                ProgressHUD.showError("Email has invalid syntax")
+//                break
+//            case SHInvalidUsernameError.value:
+//                ProgressHUD.showError("Email local portion is invalid")
+//                break
+//            case SHInvalidDomainError.value:
+//                ProgressHUD.showError("Email domain is invalid")
+//                break
+//            case SHInvalidTLDError.value:
+//                ProgressHUD.showError("Email TLD is invalid")
+//                break
             default:
-                ProgressHUD.showError("Email is invalid")
+                ProgressHUD.showError("Invalid Email")
                 break
             }
         } else {

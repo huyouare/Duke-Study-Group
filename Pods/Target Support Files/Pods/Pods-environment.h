@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Alamofire 2
 #define COCOAPODS_VERSION_PATCH_Alamofire 0
 
+// CTFeedback
+#define COCOAPODS_POD_AVAILABLE_CTFeedback
+#define COCOAPODS_VERSION_MAJOR_CTFeedback 1
+#define COCOAPODS_VERSION_MINOR_CTFeedback 0
+#define COCOAPODS_VERSION_PATCH_CTFeedback 17
+
 // ExPhotoViewer
 #define COCOAPODS_POD_AVAILABLE_ExPhotoViewer
 #define COCOAPODS_VERSION_MAJOR_ExPhotoViewer 1
