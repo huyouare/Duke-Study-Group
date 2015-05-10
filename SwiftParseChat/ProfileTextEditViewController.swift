@@ -46,8 +46,8 @@ class ProfileTextEditViewController: UIViewController {
                 user[PF_USER_FULLNAME_LOWER] = attribute.lowercaseString
                 break
             case EDIT_EMAIL:
-                if Utilities.validateEmail(attribute) == false {
-                    ProgressHUD.showError("Invalid email")
+                if Utilities.validateEmail(attribute, view: self.view) == false {
+                    HudUtil.displayErrorHUD(self.view, displayText: "Invalid email", displayTime: 1.5)
                     return
                 }
                 user[PF_USER_EMAIL] = attribute
@@ -59,13 +59,12 @@ class ProfileTextEditViewController: UIViewController {
             
             user.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
                 if error == nil {
-                    ProgressHUD.showSuccess("Saved")
                     self.navigationController?.popViewControllerAnimated(true)
                 } else {
                     if let userError = error.userInfo?["error"] as? String {
-                        ProgressHUD.showError(userError)
+                        HudUtil.displayErrorHUD(self.view, displayText: userError, displayTime: 1.5)
                     } else {
-                        ProgressHUD.showError("Network error")
+                        HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                     }
                     user[PF_USER_FULLNAME] = oldName
                     user[PF_USER_FULLNAME_LOWER] = oldName.lowercaseString
@@ -73,7 +72,7 @@ class ProfileTextEditViewController: UIViewController {
                 }
             })
         } else {
-            ProgressHUD.showError("\(self.editAttribute) field must not be empty")
+            HudUtil.displayErrorHUD(self.view, displayText: "\(self.editAttribute) field must not be empty", displayTime: 1.5)
         }
     }
 }

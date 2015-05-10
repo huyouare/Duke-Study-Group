@@ -52,7 +52,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
     }
@@ -69,7 +69,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
             
         }

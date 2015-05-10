@@ -92,15 +92,15 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
             group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
-                    ProgressHUD.showSuccess("Saved")
+                    HudUtil.displaySuccessHUD(self.view, displayText: "Saved", displayTime: 1.5)
                     println("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {
-                    ProgressHUD.showError("Network Error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                     println("%@", error)
                 }
             })
         } else {
-            ProgressHUD.showError("Group name field must not be empty")
+            HudUtil.displayErrorHUD(self.view, displayText: "Group name field must not be empty", displayTime: 1.5)
             return
         }
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)

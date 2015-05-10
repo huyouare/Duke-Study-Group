@@ -89,7 +89,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
                 self.groups.extend(objects as! [PFObject]!)
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 println(error)
             }
         }
@@ -180,7 +180,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
                 if error == nil {
                     self.loadGroups()
                 } else {
-                    ProgressHUD.showError("Network Error")
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             }
         }

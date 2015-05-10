@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class DukeLoginViewController: UITableViewController, UITextFieldDelegate {
 
@@ -51,15 +52,17 @@ class DukeLoginViewController: UITableViewController, UITextFieldDelegate {
         let password = passwordField.text
         
         if count(netId) == 0 {
-            ProgressHUD.showError("NetID field is empty.")
+            HudUtil.displayErrorHUD(self.view, displayText: "NetID field is empty", displayTime: 1.5)
             return
         } else {
-            ProgressHUD.showError("Password field is empty.")
+            HudUtil.displayErrorHUD(self.view, displayText: "Password field is empty", displayTime: 1.5)
         }
         
-        ProgressHUD.show("Signing in...", interaction: true)
+        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Signing in..."
         
         //        PFUser.logInWithUsernameInBackground(email, password: password) { (user: PFUser!, error: NSError!) -> Void in
+        //            hud.hide(true)
         //            if user != nil {
         //                PushNotication.parsePushUserAssign()
         //                ProgressHUD.showSuccess("Welcome back, \(user[PF_USER_FULLNAME])!")

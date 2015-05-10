@@ -223,7 +223,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             insertEvent(eventStore)
             break
         case .Denied:
-            ProgressHUD.showError("Access Denied")
+            HudUtil.displayErrorHUD(self.view, displayText: "Access Denied", displayTime: 1.5)
             break
         case .NotDetermined:
             eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
@@ -253,10 +253,10 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         
         if result == false {
             if let theError = error {
-                ProgressHUD.showError("Failed to save to calendar")
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed", displayTime: 1.5)
             }
         } else {
-            ProgressHUD.showSuccess("Saved to calendar")
+            HudUtil.displaySuccessHUD(self.view, displayText: "Saved", displayTime: 1.5)
         }
     }
     
@@ -307,10 +307,9 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         self.group.removeObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
         self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
             if error == nil {
-                ProgressHUD.showSuccess(NETWORK_SUCCESS)
-                println("Removed self from group \(self.group[PF_GROUP_NAME] as! String)")
+                HudUtil.displaySuccessHUD(self.view, displayText: "Quitted group successfully", displayTime: 1.5)
             } else {
-                ProgressHUD.showError(NETWORK_ERROR)
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 println("%@", error)
             }
         })
@@ -386,7 +385,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             if error == nil {
                 self.loadMembers()
             } else {
-                ProgressHUD.showError("Network Error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
     }

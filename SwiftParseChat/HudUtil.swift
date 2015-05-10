@@ -15,8 +15,8 @@ class HudUtil {
         var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDModeCustomView
         let image = UIImage(named: imageName)
-        let imageResized = Utilities.resizeImage(image!, newSize: CGSizeMake(40.0, 40.0))
-        hud.customView = UIImageView(image: imageResized)
+        //let imageResized = Utilities.resizeImage(image!, newSize: CGSizeMake(40.0, 40.0))
+        hud.customView = UIImageView(image: image)
         hud.labelText = displayText
         hud.hide(true, afterDelay: displayTime)
     }
@@ -26,5 +26,13 @@ class HudUtil {
         hud.mode = MBProgressHUDModeText
         hud.labelText = displayText
         hud.hide(true, afterDelay: displayTime)
+    }
+    
+    class func displayErrorHUD(view: UIView!, displayText: String, displayTime: Double) {
+        HudUtil.displayAlertHUDWithImage(view, imageName: "cross_mark", displayText: displayText, displayTime: displayTime)
+    }
+    
+    class func displaySuccessHUD(view: UIView!, displayText: String, displayTime: Double) {
+        HudUtil.displayAlertHUDWithImage(view, imageName: "check_mark", displayText: displayText, displayTime: displayTime)
     }
 }

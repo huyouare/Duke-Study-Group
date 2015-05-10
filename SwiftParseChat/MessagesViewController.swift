@@ -60,7 +60,7 @@ class MessagesViewController: UITableViewController, UIActionSheetDelegate {
                 self.updateEmptyView()
                 self.updateTabCounter()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
             self.refreshControl?.endRefreshing()
         }

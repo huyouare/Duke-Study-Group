@@ -105,7 +105,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 self.showSettingsButton()
                 self.hideHUDProgress()
             } else {
-                HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: NETWORK_ERROR, displayTime: 1.5)
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 println(error)
             }
         }
@@ -139,7 +139,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                     self.showSettingsButton()
                     self.hideHUDProgress()
                 } else {
-                    HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: NETWORK_ERROR, displayTime: 1.5)
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                     println(error)
                 }
                 self.isLoading = false;
@@ -192,7 +192,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             
             videoFile.saveInBackgroundWithBlock({ (succeeed: Bool, error: NSError!) -> Void in
                 if error != nil {
-                    HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: NETWORK_ERROR, displayTime: 1.5)
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             })
         }
@@ -202,7 +202,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(picture, 0.6))
             pictureFile.saveInBackgroundWithBlock({ (suceeded: Bool, error: NSError!) -> Void in
                 if error != nil {
-                    HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: "Picture save error", displayTime: 1.5)
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             })
         }
@@ -222,7 +222,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
                 self.loadMessages()
             } else {
-                HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: "Picture save error", displayTime: 1.5)
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed to save picture", displayTime: 1.5)
             }
         }
         

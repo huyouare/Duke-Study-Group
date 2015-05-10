@@ -75,10 +75,10 @@ class GroupDateEditViewController:UIViewController {
         
         self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
             if error == nil {
-                ProgressHUD.showSuccess(NETWORK_SUCCESS)
+                HudUtil.displaySuccessHUD(self.view, displayText: NETWORK_SUCCESS, displayTime: 1.5)
                 println("Changed group's \(self.editAttribute)")
             } else {
-                ProgressHUD.showError(NETWORK_ERROR)
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 println("%@", error)
             }
             self.navigationController?.popViewControllerAnimated(true)

@@ -20,7 +20,6 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
         tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
@@ -57,12 +56,12 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let password = passwordField.text
         
         if count(email) == 0 {
-            HudUtil.displayAlertHUD(view, displayText: "Email field is empty.", displayTime: 1.5)
+            HudUtil.displayErrorHUD(view, displayText: "Email field is empty.", displayTime: 1.5)
             return
         }
         
         if count(password) == 0 {
-            HudUtil.displayAlertHUD(view, displayText: "Password field is empty.", displayTime: 1.5)
+            HudUtil.displayErrorHUD(view, displayText: "Password field is empty.", displayTime: 1.5)
             return
         }
 
@@ -75,7 +74,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let info = error.userInfo {
-                    HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: info["error"] as! String, displayTime: 1.5)
+                    HudUtil.displayErrorHUD(self.view, displayText: info["error"] as! String, displayTime: 1.5)
                 }
             }
         }
