@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class LoginViewController: UITableViewController, UITextFieldDelegate {
 
@@ -20,13 +21,13 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
-        self.tableView?.tableFooterView = UIView(frame: CGRectZero)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
+        tableView?.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.emailField.becomeFirstResponder()
+        emailField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,20 +36,20 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func dismissKeyboard() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == self.emailField {
-            self.passwordField.becomeFirstResponder()
-        } else if textField == self.passwordField {
-            self.login()
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            login()
         }
         return true
     }
     
     @IBAction func loginButtonPressed(sender: UIButton) {
-        self.login()
+        login()
     }
     
     func login() {
@@ -56,21 +57,25 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let password = passwordField.text
         
         if count(email) == 0 {
-            ProgressHUD.showError("Email field is empty.")
+            HudUtil.displayAlertHUD(view, displayText: "Email field is empty.", displayTime: 1.5)
             return
-        } else {
-            ProgressHUD.showError("Password field is empty.")
         }
         
-        ProgressHUD.show("Signing in...", interaction: true)
+        if count(password) == 0 {
+            HudUtil.displayAlertHUD(view, displayText: "Password field is empty.", displayTime: 1.5)
+            return
+        }
+
+        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Signing in..."
         PFUser.logInWithUsernameInBackground(email, password: password) { (user: PFUser!, error: NSError!) -> Void in
+            hud.hide(true)
             if user != nil {
                 PushNotication.parsePushUserAssign()
-                ProgressHUD.showSuccess("Welcome back, \(user[PF_USER_FULLNAME])!")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let info = error.userInfo {
-                    ProgressHUD.showError(info["error"] as! String)
+                    HudUtil.displayAlertHUDWithImage(self.view, imageName: "cross_mark", displayText: info["error"] as! String, displayTime: 1.5)
                 }
             }
         }

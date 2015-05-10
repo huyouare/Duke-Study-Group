@@ -98,7 +98,7 @@ let EDIT_PASSWORD_SEGUE                 = "editPasswordSegue"
 let SEND_FEEDBACK_SEGUE                 = "sendFeedbackSegue"
 
 /* Error Messages */
-let NETWORK_ERROR                       = "Network Error"
+let NETWORK_ERROR                       = "Connection Error"
 let NETWORK_SUCCESS                     = "Success"
 
 

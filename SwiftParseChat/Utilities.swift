@@ -91,6 +91,16 @@ class Utilities {
         return semesterCode
     }
     
+    class func resizeImage(image:UIImage, newSize: CGSize) -> UIImage {
+        let hasAlpha = false
+        let scale:CGFloat = 0.0
+        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlpha, scale)
+        image.drawInRect(CGRect(origin: CGPointZero, size: newSize))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+    }
+    
     class func validateEmail(email:String) -> Bool {
         var error: NSError?
         let validator = SHEmailValidator()
