@@ -104,7 +104,7 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         self.dateTimeLabel.text = ""
         self.locationLabel.text = ""
         for i in 0..<self.avatarImageViews.count {
-            self.avatarImageViews[i].file = nil
+            self.avatarImageViews[i].image = nil
         }
         self.moreImageView.hidden = false
         self.countLabel.text = ""
