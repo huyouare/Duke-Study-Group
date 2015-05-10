@@ -236,7 +236,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                     if granted {
                         self!.insertEvent(eventStore)
                     } else {
-                        println("Access denied")
+                        HudUtil.displayErrorHUD(self!.view, displayText: "Access Denied", displayTime: 1.5)
                     }
                 })
             break
