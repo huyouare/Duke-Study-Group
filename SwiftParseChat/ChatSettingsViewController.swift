@@ -217,6 +217,11 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     func saveToCalendar() {
+        if group[PF_GROUP_DATETIME] == nil {
+            HudUtil.displayErrorHUD(self.view, displayText: "Meeting time not set", displayTime: 1.5)
+            return
+        }
+        
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
         case .Authorized:
