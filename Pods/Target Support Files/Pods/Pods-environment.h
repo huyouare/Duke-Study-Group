@@ -18,11 +18,11 @@
 #define COCOAPODS_VERSION_MINOR_CTFeedback 0
 #define COCOAPODS_VERSION_PATCH_CTFeedback 17
 
-// ExPhotoViewer
-#define COCOAPODS_POD_AVAILABLE_ExPhotoViewer
-#define COCOAPODS_VERSION_MAJOR_ExPhotoViewer 1
-#define COCOAPODS_VERSION_MINOR_ExPhotoViewer 1
-#define COCOAPODS_VERSION_PATCH_ExPhotoViewer 2
+// EXPhotoViewer
+#define COCOAPODS_POD_AVAILABLE_EXPhotoViewer
+#define COCOAPODS_VERSION_MAJOR_EXPhotoViewer 1
+#define COCOAPODS_VERSION_MINOR_EXPhotoViewer 1
+#define COCOAPODS_VERSION_PATCH_EXPhotoViewer 2
 
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD

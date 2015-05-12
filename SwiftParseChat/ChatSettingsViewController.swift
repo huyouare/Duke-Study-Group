@@ -216,6 +216,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         }
     }
     
+/*
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 { /* member section */
             if editingStyle == UITableViewCellEditingStyle.Delete {
@@ -226,6 +227,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             }
         }
     }
+*/
     
     func saveToCalendar() {
         let eventStore = EKEventStore()
