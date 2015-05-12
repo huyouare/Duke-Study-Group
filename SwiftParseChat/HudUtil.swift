@@ -29,10 +29,10 @@ class HudUtil {
     }
     
     class func displayErrorHUD(view: UIView!, displayText: String, displayTime: Double) {
-        HudUtil.displayAlertHUDWithImage(view, imageName: "cross_mark", displayText: displayText, displayTime: displayTime)
+        HudUtil.displayAlertHUDWithImage(view, imageName: "error", displayText: displayText, displayTime: displayTime)
     }
     
     class func displaySuccessHUD(view: UIView!, displayText: String, displayTime: Double) {
-        HudUtil.displayAlertHUDWithImage(view, imageName: "check_mark", displayText: displayText, displayTime: displayTime)
+        HudUtil.displayAlertHUDWithImage(view, imageName: "checkmark_filled", displayText: displayText, displayTime: displayTime)
     }
 }

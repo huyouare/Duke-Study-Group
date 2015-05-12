@@ -35,7 +35,7 @@ class ProfilePasswordEditViewController:UIViewController {
             return
         }
         
-        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Saving...."
         
         user[PF_USER_PASSWORD] = password

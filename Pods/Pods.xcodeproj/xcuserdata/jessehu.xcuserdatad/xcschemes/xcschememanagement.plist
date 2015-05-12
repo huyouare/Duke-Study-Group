@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-CTFeedback-CTFeedback.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-CTFeedback.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EXPhotoViewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09302E18C4AB8230411BB7EC</key>
+		<key>0888267DDD622F161FE76AA2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0E73C085DD8C249D6CD9A7F2</key>
+		<key>2141A79D43192A6A08250245</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6EB0DC5FF5E0AE73DE69A290</key>
+		<key>346310D0D8FC5EB42CB3490F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A89B8998F29F15E853F2B9EC</key>
+		<key>3D6E5B09CAF319FA37F326D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6DC8830B777424937E99BA7</key>
+		<key>7773EFF6CD637D89CEB40BDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7BB859CDB1037D17E72EA5B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D06CB02A3816488917DD5B99</key>
 		<dict>
 			<key>primary</key>
 			<true/>

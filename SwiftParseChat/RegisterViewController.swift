@@ -81,7 +81,7 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
             return
         }
         
-        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Registering...."
         
         var user = PFUser()

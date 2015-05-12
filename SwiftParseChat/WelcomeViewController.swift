@@ -35,7 +35,7 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func facebookLogin(sender: UIButton) {
-        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Signing in..."
         PFFacebookUtils.logInWithPermissions(["public_profile", "email", "user_friends", "user_education_history"], block: { (user: PFUser!, error: NSError!) -> Void in
             hud.hide(true)

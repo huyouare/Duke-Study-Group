@@ -58,7 +58,7 @@ class DukeLoginViewController: UITableViewController, UITextFieldDelegate {
             HudUtil.displayErrorHUD(self.view, displayText: "Password field is empty", displayTime: 1.5)
         }
         
-        var hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Signing in..."
         
         //        PFUser.logInWithUsernameInBackground(email, password: password) { (user: PFUser!, error: NSError!) -> Void in

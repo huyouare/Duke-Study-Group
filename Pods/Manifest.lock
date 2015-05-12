@@ -8,7 +8,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 1.2)
   - CTFeedback
-  - ExPhotoViewer
+  - EXPhotoViewer
   - MBProgressHUD (~> 0.8)
   - SHEmailValidator (~> 1.0.2)
 
@@ -19,4 +19,4 @@ SPEC CHECKSUMS:
   MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
   SHEmailValidator: b897320322e52eddc894173ef6fa8f98ca7e3639
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.1
