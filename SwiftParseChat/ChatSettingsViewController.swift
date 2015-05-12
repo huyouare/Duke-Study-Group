@@ -438,24 +438,4 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             }
         }
     }
-    
-    func removeFromGroup(user: PFUser, index: Int) {
-        let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
-        
-        if(contains(groupUsers, user)) {
-            group.removeObject(user, forKey: PF_GROUP_USERS)
-            
-            group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
-                if error == nil {
-                    self.loadMembers()
-                } else {
-                    ProgressHUD.showError("Network Error")
-                    //undo remove from group
-                    self.group.addObject(user, forKey: PF_GROUP_USERS)
-                    self.members.insert(user, atIndex: index)
-                    self.loadMembers()
-                }
-            }
-        }
-    }
 }
