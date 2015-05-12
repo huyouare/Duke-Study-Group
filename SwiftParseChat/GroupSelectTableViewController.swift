@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol GroupSelectTableViewControllerDelegate {
     func joinGroup(group: PFObject)
@@ -23,8 +24,6 @@ class GroupSelectTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGroupData()
-        refreshGroupTable()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,12 +39,14 @@ class GroupSelectTableViewController: UITableViewController {
                 self.navigationItem.title = titleString
                 
                 /* find groups for that course in Parse */
+                var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
                 var query = PFQuery(className: PF_GROUP_CLASS_NAME)
                 query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
                 query.includeKey(PF_GROUP_USERS)
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    hud.hide(true)
                     if error == nil {
                         self.groups.removeAll(keepCapacity: false)
                         for group in objects as! [PFObject]! {
@@ -54,6 +55,7 @@ class GroupSelectTableViewController: UITableViewController {
                         self.refreshGroupTable()
                     } else {
                         HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
+                        self.refreshGroupTable()
                     }
                 })
                 

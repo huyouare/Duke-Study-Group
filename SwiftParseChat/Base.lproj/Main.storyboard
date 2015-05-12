@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="1926" y="-1498"/>
         </scene>
-        <!--Groups-->
+        <!--Loading...-->
         <scene sceneID="T5F-e7-3Ua">
             <objects>
                 <tableViewController id="qAp-Q5-H7L" customClass="GroupSelectTableViewController" customModule="SwiftParseChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -363,7 +363,7 @@
                             <outlet property="delegate" destination="qAp-Q5-H7L" id="ns6-9T-Yyi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Groups" id="rYw-B4-dxU">
+                    <navigationItem key="navigationItem" title="Loading..." id="rYw-B4-dxU">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="DxG-bd-prg">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="qAp-Q5-H7L" id="pga-Nw-K2D"/>
@@ -2371,6 +2371,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rx5-ve-5Y3"/>
+        <segue reference="e7F-Ci-38C"/>
     </inferredMetricsTieBreakers>
 </document>
