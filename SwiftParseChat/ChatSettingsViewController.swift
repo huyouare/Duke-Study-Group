@@ -10,12 +10,14 @@ import UIKit
 import Foundation
 import EventKit
 
-class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate {
+class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, SelectSingleViewControllerDelegate, SelectMultipleViewControllerDelegate, AddressBookViewControllerDelegate, FacebookFriendsViewControllerDelegate, UIAlertViewDelegate {
 
     let actionItems = [EDIT_GROUP_NAME, EDIT_DESCRIPTION, EDIT_TIME, EDIT_LOCATION, SAVE_TO_CALENDAR, NOTIFY_ACTION, LEAVE_ACTION]
     var members = [PFUser]()
     var group: PFObject!
     var editAttribute:String!
+    
+    var removedUser: PFUser!
     
     @IBOutlet weak var navBar: UINavigationItem!
     override func viewDidLoad() {
@@ -216,6 +218,45 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         }
     }
     
+    /* Swipe to bring up button delete member from group */
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 { /* member section */
+            if editingStyle == UITableViewCellEditingStyle.Delete {
+                removedUser = self.members[indexPath.row]
+                deleteAlert()
+            }
+        }
+    }
+    
+    func deleteAlert() {
+        var alert = UIAlertView(title: "Are you sure you want to remove from this group?", message: "", delegate: self as UIAlertViewDelegate, cancelButtonTitle: "Cancel", otherButtonTitles: "Remove")
+        
+        alert.alertViewStyle = UIAlertViewStyle.Default
+        alert.show()
+    }
+    
+    /* UIAlertView Delegate */
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != alertView.cancelButtonIndex {
+            let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+            
+            if(contains(groupUsers, removedUser)) {
+                group.removeObject(removedUser, forKey: PF_GROUP_USERS)
+                
+                group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+                    if error == nil {
+                        self.loadMembers()
+                    } else {
+                        ProgressHUD.showError("Network Error")
+                        self.loadMembers()
+                    }
+                }
+            }
+        }
+    }
+
+    
     func saveToCalendar() {
         if group[PF_GROUP_DATETIME] == nil {
             HudUtil.displayErrorHUD(self.view, displayText: "Meeting time not set", displayTime: 1.5)
@@ -381,16 +422,27 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     
     func joinGroup(users: [PFUser]) {
         let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
+        var addedUsers = [PFUser]()
+        
         for user in users {
             if(!contains(groupUsers, user)) {
                 group.addObject(user, forKey: PF_GROUP_USERS)
+                addedUsers.append(user)
             }
         }
         group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error == nil {
                 self.loadMembers()
             } else {
+<<<<<<< HEAD
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
+=======
+                ProgressHUD.showError("Network Error")
+                //undo join group
+                for user in addedUsers {
+                    self.group.removeObject(user, forKey: PF_GROUP_USERS)
+                }
+>>>>>>> master
             }
         }
     }
