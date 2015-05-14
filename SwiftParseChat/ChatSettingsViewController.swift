@@ -248,7 +248,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                     if error == nil {
                         self.loadMembers()
                     } else {
-                        ProgressHUD.showError("Network Error")
+                        HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                         self.loadMembers()
                     }
                 }
@@ -434,15 +434,11 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             if error == nil {
                 self.loadMembers()
             } else {
-<<<<<<< HEAD
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-=======
-                ProgressHUD.showError("Network Error")
                 //undo join group
                 for user in addedUsers {
                     self.group.removeObject(user, forKey: PF_GROUP_USERS)
                 }
->>>>>>> master
             }
         }
     }
