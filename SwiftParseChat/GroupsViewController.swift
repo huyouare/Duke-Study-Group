@@ -182,10 +182,13 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
             group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
                 if error == nil {
                     self.loadGroups()
+                    HudUtil.displaySuccessHUD(self.view, displayText: "Joined group", displayTime: 1.5)
                 } else {
                     HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             }
+        } else {
+            HudUtil.displayErrorHUD(self.view, displayText: "Already in group!", displayTime: 1.5)
         }
     }
 }
