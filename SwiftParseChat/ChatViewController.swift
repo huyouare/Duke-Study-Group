@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import MediaPlayer
 import EXPhotoViewer
+import MBProgressHUD
 
 class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -34,38 +35,61 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     var batchMessages = true
     var messagesLoaded = false
     var groupLoaded = false
+    var isShowingHUD = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navBar.title = "Loading..."
-        ProgressHUD.show("")
+        navBar.title = "Loading..."
+        showHUDProgress()
         showSettingsButton()
         
         var user = PFUser.currentUser()
-        self.senderId = user.objectId
-        self.senderDisplayName = user[PF_USER_FULLNAME] as! String
+        senderId = user.objectId
+        senderDisplayName = user[PF_USER_FULLNAME] as! String
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
         incomingBubbleImage = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
 
         blankAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "profile_blank"), diameter: 30)
         
         isLoading = false
-        self.loadMessages()
+        loadMessages()
         Messages.clearMessageCounter(groupId);
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.collectionView.collectionViewLayout.springinessEnabled = true
+        collectionView.collectionViewLayout.springinessEnabled = true
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "loadMessages", userInfo: nil, repeats: true)
-        self.loadGroup()
+        loadGroup()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         timer.invalidate()
     }
+    
+    func showHUDProgress() {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        isShowingHUD = true
+    }
+    
+    func hideHUDProgress() {
+        if isShowingHUD && groupLoaded && messagesLoaded {
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            isShowingHUD = false
+        }
+    }
+    
+    func showSettingsButton() {
+        if groupLoaded && messagesLoaded {
+            navBar.rightBarButtonItem?.enabled = true
+        } else {
+            navBar.rightBarButtonItem?.enabled = false
+        }
+    }
+    
+    // Mark: - Backend methods
     
     func loadGroup() {
         var query = PFQuery(className: PF_GROUP_CLASS_NAME)
@@ -77,29 +101,19 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 let groups = objects as! [PFObject]!
                 self.group = groups[0]
                 self.navBar.title = self.group[PF_GROUP_NAME] as? String
-                ProgressHUD.dismiss()
                 self.groupLoaded = true
                 self.showSettingsButton()
+                self.hideHUDProgress()
             } else {
-                ProgressHUD.showError(NETWORK_ERROR)
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 println(error)
             }
         }
     }
     
-    func showSettingsButton() {
-        if groupLoaded && messagesLoaded {
-            self.navBar.rightBarButtonItem?.enabled = true
-        } else {
-            self.navBar.rightBarButtonItem?.enabled = false
-        }
-    }
-    
-    // Mark: - Backend methods
-    
     func loadMessages() {
-        if self.isLoading == false {
-            self.isLoading = true
+        if isLoading == false {
+            isLoading = true
             var lastMessage = messages.last
             
             var query = PFQuery(className: PF_CHAT_CLASS_NAME)
@@ -123,8 +137,10 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                     self.automaticallyScrollsToMostRecentMessage = true
                     self.messagesLoaded = true
                     self.showSettingsButton()
+                    self.hideHUDProgress()
                 } else {
-                    ProgressHUD.showError("Network error")
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
+                    println(error)
                 }
                 self.isLoading = false;
             })
@@ -176,7 +192,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             
             videoFile.saveInBackgroundWithBlock({ (succeeed: Bool, error: NSError!) -> Void in
                 if error != nil {
-                    ProgressHUD.showError("Network error")
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             })
         }
@@ -186,7 +202,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(picture, 0.6))
             pictureFile.saveInBackgroundWithBlock({ (suceeded: Bool, error: NSError!) -> Void in
                 if error != nil {
-                    ProgressHUD.showError("Picture save error")
+                    HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             })
         }
@@ -206,7 +222,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
                 self.loadMessages()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed to save picture", displayTime: 1.5)
             }
         }
         
@@ -219,7 +235,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // MARK: - JSQMessagesViewController method overrides
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        self.sendMessage(text, video: nil, picture: nil)
+        sendMessage(text, video: nil, picture: nil)
     }
     
     override func didPressAccessoryButton(sender: UIButton!) {
@@ -230,7 +246,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // MARK: - JSQMessages CollectionView DataSource
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        return self.messages[indexPath.item]
+        return messages[indexPath.item]
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -243,7 +259,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         var user = self.users[indexPath.item]
-        if self.avatars[user.objectId] == nil {
+        if avatars[user.objectId] == nil {
             var thumbnailFile = user[PF_USER_THUMBNAIL] as? PFFile
             thumbnailFile?.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
                 if error == nil {
@@ -253,7 +269,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             })
             return blankAvatarImage
         } else {
-            return self.avatars[user.objectId]
+            return avatars[user.objectId]
         }
     }
     
@@ -266,7 +282,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        var message = self.messages[indexPath.item]
+        var message = messages[indexPath.item]
         if message.senderId == self.senderId {
             return nil
         }
@@ -287,7 +303,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // MARK: - UICollectionView DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.messages.count
+        return messages.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -383,7 +399,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         var video = info[UIImagePickerControllerMediaURL] as? NSURL
         var picture = info[UIImagePickerControllerEditedImage] as? UIImage
         
-        self.sendMessage("", video: video, picture: picture)
+        sendMessage("", video: video, picture: picture)
         
         picker.dismissViewControllerAnimated(true, completion: nil)
     }

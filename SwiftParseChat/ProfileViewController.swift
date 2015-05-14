@@ -117,7 +117,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         var pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
         pictureFile.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
         
@@ -130,7 +130,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         var thumbnailFile = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
         thumbnailFile.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
         
@@ -139,7 +139,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
         user[PF_USER_THUMBNAIL] = thumbnailFile
         user.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
         
@@ -156,7 +156,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 self.processFacebook(user, userData: userData)
             } else {
                 PFUser.logOut()
-                ProgressHUD.showError("Failed to fetch Facebook user data")
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook user data", displayTime: 1.5)
             }
         }
     }
@@ -179,7 +179,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 var filePicture = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
                 filePicture.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                     if error != nil {
-                        ProgressHUD.showError("Error saving photo")
+                        HudUtil.displayErrorHUD(self.view, displayText: "Failed to save photo", displayTime: 1.5)
                     }
                 })
                 
@@ -191,7 +191,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                 var fileThumbnail = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
                 fileThumbnail.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                     if error != nil {
-                        ProgressHUD.showError("Error saving thumbnail")
+                        HudUtil.displayErrorHUD(self.view, displayText: "Failed to save thumbnail", displayTime: 1.5)
                     }
                 })
                 
@@ -206,14 +206,14 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                         return
                     } else {
                         if let info = error!.userInfo {
-                            ProgressHUD.showError("Login error")
+                            HudUtil.displayErrorHUD(self.view, displayText: "Failed to login", displayTime: 1.5)
                             println(info["error"] as! String)
                         }
                     }
                 })
             } else {
                 if let info = error!.userInfo {
-                    ProgressHUD.showError("Failed to fetch Facebook photo")
+                    HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook photo", displayTime: 1.5)
                     println(info["error"] as! String)
                 }
             }
@@ -223,7 +223,7 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     func didSelectProfileTableRow(segueID: String, action: String) {
         if segueID == SEND_FEEDBACK_SEGUE {
             var feedbackView = CTFeedbackViewController(topics: CTFeedbackViewController.defaultTopics(), localizedTopics: CTFeedbackViewController.defaultLocalizedTopics())
-            feedbackView.toRecipients = ["justinzihaozhang@gmail.com", "huyouare@gmail.com"] //TODO: change to DukeStudies email
+            feedbackView.toRecipients = ["duke.studies.app@gmail.com"]
             feedbackView.useHTML = false
             self.navigationController?.pushViewController(feedbackView, animated: true)
             return

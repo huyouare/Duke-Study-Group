@@ -8,6 +8,7 @@
 
 import UIKit
 import SHEmailValidator
+import MBProgressHUD
 
 class RegisterViewController: UITableViewController, UITextFieldDelegate {
     
@@ -65,22 +66,23 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         let confirmPassword = confirmPasswordField.text
         
         if count(name) == 0 {
-            ProgressHUD.showError("Name must be set")
+            HudUtil.displayErrorHUD(view, displayText: "Name must be set", displayTime: 1.5)
             return
         }
-        if !Utilities.validateEmail(self.emailField.text) {
+        if !Utilities.validateEmail(emailField.text, view: self.view) {
             return
         }
         if count(password) == 0 {
-            ProgressHUD.showError("Password must be set")
+            HudUtil.displayErrorHUD(view, displayText: "Password must be set", displayTime: 1.5)
             return
         }
         if count(confirmPassword) == 0 || password != confirmPassword {
-            ProgressHUD.showError("Passwords do not match")
+            HudUtil.displayErrorHUD(view, displayText: "Passwords do not match", displayTime: 1.5)
             return
         }
         
-        ProgressHUD.show("Please wait...", interaction: false)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Registering...."
         
         var user = PFUser()
         user.username = email
@@ -90,13 +92,13 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         user[PF_USER_FULLNAME] = name
         user[PF_USER_FULLNAME_LOWER] = name.lowercaseString
         user.signUpInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
+            hud.hide(true)
             if error == nil {
                 PushNotication.parsePushUserAssign()
-                ProgressHUD.showSuccess("Success")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 if let userInfo = error.userInfo {
-                    ProgressHUD.showError(userInfo["error"] as! String)
+                    HudUtil.displayErrorHUD(self.view, displayText: userInfo["error"] as! String, displayTime: 1.5)
                 }
             }
         }

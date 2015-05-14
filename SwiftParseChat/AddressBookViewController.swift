@@ -52,7 +52,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
                     }
                     self.loadUsers()
                 } else if error != nil {
-                    ProgressHUD.showError("Error loading contacts")
+                    HudUtil.displayErrorHUD(self.view, displayText: "Failed to load contacts", displayTime: 1.5)
                     println(error)
                 }
             })
@@ -95,7 +95,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
                 }
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
     }
@@ -200,7 +200,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         } else if emailsCount == 0 && phonesCount > 0 {
             self.sendSMS(user)
         } else {
-            ProgressHUD.showError("Contact has no email or phone number")
+            HudUtil.displayErrorHUD(self.view, displayText: "Contact has no email or phone number", displayTime: 1.5)
         }
     }
     
@@ -229,7 +229,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
             mailCompose.mailComposeDelegate = self
             self.presentViewController(mailCompose, animated: true, completion: nil)
         } else {
-            ProgressHUD.showError("Email not configured")
+            HudUtil.displayErrorHUD(self.view, displayText: "Email not configured", displayTime: 1.5)
         }
     }
     
@@ -237,7 +237,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         if result.value == MFMailComposeResultSent.value {
-            ProgressHUD.showSuccess("Invitation email sent successfully")
+            HudUtil.displayErrorHUD(self.view, displayText: "Invitation email sent successfully", displayTime: 1.5)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -253,7 +253,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
             messageCompose.messageComposeDelegate = self
             self.presentViewController(messageCompose, animated: true, completion: nil)
         } else {
-            ProgressHUD.showError("SMS cannot be sent")
+            HudUtil.displayErrorHUD(self.view, displayText: "Failed to send SMS", displayTime: 1.5)
         }
     }
     
@@ -261,7 +261,7 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
     
     func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
         if result.value == MessageComposeResultSent.value {
-            ProgressHUD.showSuccess("Invitation SMS sent successfully")
+            HudUtil.displaySuccessHUD(self.view, displayText: "Successfully sent invitation SMS", displayTime: 1.5)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }

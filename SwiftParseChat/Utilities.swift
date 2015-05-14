@@ -91,7 +91,17 @@ class Utilities {
         return semesterCode
     }
     
-    class func validateEmail(email:String) -> Bool {
+    class func resizeImage(image:UIImage, newSize: CGSize) -> UIImage {
+        let hasAlpha = false
+        let scale:CGFloat = 0.0
+        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlpha, scale)
+        image.drawInRect(CGRect(origin: CGPointZero, size: newSize))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+    }
+    
+    class func validateEmail(email:String, view: UIView!) -> Bool {
         var error: NSError?
         let validator = SHEmailValidator()
         validator.validateSyntaxOfEmailAddress(email, withError: &error)
@@ -99,7 +109,7 @@ class Utilities {
             let code = error?.code
             switch UInt32(code!) {
             case SHBlankAddressError.value:
-                ProgressHUD.showError("Email must be set")
+                HudUtil.displayErrorHUD(view, displayText: "Email must be set", displayTime: 1.0)
                 break
 //            case SHInvalidSyntaxError.value:
 //                ProgressHUD.showError("Email has invalid syntax")
@@ -114,7 +124,7 @@ class Utilities {
 //                ProgressHUD.showError("Email TLD is invalid")
 //                break
             default:
-                ProgressHUD.showError("Invalid Email")
+                HudUtil.displayErrorHUD(view, displayText: "Invalid Email", displayTime: 1.0)
                 break
             }
         } else {

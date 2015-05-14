@@ -43,7 +43,7 @@ class SelectMultipleViewController: UITableViewController {
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                ProgressHUD.showError("Network error")
+                HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
     }
@@ -56,7 +56,7 @@ class SelectMultipleViewController: UITableViewController {
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         if self.selection.count == 0 {
-            ProgressHUD.showError("No recipient selected")
+            HudUtil.displayErrorHUD(self.view, displayText: "None selected", displayTime: 1.5)
         } else {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 var selectedUsers = [PFUser]()

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import MBProgressHUD
 
 class WelcomeViewController: UIViewController {
     
@@ -34,8 +35,10 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func facebookLogin(sender: UIButton) {
-        ProgressHUD.show("Signing in...", interaction: false)
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Signing in..."
         PFFacebookUtils.logInWithPermissions(["public_profile", "email", "user_friends", "user_education_history"], block: { (user: PFUser!, error: NSError!) -> Void in
+            hud.hide(true)
             if user != nil {
                 if user[PF_USER_FACEBOOKID] == nil {
                     self.requestFacebook(user)
@@ -49,7 +52,7 @@ class WelcomeViewController: UIViewController {
                         println(info)
                     }
                 }
-                ProgressHUD.showError("Facebook sign in error")
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed to sign in with Facebook", displayTime: 1.5)
             }
         })
     }
@@ -86,7 +89,7 @@ class WelcomeViewController: UIViewController {
 //                }
             } else {
                 PFUser.logOut()
-                ProgressHUD.showError("Failed to fetch Facebook user data")
+                HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook user data", displayTime: 1.5)
             }
         }
     }
@@ -109,7 +112,7 @@ class WelcomeViewController: UIViewController {
                 var filePicture = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
                 filePicture.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                     if error != nil {
-                        ProgressHUD.showError("Error saving photo")
+                        HudUtil.displayErrorHUD(self.view, displayText: "Failed to save photo", displayTime: 1.5)
                     }
                 })
                 
@@ -119,7 +122,7 @@ class WelcomeViewController: UIViewController {
                 var fileThumbnail = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
                 fileThumbnail.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                     if error != nil {
-                        ProgressHUD.showError("Error saving thumbnail")
+                        HudUtil.displayErrorHUD(self.view, displayText: "Failed to save thumbnail", displayTime: 1.5)
                     }
                 })
                 
@@ -136,7 +139,7 @@ class WelcomeViewController: UIViewController {
                     } else {
                         PFUser.logOut()
                         if let info = error!.userInfo {
-                            ProgressHUD.showError("Login error")
+                            HudUtil.displayErrorHUD(self.view, displayText: "Failed to login", displayTime: 1.5)
                             println(info["error"] as! String)
                         }
                     }
@@ -144,7 +147,7 @@ class WelcomeViewController: UIViewController {
             } else {
                 PFUser.logOut()
                 if let info = error!.userInfo {
-                    ProgressHUD.showError("Failed to fetch Facebook photo")
+                    HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook photo", displayTime: 1.5)
                     println(info["error"] as! String)
                 }
             }
@@ -153,7 +156,6 @@ class WelcomeViewController: UIViewController {
     
     func userLoggedIn(user: PFUser) {
         PushNotication.parsePushUserAssign()
-        ProgressHUD.showSuccess("Welcome back, \(user[PF_USER_FULLNAME])!")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
