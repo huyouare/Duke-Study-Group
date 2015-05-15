@@ -30,8 +30,8 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
 
     func bindData(group: PFObject) {
         var currentUser = PFUser.currentUser()
-        self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
-        self.nameLabel.text = group[PF_GROUP_NAME] as? String
+        courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
+        nameLabel.text = group[PF_GROUP_NAME] as? String
         var date = group[PF_GROUP_DATETIME] as? NSDate
         var location = group[PF_GROUP_LOCATION] as? String
         var dateSet = (date != nil)
@@ -41,47 +41,50 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         if dateSet {
             let dateText = JSQMessagesTimestampFormatter.sharedFormatter().relativeDateForDate(date)
             if dateText == "Today" {
-                self.dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
-                self.dateTimeLabel.textColor = UIColor.blueColor()
+                dateTimeLabel.text = JSQMessagesTimestampFormatter.sharedFormatter().timeForDate(date)
+                dateTimeLabel.textColor = UIColor.blueColor()
             } else {
                 if date?.compare(todayDate) == NSComparisonResult.OrderedAscending { /* meeting date is past */
-                    self.nextMeetingLabel.text = "Last Meeting:"
+                    nextMeetingLabel.text = "Last Meeting:"
                 }
                 if dateText.rangeOfString(",") != nil {
-                    self.dateTimeLabel.text = dateText.substringToIndex(dateText.rangeOfString(",")!.startIndex) //year is preceded by a colon
+                    dateTimeLabel.text = dateText.substringToIndex(dateText.rangeOfString(",")!.startIndex) //year is preceded by a colon
                 } else {
-                    self.dateTimeLabel.text = dateText
+                    dateTimeLabel.text = dateText
                 }
-                self.dateTimeLabel.textColor = UIColor.blackColor()
+                dateTimeLabel.textColor = UIColor.blackColor()
             }
         } else {
-            self.dateTimeLabel.removeFromSuperview()
+            locationLabel.enabled = false
         }
         
         if locationSet {
-            self.locationLabel.text = location
-            
+            if !dateSet {
+                dateTimeLabel.text = location //set dateTimeLabel to location to provide a work around for issue #71
+            } else {
+                locationLabel.text = location
+            }
         }
         
         if !dateSet && !locationSet {
-            self.nextMeetingLabel.text = ""
-            self.dateTimeLabel.text = ""
-            self.locationLabel.text = ""
+            nextMeetingLabel.text = ""
+            dateTimeLabel.text = ""
+            locationLabel.text = ""
         }
         
         let users = group[PF_GROUP_USERS] as! [PFUser]!
         
-        if users.count > self.avatarImageViews.count {
-            self.moreImageView.hidden = false
-            let moreCount = users.count - self.avatarImageViews.count
-            self.countLabel.text = "+\(moreCount)"
-            self.moreImageView.layer.cornerRadius = CGFloat(15.0)
-            self.moreImageView.clipsToBounds = true
+        if users.count > avatarImageViews.count {
+            moreImageView.hidden = false
+            let moreCount = users.count - avatarImageViews.count
+            countLabel.text = "+\(moreCount)"
+            moreImageView.layer.cornerRadius = CGFloat(15.0)
+            moreImageView.clipsToBounds = true
         } else {
-            self.moreImageView.hidden = true
+            moreImageView.hidden = true
         }
         
-        for i in 0..<self.avatarImageViews.count {
+        for i in 0..<avatarImageViews.count {
             if i < users.count {
                 self.avatarImageViews[i].layer.cornerRadius = self.avatarImageViews[i].frame.size.width / 2
                 self.avatarImageViews[i].layer.masksToBounds = true
@@ -102,16 +105,17 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     func clear() {
-        self.courseLabel.text = ""
-        self.nameLabel.text = ""
-        self.nextMeetingLabel.text = "Next Meeting:"
-        self.dateTimeLabel.text = ""
-        self.locationLabel.text = ""
-        for i in 0..<self.avatarImageViews.count {
+        courseLabel.text = ""
+        nameLabel.text = ""
+        nextMeetingLabel.text = "Next Meeting:"
+        dateTimeLabel.text = ""
+        locationLabel.text = ""
+        locationLabel.enabled = true
+        for i in 0..<avatarImageViews.count {
             self.avatarImageViews[i].image = nil
         }
-        self.moreImageView.hidden = false
-        self.countLabel.text = ""
+        moreImageView.hidden = false
+        countLabel.text = ""
     }
 
 }

@@ -139,7 +139,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
         cell.clear()
-        cell.bindData(self.groups[indexPath.row])
+        cell.bindData(groups[indexPath.row])
         return cell
     }
     
@@ -152,7 +152,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var group = self.groups[indexPath.row]
+        var group = groups[indexPath.row]
         let groupId = group.objectId as String
         
         Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as! String)
