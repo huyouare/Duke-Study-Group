@@ -47,7 +47,11 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
                 if date?.compare(todayDate) == NSComparisonResult.OrderedAscending { /* meeting date is past */
                     self.nextMeetingLabel.text = "Last Meeting:"
                 }
-                self.dateTimeLabel.text = dateText.substringToIndex(dateText.rangeOfString(",")!.startIndex) //year is preceded by a colon
+                if dateText.rangeOfString(",") != nil {
+                    self.dateTimeLabel.text = dateText.substringToIndex(dateText.rangeOfString(",")!.startIndex) //year is preceded by a colon
+                } else {
+                    self.dateTimeLabel.text = dateText
+                }
                 self.dateTimeLabel.textColor = UIColor.blackColor()
             }
         } else {
