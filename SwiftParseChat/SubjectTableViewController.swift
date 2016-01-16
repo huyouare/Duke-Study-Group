@@ -11,7 +11,7 @@
 - Add new String var to store desired Parse class
 */
 
-// Test 1
+// Test 2
 
 import UIKit
 
