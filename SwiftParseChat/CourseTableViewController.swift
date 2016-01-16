@@ -6,17 +6,23 @@
 //  Copyright (c) 2015 Jesse Hu. All rights reserved.
 //
 
+/* Brian's Key Changes:
+- Comment out all references to 'GroupSelectTableViewControllerDelegate'
+- Replace courseToGroupSegue with subjectToCourseSegue (since we still need to segue to section selection)
+*/
+
 import UIKit
 
 class CourseTableViewController: UITableViewController, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
     var subject: NSDictionary!
     var courses: NSArray!
-    var delegate: GroupSelectTableViewControllerDelegate!
+//    var delegate: GroupSelectTableViewControllerDelegate!
     var selectedCourse: [String: String]!
 
     var filteredCourses: NSArray!
     var searchController: UISearchController!
+    var parseClassString: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +60,7 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
 
         if self.searchController.active {
             if let course = self.filteredCourses[indexPath.row] as? [String: String] {
@@ -88,7 +94,7 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
                     self.selectedCourse["subject_desc"] = desc
                 }
                 
-                self.performSegueWithIdentifier("courseToGroupsSegue", sender: self)
+                self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
             }
         }
         else {
@@ -102,27 +108,39 @@ class CourseTableViewController: UITableViewController, UISearchBarDelegate, UIS
                     self.selectedCourse["subject_desc"] = desc
                 }
                 
-                self.performSegueWithIdentifier("courseToGroupsSegue", sender: self)
+                self.performSegueWithIdentifier("subjectToCourseSegue", sender: self)
             }
         }
     }
     
     // MARK: - Navigation
     
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "courseToGroupsSegue" {
+//            let groupSelectVC = segue.destinationViewController as! GroupSelectTableViewController
+//            groupSelectVC.delegate = self.delegate
+//            groupSelectVC.course = self.selectedCourse
+//        }
+//    }
+    
+    // MARK: - Navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "courseToGroupsSegue" {
-            let groupSelectVC = segue.destinationViewController as! GroupSelectTableViewController
-            groupSelectVC.delegate = self.delegate
-            groupSelectVC.course = self.selectedCourse
+        if segue.identifier == "subjectToCourseSegue" {
+            let sectionVC = segue.destinationViewController as! ViewController
+//            courseVC.delegate = self.delegate
+//            sectionVC.subject = self.selectedCourse
+//            sectionVC.courses = self.courses
         }
     }
+
 
     // MARK: - UISearchControllerDelegate
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchString = searchController.searchBar.text
         
-        let predicate = NSPredicate(format: "course_number contains[c] %@ OR course_title contains[c] %@", argumentArray: [searchString, searchString])
+        let predicate = NSPredicate(format: "course_number contains[c] %@ OR course_title contains[c] %@", argumentArray: [searchString!, searchString!])
         self.filteredCourses = self.courses.filteredArrayUsingPredicate(predicate)
         
         self.tableView.reloadData()
