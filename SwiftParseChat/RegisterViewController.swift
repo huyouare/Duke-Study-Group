@@ -65,18 +65,18 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         let password = passwordField.text
         let confirmPassword = confirmPasswordField.text
         
-        if name.characters.count == 0 {
+        if count(name) == 0 {
             HudUtil.displayErrorHUD(view, displayText: "Name must be set", displayTime: 1.5)
             return
         }
         if !Utilities.validateEmail(emailField.text, view: self.view) {
             return
         }
-        if password.characters.count == 0 {
+        if count(password) == 0 {
             HudUtil.displayErrorHUD(view, displayText: "Password must be set", displayTime: 1.5)
             return
         }
-        if confirmPassword.characters.count == 0 || password != confirmPassword {
+        if count(confirmPassword) == 0 || password != confirmPassword {
             HudUtil.displayErrorHUD(view, displayText: "Passwords do not match", displayTime: 1.5)
             return
         }

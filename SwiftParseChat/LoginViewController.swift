@@ -55,12 +55,12 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let email = emailField.text.lowercaseString
         let password = passwordField.text
         
-        if email.characters.count == 0 {
+        if count(email) == 0 {
             HudUtil.displayErrorHUD(view, displayText: "Email field is empty.", displayTime: 1.5)
             return
         }
         
-        if password.characters.count == 0 {
+        if count(password) == 0 {
             HudUtil.displayErrorHUD(view, displayText: "Password field is empty.", displayTime: 1.5)
             return
         }

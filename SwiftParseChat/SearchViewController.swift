@@ -30,9 +30,9 @@ class SearchViewController: UITableViewController, UITableViewDelegate, UITableV
     }
     
     func loadUsers() {
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         
-        let query = PFQuery(className: PF_USER_CLASS_NAME)
+        var query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.orderByAscending(PF_USER_FULLNAME)
         query.limit = 1000
@@ -50,7 +50,7 @@ class SearchViewController: UITableViewController, UITableViewDelegate, UITableV
     func searchUsers(searchString: String) {
         let user = PFUser.currentUser()
         
-        let query = PFQuery(className: PF_USER_CLASS_NAME)
+        var query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.whereKey(PF_USER_FULLNAME_LOWER, containsString: searchString)
         query.orderByAscending(PF_USER_FULLNAME)
@@ -115,7 +115,7 @@ class SearchViewController: UITableViewController, UITableViewDelegate, UITableV
     // MARK: - UISearchBarDelegate
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
+        if count(searchText) > 0 {
             self.searchUsers(searchText.lowercaseString)
         } else {
             self.loadUsers()

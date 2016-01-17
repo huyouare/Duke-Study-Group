@@ -51,7 +51,7 @@ class DukeLoginViewController: UITableViewController, UITextFieldDelegate {
         let netId = netIdField.text.lowercaseString
         let password = passwordField.text
         
-        if netId.characters.count == 0 {
+        if count(netId) == 0 {
             HudUtil.displayErrorHUD(self.view, displayText: "NetID field is empty", displayTime: 1.5)
             return
         } else {

@@ -26,11 +26,11 @@ class ProfilePasswordEditViewController:UIViewController {
         let confirmPassword = confirmPasswordField.text
         var user = PFUser.currentUser()
         
-        if password.characters.count == 0 {
+        if count(password) == 0 {
             HudUtil.displayErrorHUD(self.view, displayText: "Password must be set", displayTime: 1.5)
             return
         }
-        if confirmPassword.characters.count == 0 || password != confirmPassword {
+        if count(confirmPassword) == 0 || password != confirmPassword {
             HudUtil.displayErrorHUD(self.view, displayText: "Passwords do not match", displayTime: 1.5)
             return
         }

@@ -44,7 +44,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
         showHUDProgress()
         showSettingsButton()
         
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         senderId = user.objectId
         senderDisplayName = user[PF_USER_FULLNAME] as! String
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
@@ -92,7 +92,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // Mark: - Backend methods
     
     func loadGroup() {
-        let query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
         query.whereKey(PF_GROUP_OBJECTID  , equalTo: self.groupId)
         query.includeKey(PF_GROUP_USERS)
         query.findObjectsInBackgroundWithBlock {
@@ -106,7 +106,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                 self.hideHUDProgress()
             } else {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                print(error)
+                println(error)
             }
         }
     }
@@ -114,9 +114,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     func loadMessages() {
         if isLoading == false {
             isLoading = true
-            let lastMessage = messages.last
+            var lastMessage = messages.last
             
-            let query = PFQuery(className: PF_CHAT_CLASS_NAME)
+            var query = PFQuery(className: PF_CHAT_CLASS_NAME)
             query.whereKey(PF_CHAT_GROUPID, equalTo: groupId)
             if lastMessage != nil {
                 query.whereKey(PF_CHAT_CREATEDAT, greaterThan: lastMessage?.date)
@@ -127,7 +127,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
                     self.automaticallyScrollsToMostRecentMessage = false
-                    for object in Array((objects as! [PFObject]!).reverse()) {
+                    for object in (objects as! [PFObject]!).reverse() {
                         self.addMessage(object)
                     }
                     if objects.count > 0 {
@@ -140,7 +140,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
                     self.hideHUDProgress()
                 } else {
                     HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                    print(error)
+                    println(error)
                 }
                 self.isLoading = false;
             })
@@ -207,7 +207,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             })
         }
         
-        let object = PFObject(className: PF_CHAT_CLASS_NAME)
+        var object = PFObject(className: PF_CHAT_CLASS_NAME)
         object[PF_CHAT_USER] = PFUser.currentUser()
         object[PF_CHAT_GROUPID] = self.groupId
         object[PF_CHAT_TEXT] = text
@@ -239,7 +239,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func didPressAccessoryButton(sender: UIButton!) {
-        let action = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Take photo", "Choose existing photo", "Choose existing video")
+        var action = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Take photo", "Choose existing photo", "Choose existing video")
         action.showInView(self.view)
     }
     
@@ -250,7 +250,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let message = self.messages[indexPath.item]
+        var message = self.messages[indexPath.item]
         if message.senderId == self.senderId {
             return outgoingBubbleImage
         }
@@ -275,20 +275,20 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         if indexPath.item % 3 == 0 {
-            let message = self.messages[indexPath.item]
+            var message = self.messages[indexPath.item]
             return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
         }
         return nil;
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item]
+        var message = messages[indexPath.item]
         if message.senderId == self.senderId {
             return nil
         }
         
         if indexPath.item - 1 > 0 {
-            let previousMessage = self.messages[indexPath.item - 1]
+            var previousMessage = self.messages[indexPath.item - 1]
             if previousMessage.senderId == message.senderId {
                 return nil
             }
@@ -307,9 +307,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        var cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
-        let message = self.messages[indexPath.item]
+        var message = self.messages[indexPath.item]
         if message.senderId == self.senderId {
             cell.textView?.textColor = UIColor.whiteColor()
         } else {
@@ -328,13 +328,13 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        let message = self.messages[indexPath.item]
+        var message = self.messages[indexPath.item]
         if message.senderId == self.senderId {
             return 0
         }
         
         if indexPath.item - 1 > 0 {
-            let previousMessage = self.messages[indexPath.item - 1]
+            var previousMessage = self.messages[indexPath.item - 1]
             if previousMessage.senderId == message.senderId {
                 return 0
             }
@@ -350,11 +350,11 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     // MARK: - Responding to CollectionView tap events
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
-        print("didTapLoadEarlierMessagesButton")
+        println("didTapLoadEarlierMessagesButton")
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
-        print("didTapAvatarImageview")
+        println("didTapAvatarImageview")
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
@@ -376,7 +376,7 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapCellAtIndexPath indexPath: NSIndexPath!, touchLocation: CGPoint) {
-        print("didTapCellAtIndexPath")
+        println("didTapCellAtIndexPath")
     }
     
     // MARK: - UIActionSheetDelegate
@@ -395,9 +395,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
     
     // MARK: - UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let video = info[UIImagePickerControllerMediaURL] as? NSURL
-        let picture = info[UIImagePickerControllerEditedImage] as? UIImage
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        var video = info[UIImagePickerControllerMediaURL] as? NSURL
+        var picture = info[UIImagePickerControllerEditedImage] as? UIImage
         
         sendMessage("", video: video, picture: picture)
         

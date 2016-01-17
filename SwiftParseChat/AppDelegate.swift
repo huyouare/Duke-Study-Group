@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebook()
         
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
-            let userNotificationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound])
+            let userNotificationTypes = (UIUserNotificationType.Alert |
+                UIUserNotificationType.Badge |
+                UIUserNotificationType.Sound)
             
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
@@ -57,26 +59,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Mark: - Facebook response
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
     }
     
     // Mark - Push Notification methods
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let installation = PFInstallation.currentInstallation()
+        var installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackgroundWithBlock { (succeeed: Bool, error: NSError!) -> Void in
             if error != nil {
-                print("didRegisterForRemoteNotificationsWithDeviceToken")
-                print(error)
+                println("didRegisterForRemoteNotificationsWithDeviceToken")
+                println(error)
             }
         }
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("didFailToRegisterForRemoteNotificationsWithError")
-        print(error)
+        println("didFailToRegisterForRemoteNotificationsWithError")
+        println(error)
     }
     
     // TODO: Rewrite this method with notifications

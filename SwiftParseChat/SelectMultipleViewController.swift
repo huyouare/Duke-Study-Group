@@ -33,7 +33,7 @@ class SelectMultipleViewController: UITableViewController {
     
     func loadUsers() {
         let user = PFUser.currentUser()
-        let query = PFQuery(className: PF_USER_CLASS_NAME)
+        var query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.orderByAscending(PF_USER_FULLNAME)
         query.limit = 1000
@@ -61,7 +61,7 @@ class SelectMultipleViewController: UITableViewController {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 var selectedUsers = [PFUser]()
                 for user in self.users {
-                    if self.selection.contains(user.objectId) {
+                    if contains(self.selection, user.objectId) {
                         selectedUsers.append(user)
                     }
                 }
@@ -85,12 +85,12 @@ class SelectMultipleViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         let user = self.users[indexPath.row]
         cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
         
-        let selected = self.selection.contains(user.objectId)
+        let selected = contains(self.selection, user.objectId)
         cell.accessoryType = selected ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None
         
         return cell
@@ -102,9 +102,9 @@ class SelectMultipleViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let user = self.users[indexPath.row]
-        let selected = self.selection.contains(user.objectId)
+        let selected = contains(self.selection, user.objectId)
         if selected {
-            if let index = self.selection.indexOf(user.objectId) {
+            if let index = find(self.selection, user.objectId) {
                 self.selection.removeAtIndex(index)
             }
         } else {

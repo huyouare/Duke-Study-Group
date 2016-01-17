@@ -49,7 +49,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func isLoginByFB() -> Bool {
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         return user[PF_USER_FACEBOOKID] != nil
     }
     
@@ -61,10 +61,10 @@ class ProfileTableViewController: UITableViewController {
             action = actionItemsWithoutFB[indexPath.row]
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = action
         cell.detailTextLabel?.text = "Not Set"
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         
         switch (action) {
         case EDIT_PROFILE_NAME:
@@ -72,9 +72,9 @@ class ProfileTableViewController: UITableViewController {
             break
         case EDIT_EMAIL:
             cell.detailTextLabel?.text = user[PF_USER_EMAIL] as? String
-            print(cell.detailTextLabel?.text)
-            print(user[PF_USER_EMAIL] as? String)
-            print(user[PF_USER_EMAIL])
+            println(cell.detailTextLabel?.text)
+            println(user[PF_USER_EMAIL] as? String)
+            println(user[PF_USER_EMAIL])
             break
         default:
             cell.detailTextLabel?.text = ""
@@ -112,7 +112,7 @@ class ProfileTableViewController: UITableViewController {
             }
             break
         default:
-            print("No profile attribute selected")
+            println("No profile attribute selected")
         }
     }
     

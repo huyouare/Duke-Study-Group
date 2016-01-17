@@ -36,20 +36,20 @@ class FacebookFriendsViewController: UITableViewController {
             return
         }
         
-        let request = FBRequest.requestForMyFriends()
+        var request = FBRequest.requestForMyFriends()
         request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 
                 var fbIds = [String]()
                 var userData = result as! [String : AnyObject]
-                let fbUsersData: AnyObject! = userData["data"]
+                var fbUsersData: AnyObject! = userData["data"]
                 if let fbUsers = fbUsersData as? [AnyObject] {
                     for fbUser in fbUsers {
                         fbIds.append(fbUser["id"] as! String)
                     }
                 }
                 
-                let query = PFQuery(className: PF_USER_CLASS_NAME)
+                var query = PFQuery(className: PF_USER_CLASS_NAME)
                 query.whereKey(PF_USER_FACEBOOKID, containedIn: fbIds)
                 query.orderByAscending(PF_USER_FULLNAME)
                 query.limit = 1000
@@ -89,7 +89,7 @@ class FacebookFriendsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
         let user = self.users[indexPath.row]
         cell.textLabel?.text = user[PF_USER_FULLNAME] as? String

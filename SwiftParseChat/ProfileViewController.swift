@@ -41,12 +41,12 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func loadUser() {
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         
         userImageView.file = user[PF_USER_PICTURE] as? PFFile
         userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
             if error != nil {
-                print(error)
+                println(error)
             }
         }
     }
@@ -58,12 +58,12 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     }
     
     func logout() {
-        let logOutAlert = UIAlertController(title: "Log Out", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
-        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction) in
+        var logOutAlert = UIAlertController(title: "Log Out", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
             NSLog("Cancelled log out")
         }))
         
-        logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction) in
+        logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction!) in
             PFUser.logOut()
             PushNotication.parsePushUserResign()
             Utilities.postNotification(NOTIFICATION_USER_LOGGED_OUT)
@@ -108,13 +108,13 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     
     // MARK: - UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         var image = info[UIImagePickerControllerEditedImage] as! UIImage
         if image.size.width > 280 {
             image = Images.resizeImage(image, width: 280, height: 280)!
         }
         
-        let pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
+        var pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
         pictureFile.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
@@ -127,14 +127,14 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
             image = Images.resizeImage(image, width: 60, height: 60)!
         }
         
-        let thumbnailFile = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
+        var thumbnailFile = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
         thumbnailFile.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
             }
         }
         
-        let user = PFUser.currentUser()
+        var user = PFUser.currentUser()
         user[PF_USER_PICTURE] = pictureFile
         user[PF_USER_THUMBNAIL] = thumbnailFile
         user.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
@@ -149,10 +149,10 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
     // MARK: - Facebook Profile Photo fetch methods
     
     func requestFacebook(user: PFUser) {
-        let request = FBRequest.requestForMe()
+        var request = FBRequest.requestForMe()
         request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                let userData = result as! [String: AnyObject]!
+                var userData = result as! [String: AnyObject]!
                 self.processFacebook(user, userData: userData)
             } else {
                 PFUser.logOut()
@@ -207,14 +207,14 @@ class ProfileViewController: UIViewController, UIActionSheetDelegate, UIImagePic
                     } else {
                         if let info = error!.userInfo {
                             HudUtil.displayErrorHUD(self.view, displayText: "Failed to login", displayTime: 1.5)
-                            print(info["error"] as! String)
+                            println(info["error"] as! String)
                         }
                     }
                 })
             } else {
                 if let info = error!.userInfo {
                     HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook photo", displayTime: 1.5)
-                    print(info["error"] as! String)
+                    println(info["error"] as! String)
                 }
             }
         }

@@ -29,7 +29,7 @@ class Images {
     }
     
     class func resizeImage(var image: UIImage, width: CGFloat, height: CGFloat) -> UIImage? {
-        let size = CGSizeMake(width, height)
+        var size = CGSizeMake(width, height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         image.drawInRect(CGRectMake(0, 0, size.width, size.height))
         image = UIGraphicsGetImageFromCurrentImageContext()

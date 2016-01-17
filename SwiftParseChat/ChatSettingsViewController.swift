@@ -35,7 +35,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             self.navBar.title = self.group[PF_GROUP_COURSE_NAME] as? String
             let users = self.group[PF_GROUP_USERS] as! [PFUser]!
             self.members.removeAll()
-            self.members.appendContentsOf(users)
+            self.members.extend(users)
             self.tableView.reloadData()
         }
     }
@@ -46,8 +46,8 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     /* only support portrait */
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
     
     // MARK: - Table view data source
@@ -84,17 +84,17 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             if indexPath.row < self.members.count {
-                let user = self.members[indexPath.row]
+                var user = self.members[indexPath.row]
                 cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
                 normalizeCell(cell)
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 
                 /* load user's picture */
-                let userImageView = PFImageView()
+                var userImageView = PFImageView()
                 userImageView.file = user[PF_USER_PICTURE] as? PFFile
                 userImageView.loadInBackground { (image: UIImage!, error: NSError!) -> Void in
                     if error != nil {
-                        print(error)
+                        println(error)
                     }
                 }
                 if(userImageView.image == nil) {
@@ -114,7 +114,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             
         } else { /* settings */
             
-            let action = actionItems[indexPath.row]
+            var action = actionItems[indexPath.row]
             let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "newCell")
             cell.textLabel?.text = action
             cell.detailTextLabel?.text = "Not Set"
@@ -195,7 +195,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                 
             }
         } else { /* settings */
-            let action = actionItems[indexPath.row]
+            var action = actionItems[indexPath.row]
             
             switch (action) {
             case LEAVE_ACTION:
@@ -229,7 +229,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     func deleteAlert() {
-        let alert = UIAlertView(title: "Are you sure you want to remove from this group?", message: "", delegate: self as UIAlertViewDelegate, cancelButtonTitle: "Cancel", otherButtonTitles: "Remove")
+        var alert = UIAlertView(title: "Are you sure you want to remove from this group?", message: "", delegate: self as UIAlertViewDelegate, cancelButtonTitle: "Cancel", otherButtonTitles: "Remove")
         
         alert.alertViewStyle = UIAlertViewStyle.Default
         alert.show()
@@ -241,7 +241,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         if buttonIndex != alertView.cancelButtonIndex {
             let groupUsers = group[PF_GROUP_USERS] as! [PFUser]!
             
-            if(groupUsers.contains(removedUser)) {
+            if(contains(groupUsers, removedUser)) {
                 group.removeObject(removedUser, forKey: PF_GROUP_USERS)
                 
                 group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
@@ -264,7 +264,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         }
         
         let eventStore = EKEventStore()
-        switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
+        switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
         case .Authorized:
             insertEvent(eventStore)
             break
@@ -272,7 +272,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
             HudUtil.displayErrorHUD(self.view, displayText: "Access Denied", displayTime: 1.5)
             break
         case .NotDetermined:
-            eventStore.requestAccessToEntityType(EKEntityType.Event, completion:
+            eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
                 {[weak self] (granted: Bool, error: NSError!) -> Void in
                     if granted {
                         self!.insertEvent(eventStore)
@@ -282,7 +282,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                 })
             break
         default:
-            print("Case Default")
+            println("Case Default")
         }
     }
     
@@ -295,14 +295,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         event.location = self.group[PF_GROUP_LOCATION] as? String
         event.calendar = store.defaultCalendarForNewEvents
         var error: NSError?
-        let result: Bool
-        do {
-            try store.saveEvent(event, span: EKSpanThisEvent)
-            result = true
-        } catch var error1 as NSError {
-            error = error1
-            result = false
-        }
+        let result = store.saveEvent(event, span: EKSpanThisEvent, error: &error)
         
         if result == false {
             if let theError = error {
@@ -325,12 +318,12 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     func showLeaveDialog() {
-        let leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
-        leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction) in
-            print("Cancelled leave group")
+        var leaveAlert = UIAlertController(title: "Leave Group?", message:"You won't get any new messages", preferredStyle: UIAlertControllerStyle.Alert)
+        leaveAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+            println("Cancelled leave group")
         }))
         
-        leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction) in
+        leaveAlert.addAction(UIAlertAction(title: "Leave", style: .Default, handler: { (action:UIAlertAction!) in
             self.removeSelfFromGroup()
             self.navigationController?.popToRootViewControllerAnimated(true)
         }))
@@ -363,7 +356,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
                 HudUtil.displaySuccessHUD(self.view, displayText: "Quitted group successfully", displayTime: 1.5)
             } else {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                print("%@", error)
+                println("%@", error)
             }
         })
     }
@@ -432,7 +425,7 @@ class ChatSettingsViewController: UITableViewController, UIActionSheetDelegate, 
         var addedUsers = [PFUser]()
         
         for user in users {
-            if(!groupUsers.contains(user)) {
+            if(!contains(groupUsers, user)) {
                 group.addObject(user, forKey: PF_GROUP_USERS)
                 addedUsers.append(user)
             }
