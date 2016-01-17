@@ -32,14 +32,14 @@ class Messages {
             userIds.append(user.objectId)
         }
         
-        let sorted = userIds.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        let sorted = userIds.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         
         for userId in sorted {
             groupId = groupId + userId
         }
         
         for user in users {
-            if count(description) > 0 {
+            if description.characters.count > 0 {
                 description = description + " & "
             }
             description = description + (user[PF_USER_FULLNAME] as! String)
@@ -53,13 +53,13 @@ class Messages {
     }
     
     class func createMessageItem(user: PFUser, groupId: String, description: String) {
-        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
+        let query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
         query.whereKey(PF_MESSAGES_USER, equalTo: user)
         query.whereKey(PF_MESSAGES_GROUPID, equalTo: groupId)
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 if objects.count == 0 {
-                    var message = PFObject(className: PF_MESSAGES_CLASS_NAME)
+                    let message = PFObject(className: PF_MESSAGES_CLASS_NAME)
                     message[PF_MESSAGES_USER] = user;
                     message[PF_MESSAGES_GROUPID] = groupId;
                     message[PF_MESSAGES_DESCRIPTION] = description;
@@ -69,14 +69,14 @@ class Messages {
                     message[PF_MESSAGES_UPDATEDACTION] = NSDate()
                     message.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
                         if (error != nil) {
-                            println("Messages.createMessageItem save error.")
-                            println(error)
+                            print("Messages.createMessageItem save error.")
+                            print(error)
                         }
                     })
                 }
             } else {
-                println("Messages.createMessageItem save error.")
-                println(error)
+                print("Messages.createMessageItem save error.")
+                print(error)
             }
         }
     }
@@ -84,20 +84,20 @@ class Messages {
     class func deleteMessageItem(message: PFObject) {
         message.deleteInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
             if error != nil {
-                println("UpdateMessageCounter save error.")
-                println(error)
+                print("UpdateMessageCounter save error.")
+                print(error)
             }
         }
     }
     
     class func updateMessageCounter(groupId: String, lastMessage: String) {
-        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
+        let query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
         query.whereKey(PF_MESSAGES_GROUPID, equalTo: groupId)
         query.limit = 1000
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for message in objects as! [PFObject]! {
-                    var user = message[PF_MESSAGES_USER] as! PFUser
+                    let user = message[PF_MESSAGES_USER] as! PFUser
                     if user.objectId != PFUser.currentUser().objectId {
                         message.incrementKey(PF_MESSAGES_COUNTER) // Increment by 1
                         message[PF_MESSAGES_LASTUSER] = PFUser.currentUser()
@@ -105,21 +105,21 @@ class Messages {
                         message[PF_MESSAGES_UPDATEDACTION] = NSDate()
                         message.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
                             if error != nil {
-                                println("UpdateMessageCounter save error.")
-                                println(error)
+                                print("UpdateMessageCounter save error.")
+                                print(error)
                             }
                         })
                     }
                 }
             } else {
-                println("UpdateMessageCounter save error.")
-                println(error)
+                print("UpdateMessageCounter save error.")
+                print(error)
             }
         }
     }
     
     class func clearMessageCounter(groupId: String) {
-        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
+        let query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
         query.whereKey(PF_MESSAGES_GROUPID, equalTo: groupId)
         query.whereKey(PF_MESSAGES_USER, equalTo: PFUser.currentUser())
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -128,14 +128,14 @@ class Messages {
                     message[PF_MESSAGES_COUNTER] = 0
                     message.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
                         if error != nil {
-                            println("ClearMessageCounter save error.")
-                            println(error)
+                            print("ClearMessageCounter save error.")
+                            print(error)
                         }
                     })
                 }
             } else {
-                println("ClearMessageCounter save error.")
-                println(error)
+                print("ClearMessageCounter save error.")
+                print(error)
             }
         }
     }

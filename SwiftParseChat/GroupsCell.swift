@@ -32,10 +32,10 @@ class GroupsCell: UITableViewCell, UIScrollViewDelegate {
         var currentUser = PFUser.currentUser()
         self.courseLabel.text = group[PF_GROUP_COURSE_NAME] as? String
         self.nameLabel.text = group[PF_GROUP_NAME] as? String
-        var date = group[PF_GROUP_DATETIME] as? NSDate
-        var location = group[PF_GROUP_LOCATION] as? String
-        var dateSet = (date != nil)
-        var locationSet = (location != nil && count(location!) > 0)
+        let date = group[PF_GROUP_DATETIME] as? NSDate
+        let location = group[PF_GROUP_LOCATION] as? String
+        let dateSet = (date != nil)
+        let locationSet = (location != nil && (location!).characters.count > 0)
         let todayDate = NSDate()
         
         if dateSet {

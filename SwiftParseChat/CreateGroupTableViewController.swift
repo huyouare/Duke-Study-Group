@@ -79,7 +79,7 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
     @IBAction func createGroupPressed(sender: AnyObject) {
         let groupName = groupNameField.text
         
-        if count(groupName) > 0 {
+        if groupName.characters.count > 0 {
             var group = PFObject(className: PF_GROUP_CLASS_NAME)
             group[PF_GROUP_NAME] = groupName
             group[PF_GROUP_COURSE_NAME] = self.course["course_name"]
@@ -93,10 +93,10 @@ class CreateGroupTableViewController: UITableViewController, UITextFieldDelegate
             group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     HudUtil.displaySuccessHUD(self.view, displayText: "Saved", displayTime: 1.5)
-                    println("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
+                    print("Group \(group[PF_GROUP_NAME]) created for class: \(group[PF_GROUP_COURSEID])")
                 } else {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                    println("%@", error)
+                    print("%@", error)
                 }
             })
         } else {

@@ -42,7 +42,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     
     func loadUsers() {
         let user = PFUser.currentUser()
-        var query = PFQuery(className: PF_USER_CLASS_NAME)
+        let query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.orderByAscending(PF_USER_FULLNAME)
         query.limit = 1000
@@ -59,7 +59,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     
     func searchUsers(searchLower: String) {
         let user = PFUser.currentUser()
-        var query = PFQuery(className: PF_USER_CLASS_NAME)
+        let query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.whereKey(PF_USER_FULLNAME_LOWER, containsString: searchLower)
         query.orderByAscending(PF_USER_FULLNAME)
@@ -96,7 +96,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
 
         let user = self.users[indexPath.row]
         cell.textLabel?.text = user[PF_USER_FULLNAME] as? String
@@ -118,7 +118,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if count(searchText) > 0 {
+        if searchText.characters.count > 0 {
             self.searchUsers(searchText.lowercaseString)
         } else {
             self.loadUsers()

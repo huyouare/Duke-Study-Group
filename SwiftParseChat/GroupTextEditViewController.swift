@@ -18,7 +18,7 @@ class GroupTextEditViewController:UIViewController {
     @IBOutlet weak var attributeField: UITextField!
     @IBAction func saveButton(sender: AnyObject) {
         var attribute = attributeField.text
-        if count(attribute) > 0 {
+        if attribute.characters.count > 0 {
             switch (editAttribute) {
             case EDIT_GROUP_NAME:
                 self.group[PF_GROUP_NAME] = attribute
@@ -33,10 +33,10 @@ class GroupTextEditViewController:UIViewController {
             self.group.saveInBackgroundWithBlock ({ (success: Bool, error: NSError!) -> Void in
                 if error == nil {
                     HudUtil.displaySuccessHUD(self.view, displayText: NETWORK_SUCCESS, displayTime: 1.5)
-                    println("Changed group's \(self.editAttribute) to \(attribute)")
+                    print("Changed group's \(self.editAttribute) to \(attribute)")
                 } else {
                     HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                    println("%@", error)
+                    print("%@", error)
                 }
                 self.navigationController?.popViewControllerAnimated(true)
             })

@@ -39,9 +39,9 @@ class GroupSelectTableViewController: UITableViewController {
                 self.navigationItem.title = titleString
                 
                 /* find groups for that course in Parse */
-                var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 let courseId = Utilities.getSemesterCode() + subjectCode + courseNumber
-                var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+                let query = PFQuery(className: PF_GROUP_CLASS_NAME)
                 query.whereKey(PF_GROUP_COURSEID, equalTo: courseId)
                 query.includeKey(PF_GROUP_USERS)
                 
@@ -113,7 +113,7 @@ class GroupSelectTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == self.groups.count {
-            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("newCell", forIndexPath: indexPath) 
             return cell
         }
         

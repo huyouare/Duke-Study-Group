@@ -53,7 +53,7 @@ class Utilities {
     }
     
     class func getFormattedTextFromDate(date:NSDate) -> String {
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         return dateFormatter.stringFromDate(date)
@@ -74,7 +74,7 @@ class Utilities {
     class func getSemesterCode() -> String {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitDay, fromDate: date)
+        let components = calendar.components([.Hour, .Minute, .Month, .Year, .Day], fromDate: date)
         let month = components.month
         let year = components.year
         var seasonCode = ""
@@ -85,9 +85,9 @@ class Utilities {
         } else if isFall(month) {
             seasonCode = "FALL"
         }
-        var yearStr = String(year)
-        var yearCode = (yearStr as NSString).substringFromIndex(2)
-        var semesterCode = seasonCode + yearCode
+        let yearStr = String(year)
+        let yearCode = (yearStr as NSString).substringFromIndex(2)
+        let semesterCode = seasonCode + yearCode
         return semesterCode
     }
     

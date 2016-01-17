@@ -12,7 +12,7 @@ import MBProgressHUD
 class HudUtil {
     
     class func displayAlertHUDWithImage(view: UIView!, imageName: String, displayText: String, displayTime: Double) {
-        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDModeCustomView
         let image = UIImage(named: imageName)
         //let imageResized = Utilities.resizeImage(image!, newSize: CGSizeMake(40.0, 40.0))
@@ -22,7 +22,7 @@ class HudUtil {
     }
     
     class func displayAlertHUD(view: UIView!, displayText: String, displayTime: Double) {
-        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDModeText
         hud.labelText = displayText
         hud.hide(true, afterDelay: displayTime)

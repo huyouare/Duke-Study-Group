@@ -79,8 +79,8 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     }
     
     func loadGroups() {
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        var query = PFQuery(className: PF_GROUP_CLASS_NAME)
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let query = PFQuery(className: PF_GROUP_CLASS_NAME)
         query.whereKey(PF_GROUP_USERS, equalTo: PFUser.currentUser())
         query.orderByDescending(PF_GROUP_UPDATED_AT) //may consider number of users (popularity) as well
         query.includeKey(PF_GROUP_USERS)
@@ -89,11 +89,11 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
             hud.hide(true)
             if error == nil {
                 self.groups.removeAll()
-                self.groups.extend(objects as! [PFObject]!)
+                self.groups.appendContentsOf(objects as! [PFObject]!)
                 self.tableView.reloadData()
             } else {
                 HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
-                println(error)
+                print(error)
             }
         }
     }
@@ -137,7 +137,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
         cell.clear()
         cell.bindData(self.groups[indexPath.row])
         return cell
@@ -152,7 +152,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var group = self.groups[indexPath.row]
+        let group = self.groups[indexPath.row]
         let groupId = group.objectId as String
         
         Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as! String)
@@ -177,7 +177,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     func joinGroup(group: PFObject) {
         let users = group[PF_GROUP_USERS] as! [PFUser]!
         
-        if(!contains(users, PFUser.currentUser())) {
+        if(!users.contains(PFUser.currentUser())) {
             group.addObject(PFUser.currentUser(), forKey: PF_GROUP_USERS)
             group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
                 if error == nil {

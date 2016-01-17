@@ -48,7 +48,7 @@ class MessagesViewController: UITableViewController, UIActionSheetDelegate {
     // MARK: - Backend methods
     
     func loadMessages() {
-        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
+        let query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
         query.whereKey(PF_MESSAGES_USER, equalTo: PFUser.currentUser())
         query.includeKey(PF_MESSAGES_LASTUSER)
         query.orderByDescending(PF_MESSAGES_UPDATEDACTION)
@@ -184,7 +184,7 @@ class MessagesViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("messagesCell") as! MessagesCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("messagesCell") as! MessagesCell
         cell.bindData(self.messages[indexPath.row])
         return cell
     }

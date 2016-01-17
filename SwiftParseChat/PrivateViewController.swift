@@ -32,7 +32,7 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     override func viewDidAppear(animated: Bool) {
         if PFUser.currentUser() != nil {
             // Load address book
-            self.addressBook.fieldsMask = APContactField.Default | APContactField.Emails
+            self.addressBook.fieldsMask = [APContactField.Default, APContactField.Emails]
 
             self.addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
             self.addressBook.loadContacts({ (contacts: [AnyObject]!, error: NSError!) -> Void in
@@ -44,7 +44,7 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
                     self.loadUsers()
                 } else if error != nil {
                     HudUtil.displayErrorHUD(self.view, displayText: "Failed to load contacts", displayTime: 1.5)
-                    println(error)
+                    print(error)
                 }
             })
         }
@@ -70,9 +70,9 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
             }
         }
         
-        var user = PFUser.currentUser()
+        let user = PFUser.currentUser()
         
-        var query = PFQuery(className: PF_USER_CLASS_NAME)
+        let query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user.objectId)
         query.whereKey(PF_USER_EMAILCOPY, containedIn: emails)
         query.orderByAscending(PF_USER_FULLNAME)
@@ -105,7 +105,7 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
             }
         }
         
-        let filtered = self.users1.filter { !contains(removeUsers, $0) }
+        let filtered = self.users1.filter { !removeUsers.contains($0) }
         self.users1 = filtered
     }
     
@@ -187,8 +187,8 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     // MARK: - Invite helper method
     
     func inviteUser(user: APContact) {
-        let emailsCount = count(user.emails)
-        let phonesCount = count(user.phones)
+        let emailsCount = user.emails.count
+        let phonesCount = user.phones.count
         
         if emailsCount > 0 && phonesCount > 0 {
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Email invitation", "SMS invitation")
@@ -219,7 +219,7 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     
     func sendMail(user: APContact) {
         if MFMailComposeViewController.canSendMail() {
-            var mailCompose = MFMailComposeViewController()
+            let mailCompose = MFMailComposeViewController()
             // TODO: Use one email rather than all emails
             mailCompose.setToRecipients(user.emails as! [String]!)
             mailCompose.setSubject("")
@@ -233,8 +233,8 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     
     // MARK: - MailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-        if result.value == MFMailComposeResultSent.value {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        if result.rawValue == MFMailComposeResultSent.rawValue {
             HudUtil.displaySuccessHUD(self.view, displayText: "Successfully sent invitation email", displayTime: 1.5)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -244,7 +244,7 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     
     func sendSMS(user: APContact) {
         if MFMessageComposeViewController.canSendText() {
-            var messageCompose = MFMessageComposeViewController()
+            let messageCompose = MFMessageComposeViewController()
             // TODO: Use primary phone rather than all numbers
             messageCompose.recipients = user.phones as! [String]!
             messageCompose.body = MESSAGE_INVITE
@@ -257,8 +257,8 @@ class PrivateViewController: UITableViewController, UITableViewDelegate, UITable
     
     // MARK: - MessageComposeViewControllerDelegate
     
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
-        if result.value == MessageComposeResultSent.value {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        if result.rawValue == MessageComposeResultSent.rawValue {
             HudUtil.displaySuccessHUD(self.view, displayText: "Successfully send invitation SMS", displayTime: 1.5)
         }
         self.dismissViewControllerAnimated(true, completion: nil)

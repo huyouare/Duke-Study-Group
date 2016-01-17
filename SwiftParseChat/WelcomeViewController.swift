@@ -47,9 +47,9 @@ class WelcomeViewController: UIViewController {
                 }
             } else {
                 if error != nil {
-                    println(error)
+                    print(error)
                     if let info = error.userInfo {
-                        println(info)
+                        print(info)
                     }
                 }
                 HudUtil.displayErrorHUD(self.view, displayText: "Failed to sign in with Facebook", displayTime: 1.5)
@@ -58,12 +58,12 @@ class WelcomeViewController: UIViewController {
     }
     
     func hasDukeEducation(userData: [String: AnyObject]!) -> Bool {
-        println(userData["education"] as! NSArray)
+        print(userData["education"] as! NSArray)
         for object in userData["education"] as! NSArray {
             let dict = object as! NSDictionary
-            println(dict["school"])
+            print(dict["school"])
             if let school = dict["school"] as? NSDictionary {
-                println(school["name"])
+                print(school["name"])
                 if let schoolName = school["name"] as? String {
                     if schoolName.lowercaseString.rangeOfString("duke") != nil {
                         return true;
@@ -75,10 +75,10 @@ class WelcomeViewController: UIViewController {
     }
     
     func requestFacebook(user: PFUser) {
-        var request = FBRequest.requestForMe()
+        let request = FBRequest.requestForMe()
         request.startWithCompletionHandler { (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var userData = result as! [String: AnyObject]!
+                let userData = result as! [String: AnyObject]!
                 self.processFacebook(user, userData: userData)
 //                if (self.hasDukeEducation(userData)) {
 //                    self.processFacebook(user, userData: userData)
@@ -140,7 +140,7 @@ class WelcomeViewController: UIViewController {
                         PFUser.logOut()
                         if let info = error!.userInfo {
                             HudUtil.displayErrorHUD(self.view, displayText: "Failed to login", displayTime: 1.5)
-                            println(info["error"] as! String)
+                            print(info["error"] as! String)
                         }
                     }
                 })
@@ -148,7 +148,7 @@ class WelcomeViewController: UIViewController {
                 PFUser.logOut()
                 if let info = error!.userInfo {
                     HudUtil.displayErrorHUD(self.view, displayText: "Failed to fetch Facebook photo", displayTime: 1.5)
-                    println(info["error"] as! String)
+                    print(info["error"] as! String)
                 }
             }
         }

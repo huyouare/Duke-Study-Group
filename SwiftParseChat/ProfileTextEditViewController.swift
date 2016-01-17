@@ -18,7 +18,7 @@ class ProfileTextEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navBar.title = editAttribute
-        var user = PFUser.currentUser()
+        let user = PFUser.currentUser()
         
         switch (editAttribute) {
         case EDIT_PROFILE_NAME:
@@ -39,7 +39,7 @@ class ProfileTextEditViewController: UIViewController {
         let oldName = user[PF_USER_FULLNAME] as! String
         let oldEmail = user[PF_USER_EMAIL] as! String
         
-        if count(attribute) > 0 {
+        if attribute.characters.count > 0 {
             switch (self.editAttribute) {
             case EDIT_PROFILE_NAME:
                 user[PF_USER_FULLNAME] = attribute
@@ -53,7 +53,7 @@ class ProfileTextEditViewController: UIViewController {
                 user[PF_USER_EMAIL] = attribute
                 break
             default:
-                println("unknown attribute")
+                print("unknown attribute")
                 break
             }
             
@@ -61,7 +61,7 @@ class ProfileTextEditViewController: UIViewController {
                 if error == nil {
                     self.navigationController?.popViewControllerAnimated(true)
                 } else {
-                    if let userError = error.userInfo?["error"] as? String {
+                    if let userError = error.userInfo["error"] as? String {
                         HudUtil.displayErrorHUD(self.view, displayText: userError, displayTime: 1.5)
                     } else {
                         HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
