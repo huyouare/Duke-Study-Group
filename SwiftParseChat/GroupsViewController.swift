@@ -139,7 +139,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! GroupsCell
         cell.clear()
-        cell.bindData(self.groups[indexPath.row])
+        cell.bindData(groups[indexPath.row])
         return cell
     }
     
@@ -152,7 +152,7 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var group = self.groups[indexPath.row]
+        var group = groups[indexPath.row]
         let groupId = group.objectId as String
         
         Messages.createMessageItem(PFUser(), groupId: groupId, description: group[PF_GROUP_NAME] as! String)
@@ -182,10 +182,13 @@ class GroupsViewController: UITableViewController, UIAlertViewDelegate, GroupSel
             group.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
                 if error == nil {
                     self.loadGroups()
+                    HudUtil.displaySuccessHUD(self.view, displayText: "Joined group", displayTime: 1.5)
                 } else {
                     HudUtil.displayErrorHUD(self.view, displayText: NETWORK_ERROR, displayTime: 1.5)
                 }
             }
+        } else {
+            HudUtil.displayErrorHUD(self.view, displayText: "Already in group!", displayTime: 1.5)
         }
     }
 }
